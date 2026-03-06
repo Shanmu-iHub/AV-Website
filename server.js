@@ -341,9 +341,12 @@ app.post('/api/create-payment', async (req, res) => {
 app.post('/api/send-otp', async (req, res) => {
     try {
         const { phone } = req.body;
-        const phoneNumber = phone || req.body.phoneNumber;
+        let phoneNumber = phone || req.body.phoneNumber;
 
-        if (!phoneNumber || !/^[6-9]\d{9}$/.test(phoneNumber)) {
+        // strip spaces, +91, country code etc. — keep last 10 digits
+        phoneNumber = phoneNumber.replace(/\D/g, '').slice(-10);
+
+        if (!/^[6-9]\d{9}$/.test(phoneNumber)) {
             return res.status(400).json({ success: false, message: 'Invalid phone number' });
         }
 
@@ -392,7 +395,10 @@ app.post('/api/send-otp', async (req, res) => {
 app.post('/api/verify-otp', (req, res) => {
     try {
         const { phone, otp, sessionId } = req.body;
-        const phoneNumber = phone || req.body.phoneNumber;
+        let phoneNumber = phone || req.body.phoneNumber;
+
+        // strip spaces, +91, country code etc. — keep last 10 digits
+        phoneNumber = phoneNumber.replace(/\D/g, '').slice(-10);
 
         if (!phoneNumber || !otp) {
             return res.status(400).json({ success: false, message: 'Phone number and OTP are required' });
@@ -441,9 +447,12 @@ app.post('/api/verify-otp', (req, res) => {
 app.post('/api/resend-otp', async (req, res) => {
     try {
         const { phone } = req.body;
-        const phoneNumber = phone || req.body.phoneNumber;
+        let phoneNumber = phone || req.body.phoneNumber;
 
-        if (!phoneNumber || !/^[6-9]\d{9}$/.test(phoneNumber)) {
+        // strip spaces, +91, country code etc. — keep last 10 digits
+        phoneNumber = phoneNumber.replace(/\D/g, '').slice(-10);
+
+        if (!/^[6-9]\d{9}$/.test(phoneNumber)) {
             return res.status(400).json({ success: false, message: 'Invalid phone number' });
         }
 

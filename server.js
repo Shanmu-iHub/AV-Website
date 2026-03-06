@@ -386,6 +386,7 @@ app.post('/api/send-otp', async (req, res) => {
         const fullPhone = `+${phone}`;
         const cleanPhone10 = phone.slice(-10);
 
+        /*
         // Check if phone (10-digit) is already registered
         const registrations = getRegistrations();
         if (registrations.phones.includes(cleanPhone10)) {
@@ -394,6 +395,7 @@ app.post('/api/send-otp', async (req, res) => {
                 message: 'This phone number is already registered'
             });
         }
+        */
 
         const existing = otpStorage.get(fullPhone);
 
@@ -553,6 +555,7 @@ app.post('/api/submit-enquiry', async (req, res) => {
             return res.status(400).json({ success: false, message: 'Name, email, and phone are required' });
         }
 
+        /*
         // Check if email is already registered
         const registrations = getRegistrations();
         if (registrations.emails.includes(email.toLowerCase())) {
@@ -561,6 +564,7 @@ app.post('/api/submit-enquiry', async (req, res) => {
                 message: 'This email is already registered'
             });
         }
+        */
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {

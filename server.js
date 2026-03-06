@@ -339,26 +339,44 @@ app.post('/api/create-payment', async (req, res) => {
 
 // POST /api/send-otp
 app.post('/api/send-otp', async (req, res) => {
+
     try {
-        const { phone } = req.body;
-        let phoneNumber = phone || req.body.phoneNumber;
 
-        // strip spaces, +91, country code etc. — keep last 10 digits
-        phoneNumber = phoneNumber.replace(/\D/g, '').slice(-10);
+        let phone = req.body.phone || req.body.phoneNumber || req.body.mobile;
 
-        if (!/^[6-9]\d{9}$/.test(phoneNumber)) {
-            return res.status(400).json({ success: false, message: 'Invalid phone number' });
+        if (!phone) {
+            return res.status(400).json({
+                success: false,
+                message: 'Phone number missing'
+            });
         }
 
-        const fullPhone = `+91${phoneNumber}`;
+        // remove +91, spaces etc
+        phone = phone.toString().replace(/\D/g, '');
 
-        // Rate limit: 1 OTP per minute
+        // keep last 10 digits
+        phone = phone.slice(-10);
+
+        if (!/^[6-9]\d{9}$/.test(phone)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid phone number'
+            });
+        }
+
+        const fullPhone = `+91${phone}`;
+
         const existing = otpStorage.get(fullPhone);
+
         if (existing && Date.now() - existing.sentAt < 60000) {
-            return res.status(429).json({ success: false, message: 'Please wait before requesting a new OTP' });
+            return res.status(429).json({
+                success: false,
+                message: 'Please wait before requesting new OTP'
+            });
         }
 
         const otp = generateOTP();
+
         otpStorage.set(fullPhone, {
             otp,
             sentAt: Date.now(),
@@ -368,27 +386,25 @@ app.post('/api/send-otp', async (req, res) => {
         });
 
         await sendSMS(fullPhone, otp);
-        console.log(`✅ OTP generated for ${fullPhone}: ${otp}`);
 
-        // Auto-cleanup after expiry
-        setTimeout(() => {
-            const data = otpStorage.get(fullPhone);
-            if (data && !data.verified) {
-                otpStorage.delete(fullPhone);
-                console.log(`🗑️ Expired OTP deleted for ${fullPhone}`);
-            }
-        }, OTP_EXPIRY_TIME);
+        console.log(`OTP generated for ${fullPhone}: ${otp}`);
 
         res.json({
             success: true,
-            message: 'OTP sent successfully',
-            expiresIn: OTP_EXPIRY_TIME / 1000
+            message: 'OTP sent successfully'
         });
 
-    } catch (error) {
-        console.error('Error sending OTP:', error);
-        res.status(500).json({ success: false, message: 'Failed to send OTP' });
+    } catch (err) {
+
+        console.error('Error sending OTP:', err);
+
+        res.status(500).json({
+            success: false,
+            message: 'OTP send failed'
+        });
+
     }
+
 });
 
 // POST /api/verify-otp

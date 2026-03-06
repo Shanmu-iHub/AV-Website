@@ -395,6 +395,7 @@ app.post('/api/send-otp', async (req, res) => {
         // Check if phone (10-digit) is already registered
         const registrations = getRegistrations();
         if (registrations.phones.includes(cleanPhone10)) {
+            console.log(`🚫 Registration blocked: phone ${cleanPhone10} already exists`);
             return res.status(400).json({
                 success: false,
                 message: 'This phone number is already registered'

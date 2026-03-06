@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNS iNNovation Hub — India's Boldest AI Challenge | Internship with ₹1 Crore Stipend</title>
-    <meta name="description" content="Join India's boldest AI challenge. 3 Phases. Ages 11-30. One winner gets an internship with ₹1 Crore stipend at SNS iHub. Join the waitlist now.">
+    <meta name="description"
+        content="Join India's boldest AI challenge. 3 Phases. Ages 11-30. One winner gets an internship with ₹1 Crore stipend at SNS iHub. Join the waitlist now.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         :root {
             --sns-saffron: #f5af23;
             --sns-orange: #e8211a;
@@ -33,8 +43,10 @@
             --font-body: 'Inter', sans-serif;
         }
 
-        html { scroll-behavior: smooth; }
-        
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: var(--font-body);
             background: var(--sns-dark);
@@ -43,40 +55,76 @@
             overflow-x: hidden;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        .text-saffron { color: var(--sns-saffron); }
-        .text-green { color: var(--sns-green); }
-        .text-muted { color: #94A3B8; }
-        .text-center { text-align: center; }
-        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .text-saffron {
+            color: var(--sns-saffron);
+        }
+
+        .text-green {
+            color: var(--sns-green);
+        }
+
+        .text-muted {
+            color: #94A3B8;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
         /* Particles */
         .particles {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 0;
             overflow: hidden;
         }
+
         .particle {
             position: absolute;
-            width: 3px; height: 3px;
+            width: 3px;
+            height: 3px;
             background: var(--sns-saffron);
             border-radius: 50%;
             opacity: 0.15;
             animation: float-particle linear infinite;
         }
+
         @keyframes float-particle {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.15; }
-            90% { opacity: 0.15; }
-            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.15;
+            }
+
+            90% {
+                opacity: 0.15;
+            }
+
+            100% {
+                transform: translateY(-10vh) rotate(720deg);
+                opacity: 0;
+            }
         }
 
         /* ===== NAVBAR ===== */
         .navbar {
             position: fixed;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
             padding: 12px 0;
             background: rgba(6, 13, 24, 0.85);
@@ -84,27 +132,38 @@
             border-bottom: 1px solid rgba(245, 166, 35, 0.1);
             transition: all 0.3s ease;
         }
+
         .navbar.scrolled {
             padding: 8px 0;
             background: rgba(6, 13, 24, 0.95);
         }
+
         .navbar .container {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
+
         .nav-logo {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
         }
+
         .nav-logo img {
             height: 48px;
             width: auto;
             object-fit: contain;
         }
-        .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+
         .nav-links a {
             color: #94A3B8;
             text-decoration: none;
@@ -112,7 +171,11 @@
             font-weight: 500;
             transition: color 0.3s;
         }
-        .nav-links a:hover { color: var(--sns-saffron); }
+
+        .nav-links a:hover {
+            color: var(--sns-saffron);
+        }
+
         .nav-cta {
             background: var(--gradient-saffron);
             color: var(--sns-dark) !important;
@@ -124,7 +187,12 @@
             letter-spacing: 0.5px;
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245, 166, 35, 0.3); color: var(--sns-dark) !important; }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(245, 166, 35, 0.3);
+            color: var(--sns-dark) !important;
+        }
 
         .mobile-menu-btn {
             display: none;
@@ -133,9 +201,11 @@
             cursor: pointer;
             padding: 8px;
         }
+
         .mobile-menu-btn span {
             display: block;
-            width: 24px; height: 2px;
+            width: 24px;
+            height: 2px;
             background: var(--sns-white);
             margin: 5px 0;
             transition: all 0.3s;
@@ -152,22 +222,29 @@
             padding: 120px 0 80px;
             overflow: hidden;
         }
+
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%; right: -30%;
-            width: 800px; height: 800px;
+            top: -50%;
+            right: -30%;
+            width: 800px;
+            height: 800px;
             background: radial-gradient(circle, rgba(245, 166, 35, 0.08) 0%, transparent 70%);
             border-radius: 50%;
         }
+
         .hero::after {
             content: '';
             position: absolute;
-            bottom: -30%; left: -20%;
-            width: 600px; height: 600px;
+            bottom: -30%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
             background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
             border-radius: 50%;
         }
+
         .hero-content {
             position: relative;
             z-index: 2;
@@ -175,6 +252,7 @@
             max-width: 900px;
             margin: 0 auto;
         }
+
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -190,16 +268,29 @@
             text-transform: uppercase;
             letter-spacing: 1.5px;
         }
+
         .hero-badge .pulse-dot {
-            width: 8px; height: 8px;
+            width: 8px;
+            height: 8px;
             background: var(--sns-green);
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
+
         @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.5); }
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.5);
+            }
         }
+
         .hero h1 {
             font-family: var(--font-display);
             font-size: clamp(36px, 6.5vw, 72px);
@@ -208,12 +299,14 @@
             margin-bottom: 10px;
             letter-spacing: -2px;
         }
+
         .hero h1 .line-gold {
             background: var(--gradient-saffron);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+
         .hero-stipend-line {
             font-family: var(--font-display);
             font-size: clamp(20px, 3vw, 30px);
@@ -222,6 +315,7 @@
             margin: 16px 0 4px;
             letter-spacing: 0.5px;
         }
+
         .hero-stipend {
             font-family: var(--font-display);
             font-size: clamp(48px, 8.5vw, 100px);
@@ -236,10 +330,17 @@
             background-clip: text;
             animation: shimmer 3s linear infinite;
         }
+
         @keyframes shimmer {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
         }
+
         .hero-sub {
             font-size: clamp(16px, 2.2vw, 20px);
             color: #94A3B8;
@@ -247,28 +348,38 @@
             font-weight: 400;
             line-height: 1.6;
         }
-        .hero-sub strong { color: var(--sns-white); font-weight: 600; }
+
+        .hero-sub strong {
+            color: var(--sns-white);
+            font-weight: 600;
+        }
 
         /* WhatsApp OTP Form */
         .waitlist-form {
             max-width: 580px;
             margin: 0 auto 20px;
         }
+
         .waitlist-form-row {
             display: flex;
             gap: 12px;
             margin-bottom: 12px;
         }
+
         .input-group {
             flex: 1;
             display: flex;
-            background: rgba(255,255,255, 0.06);
-            border: 1px solid rgba(255,255,255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 60px;
             overflow: hidden;
             transition: border-color 0.3s;
         }
-        .input-group:focus-within { border-color: var(--sns-saffron); }
+
+        .input-group:focus-within {
+            border-color: var(--sns-saffron);
+        }
+
         .country-code {
             display: flex;
             align-items: center;
@@ -278,10 +389,14 @@
             font-weight: 600;
             color: #94A3B8;
             white-space: nowrap;
-            border-right: 1px solid rgba(255,255,255,0.08);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
             user-select: none;
         }
-        .country-code .flag { font-size: 18px; }
+
+        .country-code .flag {
+            font-size: 18px;
+        }
+
         .input-group input {
             flex: 1;
             padding: 16px 18px;
@@ -293,7 +408,11 @@
             outline: none;
             min-width: 0;
         }
-        .input-group input::placeholder { color: #64748B; }
+
+        .input-group input::placeholder {
+            color: #64748B;
+        }
+
         .waitlist-form button.btn-primary {
             padding: 16px 32px;
             background: var(--gradient-saffron);
@@ -310,11 +429,15 @@
             align-items: center;
             gap: 8px;
         }
+
         .waitlist-form button.btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 40px rgba(245, 166, 35, 0.35);
         }
-        .waitlist-form button.btn-primary .wa-icon { font-size: 20px; }
+
+        .waitlist-form button.btn-primary .wa-icon {
+            font-size: 20px;
+        }
 
         /* General Button Primary */
         .btn-primary {
@@ -331,6 +454,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 40px rgba(245, 166, 35, 0.35);
@@ -342,17 +466,23 @@
             max-width: 580px;
             margin: 0 auto 20px;
         }
-        .otp-section.active { display: block; }
+
+        .otp-section.active {
+            display: block;
+        }
+
         .otp-inputs {
             display: flex;
             gap: 12px;
             justify-content: center;
             margin-bottom: 16px;
         }
+
         .otp-inputs input {
-            width: 52px; height: 58px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.15);
+            width: 52px;
+            height: 58px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 14px;
             text-align: center;
             font-size: 24px;
@@ -362,13 +492,18 @@
             outline: none;
             transition: border-color 0.3s;
         }
-        .otp-inputs input:focus { border-color: var(--sns-saffron); }
+
+        .otp-inputs input:focus {
+            border-color: var(--sns-saffron);
+        }
+
         .otp-actions {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 16px;
         }
+
         .otp-actions button {
             padding: 14px 32px;
             border-radius: 60px;
@@ -379,25 +514,38 @@
             border: none;
             transition: all 0.3s;
         }
+
         .btn-verify {
             background: var(--gradient-green);
             color: var(--sns-dark);
         }
-        .btn-verify:hover { box-shadow: 0 8px 30px rgba(34, 197, 94, 0.3); transform: translateY(-2px); }
+
+        .btn-verify:hover {
+            box-shadow: 0 8px 30px rgba(34, 197, 94, 0.3);
+            transform: translateY(-2px);
+        }
+
         .btn-resend {
             background: transparent;
             color: #64748B;
             text-decoration: underline;
             padding: 14px 16px;
         }
-        .btn-resend:hover { color: var(--sns-saffron); }
+
+        .btn-resend:hover {
+            color: var(--sns-saffron);
+        }
+
         .otp-info {
             text-align: center;
             font-size: 14px;
             color: #64748B;
             margin-bottom: 16px;
         }
-        .otp-info strong { color: var(--sns-green); }
+
+        .otp-info strong {
+            color: var(--sns-green);
+        }
 
         /* Success State */
         .success-state {
@@ -406,9 +554,14 @@
             max-width: 580px;
             margin: 0 auto 20px;
         }
-        .success-state.active { display: block; }
+
+        .success-state.active {
+            display: block;
+        }
+
         .success-check {
-            width: 72px; height: 72px;
+            width: 72px;
+            height: 72px;
             background: rgba(34, 197, 94, 0.15);
             border: 2px solid var(--sns-green);
             border-radius: 50%;
@@ -419,24 +572,40 @@
             margin: 0 auto 16px;
             animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
         @keyframes pop {
-            0% { transform: scale(0); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
+
         .success-state h3 {
             font-family: var(--font-display);
             font-size: 24px;
             margin-bottom: 8px;
             color: var(--sns-green);
         }
-        .success-state p { color: #94A3B8; font-size: 15px; }
+
+        .success-state p {
+            color: #94A3B8;
+            font-size: 15px;
+        }
 
         .waitlist-meta {
             font-size: 13px;
             color: #64748B;
             text-align: center;
         }
-        .waitlist-meta .wa-green { color: #25D366; font-weight: 600; }
+
+        .waitlist-meta .wa-green {
+            color: #25D366;
+            font-weight: 600;
+        }
+
         .waitlist-counter {
             display: inline-flex;
             align-items: center;
@@ -450,8 +619,10 @@
             color: var(--sns-green);
             margin-top: 16px;
         }
+
         .waitlist-counter .counter-dot {
-            width: 6px; height: 6px;
+            width: 6px;
+            height: 6px;
             background: var(--sns-green);
             border-radius: 50%;
             animation: pulse 1.5s infinite;
@@ -463,15 +634,20 @@
             gap: 48px;
             margin-top: 64px;
             padding-top: 48px;
-            border-top: 1px solid rgba(255,255,255,0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
-        .hero-stat { text-align: center; }
+
+        .hero-stat {
+            text-align: center;
+        }
+
         .hero-stat-value {
             font-family: var(--font-display);
             font-size: 32px;
             font-weight: 700;
             color: var(--sns-white);
         }
+
         .hero-stat-label {
             font-size: 13px;
             color: #64748B;
@@ -481,7 +657,11 @@
         }
 
         /* ===== SECTIONS ===== */
-        section { position: relative; z-index: 1; padding: 100px 0; }
+        section {
+            position: relative;
+            z-index: 1;
+            padding: 100px 0;
+        }
 
         .section-label {
             display: inline-flex;
@@ -494,11 +674,14 @@
             color: var(--sns-saffron);
             margin-bottom: 16px;
         }
+
         .section-label::before {
             content: '';
-            width: 24px; height: 2px;
+            width: 24px;
+            height: 2px;
             background: var(--sns-saffron);
         }
+
         .section-title {
             font-family: var(--font-display);
             font-size: clamp(32px, 5vw, 52px);
@@ -507,25 +690,33 @@
             letter-spacing: -1.5px;
             margin-bottom: 20px;
         }
+
         .section-desc {
             font-size: 18px;
             color: #94A3B8;
             max-width: 640px;
             line-height: 1.7;
         }
-        .section-desc.centered { margin: 0 auto; }
+
+        .section-desc.centered {
+            margin: 0 auto;
+        }
 
         /* ===== WHO IS THIS FOR ===== */
-        .who-section { background: var(--sns-dark); }
+        .who-section {
+            background: var(--sns-dark);
+        }
+
         .who-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 24px;
             margin-top: 56px;
         }
+
         .who-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 20px;
             padding: 36px 28px;
             text-align: center;
@@ -533,23 +724,32 @@
             position: relative;
             overflow: hidden;
         }
+
         .who-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             height: 3px;
             background: var(--gradient-saffron);
             transform: scaleX(0);
             transition: transform 0.4s ease;
         }
-        .who-card:hover::before { transform: scaleX(1); }
+
+        .who-card:hover::before {
+            transform: scaleX(1);
+        }
+
         .who-card:hover {
             background: rgba(245, 166, 35, 0.04);
             border-color: rgba(245, 166, 35, 0.15);
             transform: translateY(-8px);
         }
+
         .who-icon {
-            width: 64px; height: 64px;
+            width: 64px;
+            height: 64px;
             background: rgba(245, 166, 35, 0.1);
             border-radius: 16px;
             display: flex;
@@ -558,12 +758,14 @@
             margin: 0 auto 20px;
             font-size: 28px;
         }
+
         .who-card h3 {
             font-family: var(--font-display);
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 8px;
         }
+
         .who-card p {
             font-size: 14px;
             color: #94A3B8;
@@ -578,16 +780,24 @@
             border-bottom: 1px solid rgba(245, 166, 35, 0.08);
             overflow: hidden;
         }
+
         .marquee-track {
             display: flex;
             gap: 48px;
             animation: marquee 40s linear infinite;
             width: max-content;
         }
+
         @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
         }
+
         .marquee-item {
             font-family: var(--font-display);
             font-size: 14px;
@@ -598,25 +808,33 @@
             align-items: center;
             gap: 12px;
         }
-        .marquee-item span { color: var(--sns-saffron); font-size: 8px; }
+
+        .marquee-item span {
+            color: var(--sns-saffron);
+            font-size: 8px;
+        }
 
         /* ===== PHASES ===== */
         .phases-section {
             background: linear-gradient(180deg, var(--sns-dark) 0%, var(--sns-charcoal) 100%);
         }
+
         .phase-timeline {
             margin-top: 64px;
             position: relative;
         }
+
         .phase-timeline::before {
             content: '';
             position: absolute;
             left: 50%;
-            top: 0; bottom: 0;
+            top: 0;
+            bottom: 0;
             width: 2px;
             background: linear-gradient(180deg, var(--sns-saffron) 0%, var(--sns-purple) 50%, var(--sns-green) 100%);
             transform: translateX(-50%);
         }
+
         .phase-item {
             display: flex;
             align-items: flex-start;
@@ -624,37 +842,50 @@
             margin-bottom: 80px;
             position: relative;
         }
-        .phase-item:last-child { margin-bottom: 0; }
-        .phase-item:nth-child(even) { flex-direction: row-reverse; }
+
+        .phase-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .phase-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
         .phase-number-col {
             flex: 0 0 50%;
             display: flex;
             justify-content: flex-end;
             padding-right: 40px;
         }
+
         .phase-item:nth-child(even) .phase-number-col {
             justify-content: flex-start;
             padding-right: 0;
             padding-left: 40px;
         }
+
         .phase-content-col {
             flex: 0 0 50%;
             padding-left: 40px;
         }
+
         .phase-item:nth-child(even) .phase-content-col {
             padding-left: 0;
             padding-right: 40px;
             text-align: right;
         }
+
         .phase-dot {
             position: absolute;
             left: 50%;
             top: 20px;
-            width: 20px; height: 20px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             transform: translateX(-50%);
             z-index: 2;
         }
+
         .phase-dot::after {
             content: '';
             position: absolute;
@@ -663,25 +894,45 @@
             border: 2px solid;
             opacity: 0.3;
         }
-        .phase-1 .phase-dot { background: var(--sns-saffron); }
-        .phase-1 .phase-dot::after { border-color: var(--sns-saffron); }
-        .phase-2 .phase-dot { background: var(--sns-purple); }
-        .phase-2 .phase-dot::after { border-color: var(--sns-purple); }
-        .phase-3 .phase-dot { background: var(--sns-green); }
-        .phase-3 .phase-dot::after { border-color: var(--sns-green); }
+
+        .phase-1 .phase-dot {
+            background: var(--sns-saffron);
+        }
+
+        .phase-1 .phase-dot::after {
+            border-color: var(--sns-saffron);
+        }
+
+        .phase-2 .phase-dot {
+            background: var(--sns-purple);
+        }
+
+        .phase-2 .phase-dot::after {
+            border-color: var(--sns-purple);
+        }
+
+        .phase-3 .phase-dot {
+            background: var(--sns-green);
+        }
+
+        .phase-3 .phase-dot::after {
+            border-color: var(--sns-green);
+        }
 
         .phase-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             padding: 40px;
             transition: all 0.4s ease;
         }
+
         .phase-card:hover {
             border-color: rgba(245, 166, 35, 0.2);
             transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
+
         .phase-tag {
             display: inline-block;
             font-size: 11px;
@@ -692,9 +943,22 @@
             border-radius: 50px;
             margin-bottom: 16px;
         }
-        .phase-1 .phase-tag { background: rgba(245, 166, 35, 0.15); color: var(--sns-saffron); }
-        .phase-2 .phase-tag { background: rgba(139, 92, 246, 0.15); color: var(--sns-purple); }
-        .phase-3 .phase-tag { background: rgba(34, 197, 94, 0.15); color: var(--sns-green); }
+
+        .phase-1 .phase-tag {
+            background: rgba(245, 166, 35, 0.15);
+            color: var(--sns-saffron);
+        }
+
+        .phase-2 .phase-tag {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--sns-purple);
+        }
+
+        .phase-3 .phase-tag {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--sns-green);
+        }
+
         .phase-card h3 {
             font-family: var(--font-display);
             font-size: 28px;
@@ -702,40 +966,53 @@
             margin-bottom: 12px;
             letter-spacing: -0.5px;
         }
+
         .phase-card p {
             color: #94A3B8;
             font-size: 16px;
             line-height: 1.7;
             margin-bottom: 24px;
         }
+
         .track-chips {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
-        .phase-item:nth-child(even) .track-chips { justify-content: flex-end; }
+
+        .phase-item:nth-child(even) .track-chips {
+            justify-content: flex-end;
+        }
+
         .track-chip {
             display: inline-flex;
             align-items: center;
             gap: 6px;
             padding: 8px 16px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50px;
             font-size: 13px;
             font-weight: 500;
             color: #CBD5E1;
             transition: all 0.3s;
         }
+
         .track-chip:hover {
             background: rgba(245, 166, 35, 0.1);
             border-color: rgba(245, 166, 35, 0.3);
             color: var(--sns-saffron);
         }
-        .track-chip .chip-icon { font-size: 16px; }
+
+        .track-chip .chip-icon {
+            font-size: 16px;
+        }
 
         /* ===== PRICING ===== */
-        .pricing-section { background: var(--sns-charcoal); }
+        .pricing-section {
+            background: var(--sns-charcoal);
+        }
+
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -743,9 +1020,10 @@
             margin-top: 56px;
             margin-bottom: 48px;
         }
+
         .pricing-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             padding: 40px 32px;
             text-align: center;
@@ -753,15 +1031,18 @@
             position: relative;
             overflow: hidden;
         }
+
         .pricing-card.featured {
             background: rgba(245, 166, 35, 0.05);
             border-color: rgba(245, 166, 35, 0.3);
             transform: scale(1.05);
         }
+
         .pricing-card.featured::before {
             content: 'BEST VALUE';
             position: absolute;
-            top: 18px; right: -32px;
+            top: 18px;
+            right: -32px;
             background: var(--gradient-saffron);
             color: var(--sns-dark);
             font-size: 10px;
@@ -770,11 +1051,16 @@
             transform: rotate(45deg);
             letter-spacing: 1px;
         }
+
         .pricing-card:hover {
             transform: translateY(-8px);
             border-color: rgba(245, 166, 35, 0.2);
         }
-        .pricing-card.featured:hover { transform: scale(1.05) translateY(-8px); }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+
         .pricing-tier {
             font-size: 12px;
             font-weight: 700;
@@ -783,12 +1069,14 @@
             color: var(--sns-saffron);
             margin-bottom: 8px;
         }
+
         .pricing-card h3 {
             font-family: var(--font-display);
             font-size: 20px;
             margin-bottom: 24px;
             color: #CBD5E1;
         }
+
         .pricing-amount {
             font-family: var(--font-display);
             font-size: 56px;
@@ -796,28 +1084,45 @@
             margin-bottom: 4px;
             line-height: 1;
         }
-        .pricing-amount .currency { font-size: 24px; vertical-align: super; color: #94A3B8; }
-        .pricing-amount.free { color: var(--sns-green); }
+
+        .pricing-amount .currency {
+            font-size: 24px;
+            vertical-align: super;
+            color: #94A3B8;
+        }
+
+        .pricing-amount.free {
+            color: var(--sns-green);
+        }
+
         .pricing-label {
             font-size: 14px;
             color: #64748B;
             margin-bottom: 32px;
         }
+
         .pricing-features {
             list-style: none;
             text-align: left;
             margin-bottom: 32px;
         }
+
         .pricing-features li {
             padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             font-size: 14px;
             color: #94A3B8;
             display: flex;
             align-items: flex-start;
             gap: 10px;
         }
-        .pricing-features li .check { color: var(--sns-green); font-weight: bold; flex-shrink: 0; }
+
+        .pricing-features li .check {
+            color: var(--sns-green);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
         .pricing-btn {
             display: inline-block;
             width: 100%;
@@ -832,21 +1137,25 @@
             cursor: pointer;
             border: none;
         }
+
         .pricing-btn.primary {
             background: var(--gradient-saffron);
             color: var(--sns-dark);
         }
+
         .pricing-btn.primary:hover {
             box-shadow: 0 8px 30px rgba(245, 166, 35, 0.35);
             transform: translateY(-2px);
         }
+
         .pricing-btn.secondary {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             color: var(--sns-white);
         }
+
         .pricing-btn.secondary:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             border-color: rgba(245, 166, 35, 0.3);
         }
 
@@ -860,13 +1169,19 @@
             justify-content: space-between;
             gap: 32px;
         }
+
         .bootcamp-note-text h4 {
             font-family: var(--font-display);
             font-size: 20px;
             font-weight: 600;
             margin-bottom: 4px;
         }
-        .bootcamp-note-text p { color: #94A3B8; font-size: 15px; }
+
+        .bootcamp-note-text p {
+            color: #94A3B8;
+            font-size: 15px;
+        }
+
         .bootcamp-price {
             font-family: var(--font-display);
             font-size: 24px;
@@ -876,26 +1191,33 @@
         }
 
         /* ===== ECOSYSTEM ===== */
-        .ecosystem-section { background: var(--sns-dark); }
+        .ecosystem-section {
+            background: var(--sns-dark);
+        }
+
         .eco-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             margin-top: 56px;
         }
+
         .eco-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 20px;
             padding: 36px;
             transition: all 0.4s ease;
         }
+
         .eco-card:hover {
             border-color: rgba(245, 166, 35, 0.15);
             transform: translateY(-6px);
         }
+
         .eco-card-icon {
-            width: 48px; height: 48px;
+            width: 48px;
+            height: 48px;
             background: rgba(245, 166, 35, 0.1);
             border-radius: 12px;
             display: flex;
@@ -904,12 +1226,14 @@
             font-size: 22px;
             margin-bottom: 20px;
         }
+
         .eco-card h4 {
             font-family: var(--font-display);
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 8px;
         }
+
         .eco-card p {
             font-size: 14px;
             color: #94A3B8;
@@ -921,6 +1245,7 @@
             background: linear-gradient(180deg, var(--sns-dark), var(--sns-charcoal));
             overflow: hidden;
         }
+
         .competency-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -928,6 +1253,7 @@
             align-items: center;
             margin-top: 56px;
         }
+
         /* Interactive SVG Circle */
         .circle-visual {
             position: relative;
@@ -935,16 +1261,20 @@
             max-width: 480px;
             margin: 0 auto;
         }
+
         .circle-visual svg {
             width: 100%;
             height: auto;
         }
+
         .circle-center-text {
             position: absolute;
-            top: 50%; left: 50%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
         }
+
         .circle-center-text h4 {
             font-family: var(--font-display);
             font-size: 18px;
@@ -952,10 +1282,12 @@
             color: var(--sns-white);
             margin-bottom: 4px;
         }
+
         .circle-center-text p {
             font-size: 12px;
             color: #94A3B8;
         }
+
         .competency-details h3 {
             font-family: var(--font-display);
             font-size: 28px;
@@ -963,32 +1295,38 @@
             margin-bottom: 32px;
             line-height: 1.2;
         }
+
         .comp-item {
             display: flex;
             gap: 20px;
             padding: 24px;
             margin-bottom: 16px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 16px;
             transition: all 0.4s ease;
             cursor: default;
         }
+
         .comp-item:hover {
             background: rgba(245, 166, 35, 0.04);
             border-color: rgba(245, 166, 35, 0.2);
             transform: translateX(8px);
         }
+
         .comp-item:nth-child(2):hover {
             background: rgba(59, 130, 246, 0.04);
             border-color: rgba(59, 130, 246, 0.2);
         }
+
         .comp-item:nth-child(3):hover {
             background: rgba(34, 197, 94, 0.04);
             border-color: rgba(34, 197, 94, 0.2);
         }
+
         .comp-icon {
-            width: 52px; height: 52px;
+            width: 52px;
+            height: 52px;
             border-radius: 14px;
             display: flex;
             align-items: center;
@@ -996,63 +1334,99 @@
             font-size: 24px;
             flex-shrink: 0;
         }
-        .comp-icon.attitude { background: rgba(245, 166, 35, 0.12); }
-        .comp-icon.technical { background: rgba(59, 130, 246, 0.12); }
-        .comp-icon.logical { background: rgba(34, 197, 94, 0.12); }
+
+        .comp-icon.attitude {
+            background: rgba(245, 166, 35, 0.12);
+        }
+
+        .comp-icon.technical {
+            background: rgba(59, 130, 246, 0.12);
+        }
+
+        .comp-icon.logical {
+            background: rgba(34, 197, 94, 0.12);
+        }
+
         .comp-text h4 {
             font-family: var(--font-display);
             font-size: 17px;
             font-weight: 600;
             margin-bottom: 4px;
         }
+
         .comp-text p {
             font-size: 14px;
             color: #94A3B8;
             line-height: 1.6;
         }
+
         .comp-text .comp-tags {
             display: flex;
             gap: 8px;
             margin-top: 8px;
             flex-wrap: wrap;
         }
+
         .comp-text .comp-tag {
             font-size: 11px;
             padding: 3px 10px;
             border-radius: 50px;
             font-weight: 600;
         }
-        .comp-tag.att { background: rgba(245, 166, 35, 0.1); color: var(--sns-saffron); }
-        .comp-tag.tech { background: rgba(59, 130, 246, 0.1); color: var(--sns-blue); }
-        .comp-tag.log { background: rgba(34, 197, 94, 0.1); color: var(--sns-green); }
+
+        .comp-tag.att {
+            background: rgba(245, 166, 35, 0.1);
+            color: var(--sns-saffron);
+        }
+
+        .comp-tag.tech {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--sns-blue);
+        }
+
+        .comp-tag.log {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--sns-green);
+        }
 
         /* ===== 3P + 5 PILLARS ===== */
         .pillars-section {
             background: var(--sns-charcoal);
         }
+
         .pillars-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 64px;
             margin-top: 56px;
         }
+
         .pillar-block h3 {
             font-family: var(--font-display);
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 24px;
         }
-        .pillar-list { list-style: none; }
+
+        .pillar-list {
+            list-style: none;
+        }
+
         .pillar-list li {
             display: flex;
             align-items: flex-start;
             gap: 16px;
             padding: 16px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
-        .pillar-list li:last-child { border-bottom: none; }
+
+        .pillar-list li:last-child {
+            border-bottom: none;
+        }
+
         .pillar-icon {
-            width: 40px; height: 40px;
+            width: 40px;
+            height: 40px;
             background: rgba(245, 166, 35, 0.1);
             border-radius: 10px;
             display: flex;
@@ -1061,20 +1435,33 @@
             font-size: 18px;
             flex-shrink: 0;
         }
+
         .pillar-text h4 {
             font-family: var(--font-display);
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 4px;
         }
-        .pillar-text p { font-size: 13px; color: #94A3B8; }
+
+        .pillar-text p {
+            font-size: 13px;
+            color: #94A3B8;
+        }
 
         /* ===== FAQ ===== */
-        .faq-section { background: linear-gradient(180deg, var(--sns-charcoal), var(--sns-dark)); }
-        .faq-grid { max-width: 780px; margin: 56px auto 0; }
-        .faq-item {
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+        .faq-section {
+            background: linear-gradient(180deg, var(--sns-charcoal), var(--sns-dark));
         }
+
+        .faq-grid {
+            max-width: 780px;
+            margin: 56px auto 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
         .faq-question {
             width: 100%;
             background: none;
@@ -1086,6 +1473,7 @@
             cursor: pointer;
             text-align: left;
         }
+
         .faq-question h4 {
             font-family: var(--font-display);
             font-size: 17px;
@@ -1093,9 +1481,11 @@
             color: var(--sns-white);
             padding-right: 20px;
         }
+
         .faq-toggle {
-            width: 32px; height: 32px;
-            background: rgba(255,255,255,0.05);
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -1105,13 +1495,21 @@
             flex-shrink: 0;
             transition: transform 0.3s;
         }
-        .faq-item.open .faq-toggle { transform: rotate(45deg); }
+
+        .faq-item.open .faq-toggle {
+            transform: rotate(45deg);
+        }
+
         .faq-answer {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease;
         }
-        .faq-item.open .faq-answer { max-height: 300px; }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+        }
+
         .faq-answer p {
             padding-bottom: 24px;
             font-size: 15px;
@@ -1124,6 +1522,7 @@
             background: var(--sns-dark);
             padding: 100px 0;
         }
+
         .cta-box {
             background: linear-gradient(135deg, rgba(245, 166, 35, 0.1), rgba(139, 92, 246, 0.08));
             border: 1px solid rgba(245, 166, 35, 0.2);
@@ -1133,14 +1532,18 @@
             position: relative;
             overflow: hidden;
         }
+
         .cta-box::before {
             content: '';
             position: absolute;
-            top: -100px; right: -100px;
-            width: 300px; height: 300px;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
             background: radial-gradient(circle, rgba(245, 166, 35, 0.1), transparent);
             border-radius: 50%;
         }
+
         .cta-box h2 {
             font-family: var(--font-display);
             font-size: clamp(32px, 5vw, 48px);
@@ -1150,6 +1553,7 @@
             letter-spacing: -1px;
             position: relative;
         }
+
         .cta-box p.cta-sub {
             font-size: 18px;
             color: #94A3B8;
@@ -1163,26 +1567,30 @@
         /* ===== FOOTER ===== */
         .footer {
             background: var(--sns-dark);
-            border-top: 1px solid rgba(255,255,255,0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             padding: 60px 0 32px;
         }
+
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 48px;
             margin-bottom: 48px;
         }
+
         .footer-brand-logo {
             height: 56px;
             width: auto;
             margin-bottom: 12px;
         }
+
         .footer-brand p {
             font-size: 14px;
             color: #64748B;
             margin-top: 8px;
             line-height: 1.7;
         }
+
         .footer-col h5 {
             font-family: var(--font-display);
             font-size: 14px;
@@ -1192,6 +1600,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+
         .footer-col a {
             display: block;
             color: #64748B;
@@ -1200,19 +1609,29 @@
             padding: 6px 0;
             transition: color 0.3s;
         }
-        .footer-col a:hover { color: var(--sns-saffron); }
+
+        .footer-col a:hover {
+            color: var(--sns-saffron);
+        }
+
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             padding-top: 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .footer-bottom p { font-size: 13px; color: #475569; }
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: #475569;
+        }
+
         .footer-locations {
             display: flex;
             gap: 16px;
         }
+
         .footer-locations span {
             font-size: 12px;
             color: #475569;
@@ -1235,11 +1654,16 @@
             z-index: 9999;
             transform: translateY(150%);
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
         }
-        .toast.show { transform: translateY(0); }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+
         .toast-icon {
-            width: 40px; height: 40px;
+            width: 40px;
+            height: 40px;
             background: rgba(34, 197, 94, 0.15);
             border-radius: 10px;
             display: flex;
@@ -1248,15 +1672,26 @@
             font-size: 20px;
             flex-shrink: 0;
         }
-        .toast-text strong { display: block; font-size: 14px; color: var(--sns-white); }
-        .toast-text span { font-size: 13px; color: #94A3B8; }
+
+        .toast-text strong {
+            display: block;
+            font-size: 14px;
+            color: var(--sns-white);
+        }
+
+        .toast-text span {
+            font-size: 13px;
+            color: #94A3B8;
+        }
 
         /* ===== MODAL FORM ===== */
         .modal-overlay {
             display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(8px);
             z-index: 10000;
@@ -1264,7 +1699,11 @@
             justify-content: center;
             padding: 20px;
         }
-        .modal-overlay.active { display: flex; }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
         .modal-content {
             background: var(--sns-white);
             border-radius: 24px;
@@ -1277,14 +1716,25 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
             animation: modalSlide 0.3s ease-out;
         }
+
         @keyframes modalSlide {
-            from { transform: translateY(-30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
+
         .modal-close {
             position: absolute;
-            top: 20px; right: 20px;
-            width: 40px; height: 40px;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
             background: var(--sns-charcoal);
             border: none;
             border-radius: 50%;
@@ -1297,7 +1747,12 @@
             transition: all 0.3s;
             line-height: 1;
         }
-        .modal-close:hover { background: var(--sns-navy); transform: rotate(90deg); }
+
+        .modal-close:hover {
+            background: var(--sns-navy);
+            transform: rotate(90deg);
+        }
+
         .modal-header h2 {
             font-family: var(--font-display);
             font-size: 32px;
@@ -1305,17 +1760,21 @@
             color: var(--sns-charcoal);
             margin-bottom: 12px;
         }
+
         .modal-header p {
             font-size: 16px;
             color: #64748B;
             line-height: 1.6;
         }
+
         .modal-form {
             margin-top: 32px;
         }
+
         .form-group {
             margin-bottom: 24px;
         }
+
         .form-group label {
             display: block;
             font-size: 15px;
@@ -1323,10 +1782,12 @@
             color: var(--sns-charcoal);
             margin-bottom: 8px;
         }
+
         .form-group label .required {
             color: #EF4444;
             margin-left: 2px;
         }
+
         .form-group input {
             width: 100%;
             padding: 14px 16px;
@@ -1338,16 +1799,21 @@
             color: var(--sns-charcoal);
             transition: all 0.3s;
         }
+
         .form-group input:focus {
             outline: none;
             border-color: var(--sns-saffron);
             background: var(--sns-white);
         }
-        .form-group input::placeholder { color: #94A3B8; }
-        
+
+        .form-group input::placeholder {
+            color: #94A3B8;
+        }
+
         .quick-questions {
             margin-top: 28px;
         }
+
         .quick-questions h3 {
             font-family: var(--font-display);
             font-size: 18px;
@@ -1355,12 +1821,14 @@
             color: var(--sns-charcoal);
             margin-bottom: 16px;
         }
+
         .checkbox-group {
             display: flex;
             align-items: center;
             padding: 12px 0;
             cursor: pointer;
         }
+
         .checkbox-group input[type="checkbox"] {
             width: 20px;
             height: 20px;
@@ -1368,6 +1836,7 @@
             cursor: pointer;
             accent-color: var(--sns-saffron);
         }
+
         .checkbox-group label {
             font-size: 15px;
             color: #475569;
@@ -1375,6 +1844,7 @@
             margin: 0;
             font-weight: 400;
         }
+
         .modal-submit {
             width: 100%;
             padding: 16px;
@@ -1388,11 +1858,13 @@
             cursor: pointer;
             transition: all 0.3s;
         }
+
         .modal-submit:hover {
             background: var(--sns-navy);
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
+
         .modal-submit:disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -1404,1356 +1876,1551 @@
             transform: translateY(40px);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        section[id] { scroll-margin-top: 80px; }
+        section[id] {
+            scroll-margin-top: 80px;
+        }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
-            .who-grid { grid-template-columns: repeat(2, 1fr); }
-            .eco-grid { grid-template-columns: repeat(2, 1fr); }
-            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
-            .pricing-card.featured { transform: none; }
-            .pricing-card.featured:hover { transform: translateY(-8px); }
-            .competency-layout { grid-template-columns: 1fr; gap: 48px; }
-            .circle-visual { max-width: 380px; }
-            .pillars-wrapper { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .who-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .eco-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-8px);
+            }
+
+            .competency-layout {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .circle-visual {
+                max-width: 380px;
+            }
+
+            .pillars-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .mobile-menu-btn { display: block; }
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
             .nav-links.active {
                 display: flex;
                 flex-direction: column;
                 position: absolute;
                 top: 100%;
-                left: 0; right: 0;
+                left: 0;
+                right: 0;
                 background: rgba(6, 13, 24, 0.98);
                 padding: 24px;
                 gap: 16px;
                 border-bottom: 1px solid rgba(245, 166, 35, 0.1);
             }
-            .hero { padding: 100px 0 60px; min-height: auto; }
-            .hero-stats { flex-direction: column; gap: 24px; }
-            .waitlist-form-row { flex-direction: column; }
-            .who-grid { grid-template-columns: 1fr; }
-            .eco-grid { grid-template-columns: 1fr; }
 
-            .phase-timeline::before { left: 20px; }
-            .phase-item, .phase-item:nth-child(even) {
+            .hero {
+                padding: 100px 0 60px;
+                min-height: auto;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .waitlist-form-row {
+                flex-direction: column;
+            }
+
+            .who-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .eco-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .phase-timeline::before {
+                left: 20px;
+            }
+
+            .phase-item,
+            .phase-item:nth-child(even) {
                 flex-direction: column;
                 gap: 0;
                 padding-left: 50px;
             }
-            .phase-number-col, .phase-item:nth-child(even) .phase-number-col { display: none; }
-            .phase-content-col, .phase-item:nth-child(even) .phase-content-col {
+
+            .phase-number-col,
+            .phase-item:nth-child(even) .phase-number-col {
+                display: none;
+            }
+
+            .phase-content-col,
+            .phase-item:nth-child(even) .phase-content-col {
                 flex: 1;
                 padding: 0;
                 text-align: left;
             }
-            .phase-item:nth-child(even) .track-chips { justify-content: flex-start; }
-            .phase-dot, .phase-1 .phase-dot, .phase-2 .phase-dot, .phase-3 .phase-dot {
+
+            .phase-item:nth-child(even) .track-chips {
+                justify-content: flex-start;
+            }
+
+            .phase-dot,
+            .phase-1 .phase-dot,
+            .phase-2 .phase-dot,
+            .phase-3 .phase-dot {
                 left: 20px;
                 top: 10px;
             }
+
             .bootcamp-note {
                 flex-direction: column;
                 text-align: center;
                 padding: 28px;
             }
-            .cta-box { padding: 48px 24px; }
-            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-            .otp-inputs input { width: 44px; height: 50px; font-size: 20px; }
+
+            .cta-box {
+                padding: 48px 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .otp-inputs input {
+                width: 44px;
+                height: 50px;
+                font-size: 20px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<!-- Particles -->
-<div class="particles" id="particles"></div>
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
 
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar" id="navbar">
-    <div class="container">
-        <a href="#" class="nav-logo">
-            <img src="https://snsgroups.com/sns.png" alt="SNS iNNovation Hub" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div style="display:none; align-items:center; gap:8px;">
-                <div style="width:40px;height:40px;background:var(--gradient-saffron);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--sns-dark);">SNS</div>
-                <div style="font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--sns-white);">iHub</div>
-            </div>
-        </a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#challenge">The Challenge</a></li>
-            <li><a href="#phases">3 Phases</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-           
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#pricing" onclick="event.preventDefault(); document.getElementById('pricing').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="nav-cta">Register Now</a></li>
-        </ul>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
-</nav>
-
-<!-- ===== HERO ===== -->
-<section class="hero" id="home">
-    <div class="container">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <span class="pulse-dot"></span>
-                Waitlist Now Open — Pan India — Ages 11 to 30
-            </div>
-            <h1>
-                India's Boldest<br>
-                <span class="line-gold">AI Challenge.</span>
-            </h1>
-            <div class="hero-stipend-line">Win an Internship with</div>
-            <div class="hero-stipend">&#8377;1 CRORE Stipend</div>
-            <p class="hero-sub">
-                One challenge. Three phases. <strong>One winner gets an internship with ₹1 Crore stipend</strong> at SNS iHub.<br>
-                Open to ages 11–30 across India. Early birds pay nothing.
-            </p>
-
-            <!-- Join Waitlist Button -->
-            <div style="max-width: 580px; margin: 0 auto 20px;">
-                <button class="btn-primary" type="button" onclick="document.getElementById('pricing').scrollIntoView({ behavior: 'smooth', block: 'start' })" style="width: 100%; padding: 18px 32px; font-size: 16px; border-radius: 60px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;">
-                    JOIN WAITLIST BEFORE 14TH APRIL
-                </button>
-            </div>
-
-            <div class="waitlist-counter">
-                <span class="counter-dot"></span>
-                <span id="liveCounter">12,847</span> people on the waitlist
-            </div>
-
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <div class="hero-stat-value">11–30</div>
-                    <div class="hero-stat-label">Age Group</div>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="nav-logo">
+                <img src="https://snsgroups.com/sns.png" alt="SNS iNNovation Hub"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div style="display:none; align-items:center; gap:8px;">
+                    <div
+                        style="width:40px;height:40px;background:var(--gradient-saffron);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--sns-dark);">
+                        SNS</div>
+                    <div style="font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--sns-white);">
+                        iHub</div>
                 </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-value">4</div>
-                    <div class="hero-stat-label">Challenge Tracks</div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#challenge">The Challenge</a></li>
+                <li><a href="#phases">3 Phases</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#pricing"
+                        onclick="event.preventDefault(); document.getElementById('pricing').scrollIntoView({ behavior: 'smooth', block: 'start' });"
+                        style="background: linear-gradient(90deg, #E8372A 0%, #F5831F 50%, #F5A623 100%); color: #0A1628 !important; font-weight: 800; font-size: 12px; letter-spacing: 0.5px; padding: 10px 20px; border-radius: 50px; text-transform: uppercase; white-space: nowrap; transition: all 0.3s; box-shadow: 0 4px 20px rgba(232,55,42,0.35);"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 30px rgba(232,55,42,0.5)';"
+                        onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 20px rgba(232,55,42,0.35)';">JOIN
+                        WAITLIST BEFORE 14TH APRIL</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="pulse-dot"></span>
+                    Waitlist Now Open — Pan India — Ages 11 to 30
                 </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-value">100</div>
-                    <div class="hero-stat-label">Day Bootcamp</div>
+                <h1>
+                    India's Boldest<br>
+                    <span class="line-gold">AI Challenge.</span>
+                </h1>
+                <div class="hero-stipend-line">Win an Internship with</div>
+                <div class="hero-stipend">&#8377;1 CRORE Stipend</div>
+                <p class="hero-sub">
+                    One challenge. Three phases. <strong>One winner gets an internship with ₹1 Crore stipend</strong> at
+                    SNS iHub.<br>
+                    Open to ages 11–30 across India. Early birds pay nothing.
+                </p>
+
+                <!-- Join Waitlist Button -->
+                <div style="max-width: 580px; margin: 0 auto 20px;">
+                    <button class="btn-primary" type="button"
+                        onclick="document.getElementById('pricing').scrollIntoView({ behavior: 'smooth', block: 'start' })"
+                        style="width: 100%; padding: 18px 32px; font-size: 16px; border-radius: 60px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;">
+                        JOIN WAITLIST BEFORE 14TH APRIL
+                    </button>
                 </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-value">₹1Cr</div>
-                    <div class="hero-stat-label">Internship Stipend</div>
+
+                <div class="waitlist-counter">
+                    <span class="counter-dot"></span>
+                    <span id="liveCounter">12,847</span> people on the waitlist
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- ===== WHO IS THIS FOR ===== -->
-<section class="who-section" id="challenge">
-    <div class="container">
-        <div class="text-center reveal">
-            <span class="section-label">Who Is This For</span>
-            <h2 class="section-title">Not Just for Coders.<br><span class="text-saffron">For India's Sharpest Minds.</span></h2>
-            <p class="section-desc centered">Whether you're cracking JEE, preparing for UPSC, dreaming of banking, or building code — this challenge finds the best and transforms them into AI-powered leaders.</p>
-        </div>
-        <div class="who-grid reveal">
-            <div class="who-card">
-                <div class="who-icon">&#128187;</div>
-                <h3>Tech Track</h3>
-                <p>DSA, System Design, Competitive Coding — the builders and architects of tomorrow's tech.</p>
-            </div>
-            <div class="who-card">
-                <div class="who-icon">&#129514;</div>
-                <h3>JEE / NEET Track</h3>
-                <p>Engineering & medical aspirants ready to add AI to their arsenal before college even starts.</p>
-            </div>
-            <div class="who-card">
-                <div class="who-icon">&#127963;</div>
-                <h3>Govt Exams Track</h3>
-                <p>UPSC, SSB, Defense, Railways — future administrators who'll govern with AI intelligence.</p>
-            </div>
-            <div class="who-card">
-                <div class="who-icon">&#127974;</div>
-                <h3>Banking Track</h3>
-                <p>IBPS, SBI, RBI aspirants preparing for the AI-driven future of BFSI and FinTech.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== MARQUEE ===== -->
-<div class="marquee-section">
-    <div class="marquee-track">
-        <div class="marquee-item"><span>&#9670;</span> Smart City & Manufacturing</div>
-        <div class="marquee-item"><span>&#9670;</span> Healthcare AI</div>
-        <div class="marquee-item"><span>&#9670;</span> Agriculture & Food Tech</div>
-        <div class="marquee-item"><span>&#9670;</span> Retail & FMCG</div>
-        <div class="marquee-item"><span>&#9670;</span> Automotive & Aerospace</div>
-        <div class="marquee-item"><span>&#9670;</span> Defense & Govt</div>
-        <div class="marquee-item"><span>&#9670;</span> Real Estate</div>
-        <div class="marquee-item"><span>&#9670;</span> Sports & Media</div>
-        <div class="marquee-item"><span>&#9670;</span> BFSI & FinTech</div>
-        <div class="marquee-item"><span>&#9670;</span> Energy & Power</div>
-        <div class="marquee-item"><span>&#9670;</span> EdTech & HR Tech</div>
-        <div class="marquee-item"><span>&#9670;</span> Robotics & Automation</div>
-        <div class="marquee-item"><span>&#9670;</span> AR / VR</div>
-        <div class="marquee-item"><span>&#9670;</span> Data Science / AI / ML</div>
-        <div class="marquee-item"><span>&#9670;</span> IoT & Cybersecurity</div>
-        <div class="marquee-item"><span>&#9670;</span> Additive Manufacturing</div>
-        <div class="marquee-item"><span>&#9670;</span> Low Code / No Code</div>
-        <!-- Duplicate for seamless loop -->
-        <div class="marquee-item"><span>&#9670;</span> Smart City & Manufacturing</div>
-        <div class="marquee-item"><span>&#9670;</span> Healthcare AI</div>
-        <div class="marquee-item"><span>&#9670;</span> Agriculture & Food Tech</div>
-        <div class="marquee-item"><span>&#9670;</span> Retail & FMCG</div>
-        <div class="marquee-item"><span>&#9670;</span> Automotive & Aerospace</div>
-        <div class="marquee-item"><span>&#9670;</span> Defense & Govt</div>
-        <div class="marquee-item"><span>&#9670;</span> Real Estate</div>
-        <div class="marquee-item"><span>&#9670;</span> Sports & Media</div>
-        <div class="marquee-item"><span>&#9670;</span> BFSI & FinTech</div>
-        <div class="marquee-item"><span>&#9670;</span> Energy & Power</div>
-        <div class="marquee-item"><span>&#9670;</span> EdTech & HR Tech</div>
-        <div class="marquee-item"><span>&#9670;</span> Robotics & Automation</div>
-        <div class="marquee-item"><span>&#9670;</span> AR / VR</div>
-        <div class="marquee-item"><span>&#9670;</span> Data Science / AI / ML</div>
-        <div class="marquee-item"><span>&#9670;</span> IoT & Cybersecurity</div>
-        <div class="marquee-item"><span>&#9670;</span> Additive Manufacturing</div>
-        <div class="marquee-item"><span>&#9670;</span> Low Code / No Code</div>
-    </div>
-</div>
-
-<!-- ===== 3 PHASES ===== -->
-<section class="phases-section" id="phases">
-    <div class="container">
-        <div class="text-center reveal">
-            <span class="section-label">The Journey</span>
-            <h2 class="section-title">3 Phases. 1 Winner.<br><span class="text-saffron">Zero Shortcuts.</span></h2>
-            <p class="section-desc centered">This isn't a course you watch — it's a gauntlet you survive. Each phase filters for grit, skill, and the ability to build with AI. One winner walks away with an internship carrying a ₹1 Crore stipend.</p>
-        </div>
-
-        <div class="phase-timeline">
-            <!-- Phase 1 -->
-            <div class="phase-item phase-1 reveal">
-                <div class="phase-number-col">
-                    <div style="text-align:right;">
-                        <div style="font-family: var(--font-display); font-size: 120px; font-weight: 700; color: rgba(245,166,35,0.08); line-height:1;">01</div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">11–30</div>
+                        <div class="hero-stat-label">Age Group</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">4</div>
+                        <div class="hero-stat-label">Challenge Tracks</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">100</div>
+                        <div class="hero-stat-label">Day Bootcamp</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">₹1Cr</div>
+                        <div class="hero-stat-label">Internship Stipend</div>
                     </div>
                 </div>
-                <div class="phase-dot"></div>
-                <div class="phase-content-col">
-                    <div class="phase-card">
-                        <span class="phase-tag">Phase 1</span>
-                        <h3>The Challenge — Choose Your Arena before 14th April</h3>
-                        <p>A rigorous online challenge designed to test your domain mastery. Pick the track that matches your fire. Top performers advance to Phase 2.</p>
-                        <div class="track-chips">
-                            <span class="track-chip"><span class="chip-icon">&#128187;</span> Tech — DSA, System Design, Coding</span>
-                            <span class="track-chip"><span class="chip-icon">&#128218;</span> JEE / NEET</span>
-                            <span class="track-chip"><span class="chip-icon">&#127963;</span> UPSC / SSB / Defense / Railways</span>
-                            <span class="track-chip"><span class="chip-icon">&#127974;</span> Banking</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHO IS THIS FOR ===== -->
+    <section class="who-section" id="challenge">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="section-label">Who Is This For</span>
+                <h2 class="section-title">Not Just for Coders.<br><span class="text-saffron">For India's Sharpest
+                        Minds.</span></h2>
+                <p class="section-desc centered">Whether you're cracking JEE, preparing for UPSC, dreaming of banking,
+                    or building code — this challenge finds the best and transforms them into AI-powered leaders.</p>
+            </div>
+            <div class="who-grid reveal">
+                <div class="who-card">
+                    <div class="who-icon">&#128187;</div>
+                    <h3>Tech Track</h3>
+                    <p>DSA, System Design, Competitive Coding — the builders and architects of tomorrow's tech.</p>
+                </div>
+                <div class="who-card">
+                    <div class="who-icon">&#129514;</div>
+                    <h3>JEE / NEET Track</h3>
+                    <p>Engineering & medical aspirants ready to add AI to their arsenal before college even starts.</p>
+                </div>
+                <div class="who-card">
+                    <div class="who-icon">&#127963;</div>
+                    <h3>Govt Exams Track</h3>
+                    <p>UPSC, SSB, Defense, Railways — future administrators who'll govern with AI intelligence.</p>
+                </div>
+                <div class="who-card">
+                    <div class="who-icon">&#127974;</div>
+                    <h3>Banking Track</h3>
+                    <p>IBPS, SBI, RBI aspirants preparing for the AI-driven future of BFSI and FinTech.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MARQUEE ===== -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <div class="marquee-item"><span>&#9670;</span> Smart City & Manufacturing</div>
+            <div class="marquee-item"><span>&#9670;</span> Healthcare AI</div>
+            <div class="marquee-item"><span>&#9670;</span> Agriculture & Food Tech</div>
+            <div class="marquee-item"><span>&#9670;</span> Retail & FMCG</div>
+            <div class="marquee-item"><span>&#9670;</span> Automotive & Aerospace</div>
+            <div class="marquee-item"><span>&#9670;</span> Defense & Govt</div>
+            <div class="marquee-item"><span>&#9670;</span> Real Estate</div>
+            <div class="marquee-item"><span>&#9670;</span> Sports & Media</div>
+            <div class="marquee-item"><span>&#9670;</span> BFSI & FinTech</div>
+            <div class="marquee-item"><span>&#9670;</span> Energy & Power</div>
+            <div class="marquee-item"><span>&#9670;</span> EdTech & HR Tech</div>
+            <div class="marquee-item"><span>&#9670;</span> Robotics & Automation</div>
+            <div class="marquee-item"><span>&#9670;</span> AR / VR</div>
+            <div class="marquee-item"><span>&#9670;</span> Data Science / AI / ML</div>
+            <div class="marquee-item"><span>&#9670;</span> IoT & Cybersecurity</div>
+            <div class="marquee-item"><span>&#9670;</span> Additive Manufacturing</div>
+            <div class="marquee-item"><span>&#9670;</span> Low Code / No Code</div>
+            <!-- Duplicate for seamless loop -->
+            <div class="marquee-item"><span>&#9670;</span> Smart City & Manufacturing</div>
+            <div class="marquee-item"><span>&#9670;</span> Healthcare AI</div>
+            <div class="marquee-item"><span>&#9670;</span> Agriculture & Food Tech</div>
+            <div class="marquee-item"><span>&#9670;</span> Retail & FMCG</div>
+            <div class="marquee-item"><span>&#9670;</span> Automotive & Aerospace</div>
+            <div class="marquee-item"><span>&#9670;</span> Defense & Govt</div>
+            <div class="marquee-item"><span>&#9670;</span> Real Estate</div>
+            <div class="marquee-item"><span>&#9670;</span> Sports & Media</div>
+            <div class="marquee-item"><span>&#9670;</span> BFSI & FinTech</div>
+            <div class="marquee-item"><span>&#9670;</span> Energy & Power</div>
+            <div class="marquee-item"><span>&#9670;</span> EdTech & HR Tech</div>
+            <div class="marquee-item"><span>&#9670;</span> Robotics & Automation</div>
+            <div class="marquee-item"><span>&#9670;</span> AR / VR</div>
+            <div class="marquee-item"><span>&#9670;</span> Data Science / AI / ML</div>
+            <div class="marquee-item"><span>&#9670;</span> IoT & Cybersecurity</div>
+            <div class="marquee-item"><span>&#9670;</span> Additive Manufacturing</div>
+            <div class="marquee-item"><span>&#9670;</span> Low Code / No Code</div>
+        </div>
+    </div>
+
+    <!-- ===== 3 PHASES ===== -->
+    <section class="phases-section" id="phases">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="section-label">The Journey</span>
+                <h2 class="section-title">3 Phases. 1 Winner.<br><span class="text-saffron">Zero Shortcuts.</span></h2>
+                <p class="section-desc centered">This isn't a course you watch — it's a gauntlet you survive. Each phase
+                    filters for grit, skill, and the ability to build with AI. One winner walks away with an internship
+                    carrying a ₹1 Crore stipend.</p>
+            </div>
+
+            <div class="phase-timeline">
+                <!-- Phase 1 -->
+                <div class="phase-item phase-1 reveal">
+                    <div class="phase-number-col">
+                        <div style="text-align:right;">
+                            <div
+                                style="font-family: var(--font-display); font-size: 120px; font-weight: 700; color: rgba(245,166,35,0.08); line-height:1;">
+                                01</div>
+                        </div>
+                    </div>
+                    <div class="phase-dot"></div>
+                    <div class="phase-content-col">
+                        <div class="phase-card">
+                            <span class="phase-tag">Phase 1</span>
+                            <h3>The Challenge — Choose Your Arena before 14th April</h3>
+                            <p>A rigorous online challenge designed to test your domain mastery. Pick the track that
+                                matches your fire. Top performers advance to Phase 2.</p>
+                            <div class="track-chips">
+                                <span class="track-chip"><span class="chip-icon">&#128187;</span> Tech — DSA, System
+                                    Design, Coding</span>
+                                <span class="track-chip"><span class="chip-icon">&#128218;</span> JEE / NEET</span>
+                                <span class="track-chip"><span class="chip-icon">&#127963;</span> UPSC / SSB / Defense /
+                                    Railways</span>
+                                <span class="track-chip"><span class="chip-icon">&#127974;</span> Banking</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="phase-item phase-2 reveal">
+                    <div class="phase-number-col">
+                        <div>
+                            <div
+                                style="font-family: var(--font-display); font-size: 120px; font-weight: 700; color: rgba(139,92,246,0.08); line-height:1;">
+                                02</div>
+                        </div>
+                    </div>
+                    <div class="phase-dot"></div>
+                    <div class="phase-content-col">
+                        <div class="phase-card">
+                            <span class="phase-tag">Phase 2 — 100 Days</span>
+                            <h3><a href="https://av.snsgroups.com" target="_blank">The Bootcamp</a> — Gen AI & Agentic
+                                AI</h3>
+                            <p>100 days of intense, hands-on training in Generative AI and Agentic AI. You won't just
+                                learn frameworks — you'll build autonomous agents, ship real prototypes, and think like
+                                an AI entrepreneur. This is where common minds get redesigned.</p>
+                            <div class="track-chips">
+                                <span class="track-chip"><span class="chip-icon">&#129302;</span> Agentic AI
+                                    Architecture</span>
+                                <span class="track-chip"><span class="chip-icon">&#128161;</span> GenAI
+                                    Frameworks</span>
+                                <span class="track-chip"><span class="chip-icon">&#128736;</span> Real-World
+                                    Projects</span>
+                                <span class="track-chip"><span class="chip-icon">&#127891;</span> Industry
+                                    Mentorship</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="phase-item phase-3 reveal">
+                    <div class="phase-number-col">
+                        <div style="text-align:right;">
+                            <div
+                                style="font-family: var(--font-display); font-size: 120px; font-weight: 700; color: rgba(34,197,94,0.08); line-height:1;">
+                                03</div>
+                        </div>
+                    </div>
+                    <div class="phase-dot"></div>
+                    <div class="phase-content-col">
+                        <div class="phase-card">
+                            <span class="phase-tag">Phase 3 — The Finale</span>
+                            <h3>One-Day Hack — Prove It Live</h3>
+                            <p>The ultimate pressure test. One day. One problem statement. Build a working AI solution
+                                in front of judges and industry leaders. The winner receives a 1-year internship at SNS
+                                iHub / SNS Square with a ₹1 Crore stipend.</p>
+                            <div class="track-chips">
+                                <span class="track-chip"
+                                    style="border-color: rgba(34,197,94,0.3); color: var(--sns-green);"><span
+                                        class="chip-icon">&#127942;</span> Internship with ₹1 Crore Stipend</span>
+                                <span class="track-chip"><span class="chip-icon">&#128188;</span> 1 Year @ SNS iHub /
+                                    SNS Square</span>
+                                <span class="track-chip"><span class="chip-icon">&#127758;</span> Remote & Onsite
+                                    Options</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Phase 2 -->
-            <div class="phase-item phase-2 reveal">
-                <div class="phase-number-col">
-                    <div>
-                        <div style="font-family: var(--font-display); font-size: 120px; font-weight: 700; color: rgba(139,92,246,0.08); line-height:1;">02</div>
+    <!-- ===== PRICING ===== -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="section-label">Pricing</span>
+                <h2 class="section-title">Early Birds Pay Nothing.<br><span class="text-saffron">Late Birds Pay
+                        Attention.</span></h2>
+                <p class="section-desc centered">We reward action. The earlier you sign up, the less you pay. Phase 1
+                    registration pricing below — bootcamp fees are separate.</p>
+            </div>
+
+            <div class="pricing-grid reveal">
+                <div class="pricing-card featured">
+                    <div class="pricing-tier">Early Bird</div>
+                    <h3>For the Fast Movers</h3>
+                    <div class="pricing-amount free">FREE TILL 13TH APRIL</div>
+                    <div class="pricing-label">₹0 — Zero. Nada. Nothing.</div>
+                    <ul class="pricing-features">
+                        <li><span class="check">&#10003;</span> Phase 1 Challenge Access</li>
+                        <li><span class="check">&#10003;</span> Early community access</li>
+                        <li><span class="check">&#10003;</span> Priority waitlist position</li>
+                        <li><span class="check">&#10003;</span> Exclusive prep resources</li>
+                        <li><span class="check">&#10003;</span> Early bird badge & certificate</li>
+                    </ul>
+                    <button class="pricing-btn primary" onclick="openRegisterModal('free')">Join Free — Limited
+                        Slots</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-tier">Mid Level</div>
+                    <h3>Still Ahead of the Crowd</h3>
+                    <div class="pricing-amount"><span class="currency">₹</span>500</div>
+                    <div class="pricing-label">One-time registration fee</div>
+                    <ul class="pricing-features">
+                        <li><span class="check">&#10003;</span> Phase 1 Challenge Access</li>
+                        <li><span class="check">&#10003;</span> Community access</li>
+                        <li><span class="check">&#10003;</span> Standard waitlist position</li>
+                        <li><span class="check">&#10003;</span> Prep resource kit</li>
+                        <li><span class="check">&#10003;</span> Participation certificate</li>
+                    </ul>
+                    <button class="pricing-btn secondary" onclick="openRegisterModal('500')">Register — ₹500 +
+                        GST</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-tier">Regular</div>
+                    <h3>Better Late Than Never</h3>
+                    <div class="pricing-amount"><span class="currency">₹</span>1,000</div>
+                    <div class="pricing-label">Standard registration fee</div>
+                    <ul class="pricing-features">
+                        <li><span class="check">&#10003;</span> Phase 1 Challenge Access</li>
+                        <li><span class="check">&#10003;</span> Community access</li>
+                        <li><span class="check">&#10003;</span> General waitlist position</li>
+                        <li><span class="check">&#10003;</span> Basic resource kit</li>
+                        <li><span class="check">&#10003;</span> Participation certificate</li>
+                    </ul>
+                    <button class="pricing-btn secondary" onclick="openRegisterModal('1000')">Register — ₹1,000 +
+                        GST</button>
+                </div>
+            </div>
+
+            <div class="bootcamp-note reveal">
+                <div class="bootcamp-note-text">
+                    <h4>Phase 2 — 100-Day Bootcamp Fees</h4>
+                    <p>Separate from registration. Covers mentorship, tools, projects, and certification. Pricing based
+                        on track and scholarship tier.</p>
+                </div>
+                <button class="pricing-btn secondary" style="white-space:nowrap;width:40%;min-width:140px;"
+                    onclick="openRegisterModal('1')">Pay ₹1 + GST</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="section-label">Questions</span>
+                <h2 class="section-title">Got Questions?<br><span class="text-saffron">We've Got Answers.</span></h2>
+            </div>
+            <div class="faq-grid reveal">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <h4>Who can participate? Is there an age limit?</h4>
+                        <div class="faq-toggle">+</div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Anyone aged 11 to 30 across India. School students, graduates, working professionals,
+                            self-taught learners — all welcome. All you need is fire in the belly.</p>
                     </div>
                 </div>
-                <div class="phase-dot"></div>
-                <div class="phase-content-col">
-                    <div class="phase-card">
-                        <span class="phase-tag">Phase 2 — 100 Days</span>
-                        <h3><a href="https://av.snsgroups.com" target="_blank">The Bootcamp</a> — Gen AI & Agentic AI</h3>
-                        <p>100 days of intense, hands-on training in Generative AI and Agentic AI. You won't just learn frameworks — you'll build autonomous agents, ship real prototypes, and think like an AI entrepreneur. This is where common minds get redesigned.</p>
-                        <div class="track-chips">
-                            <span class="track-chip"><span class="chip-icon">&#129302;</span> Agentic AI Architecture</span>
-                            <span class="track-chip"><span class="chip-icon">&#128161;</span> GenAI Frameworks</span>
-                            <span class="track-chip"><span class="chip-icon">&#128736;</span> Real-World Projects</span>
-                            <span class="track-chip"><span class="chip-icon">&#127891;</span> Industry Mentorship</span>
-                        </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <h4>Do I need a technical background for the Tech track?</h4>
+                        <div class="faq-toggle">+</div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>For the Tech track (DSA, System Design, Coding) — yes, foundational programming knowledge
+                            helps. For JEE/NEET, Govt Exams, and Banking tracks, Phase 1 is domain-specific. Phase 2
+                            bootcamp teaches AI from the ground up regardless of your track.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <h4>What exactly is the ₹1 Crore stipend? Is it real?</h4>
+                        <div class="faq-toggle">+</div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>100% real. The Phase 3 winner gets a 1-year internship at SNS iHub or SNS Square with a total
+                            stipend of ₹1 Crore. It's a working internship — you'll be building real AI solutions for
+                            SHAAARP industry verticals. Remote and onsite options across CBE, BLR, CHE, HYD, PUNE, and
+                            Delhi NCR.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <h4>Why do you collect my WhatsApp number?</h4>
+                        <div class="faq-toggle">+</div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>All challenge updates, OTP verification, community access, and phase notifications happen via
+                            WhatsApp — it's faster, more personal, and ensures you never miss an update. We verify your
+                            number via OTP to keep the waitlist genuine. We will never spam you.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <h4>What does the waitlist mean? Am I guaranteed a spot?</h4>
+                        <div class="faq-toggle">+</div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Joining the waitlist secures your priority position. Early bird registrants (₹0 fee) get
+                            first access when Phase 1 opens. As slots fill, pricing moves to ₹500 and ₹1,000. The
+                            earlier you join, the better your position and the less you pay.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <h4>What's the 3C Competency Circle?</h4>
+                        <div class="faq-toggle">+</div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>It's SNS Institutions' proprietary framework that develops three core competencies: Attitude
+                            (curiosity, accountability), Technical Domain Expertise (hard skills for today's tech
+                            world), and Logical & Business Acumen (problem-solving and practical thinking). When all
+                            three align, graduates become industry-ready innovators.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <h4>Can I participate remotely?</h4>
+                        <div class="faq-toggle">+</div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Phase 1 (Challenge) and Phase 2 (Bootcamp) support both remote and onsite modes. Phase 3
+                            (One-Day Hack) will be held onsite at select locations. The final internship also offers
+                            remote and onsite options.</p>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Phase 3 -->
-            <div class="phase-item phase-3 reveal">
-                <div class="phase-number-col">
-                    <div style="text-align:right;">
-                        <div style="font-family: var(--font-display); font-size: 120px; font-weight: 700; color: rgba(34,197,94,0.08); line-height:1;">03</div>
-                    </div>
-                </div>
-                <div class="phase-dot"></div>
-                <div class="phase-content-col">
-                    <div class="phase-card">
-                        <span class="phase-tag">Phase 3 — The Finale</span>
-                        <h3>One-Day Hack — Prove It Live</h3>
-                        <p>The ultimate pressure test. One day. One problem statement. Build a working AI solution in front of judges and industry leaders. The winner receives a 1-year internship at SNS iHub / SNS Square with a ₹1 Crore stipend.</p>
-                        <div class="track-chips">
-                            <span class="track-chip" style="border-color: rgba(34,197,94,0.3); color: var(--sns-green);"><span class="chip-icon">&#127942;</span> Internship with ₹1 Crore Stipend</span>
-                            <span class="track-chip"><span class="chip-icon">&#128188;</span> 1 Year @ SNS iHub / SNS Square</span>
-                            <span class="track-chip"><span class="chip-icon">&#127758;</span> Remote & Onsite Options</span>
-                        </div>
-                    </div>
+    <!-- ===== FINAL CTA ===== -->
+    <section class="cta-section" id="waitlist">
+        <div class="container">
+            <div class="cta-box reveal">
+                <h2>The Waitlist Is Open till 13th April.<br><span class="text-saffron">Are You In?</span></h2>
+                <p class="cta-sub">12,847 people are already ahead of you. Every day you wait, the free slots shrink.
+                    Join now and pay nothing — or pay later and wish you hadn't.</p>
+
+                <!-- CTA Join Button -->
+                <div style="max-width: 580px; margin: 0 auto 20px;">
+                    <button class="btn-primary" type="button"
+                        onclick="document.getElementById('pricing').scrollIntoView({ behavior: 'smooth', block: 'start' })"
+                        style="width: 100%; padding: 18px 32px; font-size: 16px; border-radius: 60px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;">
+                        JOIN WAITLIST BEFORE 14TH APRIL
+                    </button>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="https://snsgroups.com/sns.png" alt="SNS iNNovation Hub" class="footer-brand-logo"
+                        onerror="this.style.display='none';">
+                    <p>Redesigning common minds and business. Building entrepreneurial mindsets through design thinking.
+                        India's boldest AI challenge — backed by a mission to create 1000 AI startups in 10 years.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Challenge</h5>
+                    <a href="#challenge">Who It's For</a>
+                    <a href="#phases">3 Phases</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Contact</h5>
+                    <a href="tel:+919566423456">+91 95664 23456</a>
+                    <a href="https://wa.me/919566423456" target="_blank">WhatsApp Us</a>
+                    <a href="https://www.snsihub.ai" target="_blank">www.snsihub.ai</a>
+
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SNS iNNovation Hub. All rights reserved.</p>
+                <div class="footer-locations">
+                    <span>CBE</span>
+                    <span>BLR</span>
+                    <span>CHE</span>
+                    <span>HYD</span>
+                    <span>PUNE</span>
+                    <span>DELHI NCR</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">&#10003;</div>
+        <div class="toast-text">
+            <strong>You're on the waitlist!</strong>
+            <span>Check your phone for confirmation.</span>
         </div>
     </div>
-</section>
 
-<!-- ===== PRICING ===== -->
-<section class="pricing-section" id="pricing">
-    <div class="container">
-        <div class="text-center reveal">
-            <span class="section-label">Pricing</span>
-            <h2 class="section-title">Early Birds Pay Nothing.<br><span class="text-saffron">Late Birds Pay Attention.</span></h2>
-            <p class="section-desc centered">We reward action. The earlier you sign up, the less you pay. Phase 1 registration pricing below — bootcamp fees are separate.</p>
-        </div>
-
-        <div class="pricing-grid reveal">
-            <div class="pricing-card featured">
-                <div class="pricing-tier">Early Bird</div>
-                <h3>For the Fast Movers</h3>
-                <div class="pricing-amount free">FREE TILL 13TH APRIL</div>
-                <div class="pricing-label">₹0 — Zero. Nada. Nothing.</div>
-                <ul class="pricing-features">
-                    <li><span class="check">&#10003;</span> Phase 1 Challenge Access</li>
-                    <li><span class="check">&#10003;</span> Early community access</li>
-                    <li><span class="check">&#10003;</span> Priority waitlist position</li>
-                    <li><span class="check">&#10003;</span> Exclusive prep resources</li>
-                    <li><span class="check">&#10003;</span> Early bird badge & certificate</li>
-                </ul>
-                <button class="pricing-btn primary" onclick="openRegisterModal('free')">Join Free — Limited Slots</button>
-            </div>
-            <div class="pricing-card">
-                <div class="pricing-tier">Mid Level</div>
-                <h3>Still Ahead of the Crowd</h3>
-                <div class="pricing-amount"><span class="currency">₹</span>500</div>
-                <div class="pricing-label">One-time registration fee</div>
-                <ul class="pricing-features">
-                    <li><span class="check">&#10003;</span> Phase 1 Challenge Access</li>
-                    <li><span class="check">&#10003;</span> Community access</li>
-                    <li><span class="check">&#10003;</span> Standard waitlist position</li>
-                    <li><span class="check">&#10003;</span> Prep resource kit</li>
-                    <li><span class="check">&#10003;</span> Participation certificate</li>
-                </ul>
-                <button class="pricing-btn secondary" onclick="openRegisterModal('500')">Register — ₹500 + GST</button>
-            </div>
-            <div class="pricing-card">
-                <div class="pricing-tier">Regular</div>
-                <h3>Better Late Than Never</h3>
-                <div class="pricing-amount"><span class="currency">₹</span>1,000</div>
-                <div class="pricing-label">Standard registration fee</div>
-                <ul class="pricing-features">
-                    <li><span class="check">&#10003;</span> Phase 1 Challenge Access</li>
-                    <li><span class="check">&#10003;</span> Community access</li>
-                    <li><span class="check">&#10003;</span> General waitlist position</li>
-                    <li><span class="check">&#10003;</span> Basic resource kit</li>
-                    <li><span class="check">&#10003;</span> Participation certificate</li>
-                </ul>
-                <button class="pricing-btn secondary" onclick="openRegisterModal('1000')">Register — ₹1,000 + GST</button>
-            </div>
-        </div>
-
-        <div class="bootcamp-note reveal">
-            <div class="bootcamp-note-text">
-                <h4>Phase 2 — 100-Day Bootcamp Fees</h4>
-                <p>Separate from registration. Covers mentorship, tools, projects, and certification. Pricing based on track and scholarship tier.</p>
-            </div>
-            <button class="pricing-btn secondary" style="white-space:nowrap;width:40%;min-width:140px;" onclick="openRegisterModal('1')">Pay ₹1 + GST</button>
-        </div>
-    </div>
-</section>
-
-
-<!-- ===== FAQ ===== -->
-<section class="faq-section" id="faq">
-    <div class="container">
-        <div class="text-center reveal">
-            <span class="section-label">Questions</span>
-            <h2 class="section-title">Got Questions?<br><span class="text-saffron">We've Got Answers.</span></h2>
-        </div>
-        <div class="faq-grid reveal">
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    <h4>Who can participate? Is there an age limit?</h4>
-                    <div class="faq-toggle">+</div>
-                </button>
-                <div class="faq-answer">
-                    <p>Anyone aged 11 to 30 across India. School students, graduates, working professionals, self-taught learners — all welcome. All you need is fire in the belly.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    <h4>Do I need a technical background for the Tech track?</h4>
-                    <div class="faq-toggle">+</div>
-                </button>
-                <div class="faq-answer">
-                    <p>For the Tech track (DSA, System Design, Coding) — yes, foundational programming knowledge helps. For JEE/NEET, Govt Exams, and Banking tracks, Phase 1 is domain-specific. Phase 2 bootcamp teaches AI from the ground up regardless of your track.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    <h4>What exactly is the ₹1 Crore stipend? Is it real?</h4>
-                    <div class="faq-toggle">+</div>
-                </button>
-                <div class="faq-answer">
-                    <p>100% real. The Phase 3 winner gets a 1-year internship at SNS iHub or SNS Square with a total stipend of ₹1 Crore. It's a working internship — you'll be building real AI solutions for SHAAARP industry verticals. Remote and onsite options across CBE, BLR, CHE, HYD, PUNE, and Delhi NCR.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    <h4>Why do you collect my WhatsApp number?</h4>
-                    <div class="faq-toggle">+</div>
-                </button>
-                <div class="faq-answer">
-                    <p>All challenge updates, OTP verification, community access, and phase notifications happen via WhatsApp — it's faster, more personal, and ensures you never miss an update. We verify your number via OTP to keep the waitlist genuine. We will never spam you.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    <h4>What does the waitlist mean? Am I guaranteed a spot?</h4>
-                    <div class="faq-toggle">+</div>
-                </button>
-                <div class="faq-answer">
-                    <p>Joining the waitlist secures your priority position. Early bird registrants (₹0 fee) get first access when Phase 1 opens. As slots fill, pricing moves to ₹500 and ₹1,000. The earlier you join, the better your position and the less you pay.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    <h4>What's the 3C Competency Circle?</h4>
-                    <div class="faq-toggle">+</div>
-                </button>
-                <div class="faq-answer">
-                    <p>It's SNS Institutions' proprietary framework that develops three core competencies: Attitude (curiosity, accountability), Technical Domain Expertise (hard skills for today's tech world), and Logical & Business Acumen (problem-solving and practical thinking). When all three align, graduates become industry-ready innovators.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    <h4>Can I participate remotely?</h4>
-                    <div class="faq-toggle">+</div>
-                </button>
-                <div class="faq-answer">
-                    <p>Phase 1 (Challenge) and Phase 2 (Bootcamp) support both remote and onsite modes. Phase 3 (One-Day Hack) will be held onsite at select locations. The final internship also offers remote and onsite options.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== FINAL CTA ===== -->
-<section class="cta-section" id="waitlist">
-    <div class="container">
-        <div class="cta-box reveal">
-            <h2>The Waitlist Is Open till 13th April.<br><span class="text-saffron">Are You In?</span></h2>
-            <p class="cta-sub">12,847 people are already ahead of you. Every day you wait, the free slots shrink. Join now and pay nothing — or pay later and wish you hadn't.</p>
-
-            <!-- CTA Join Button -->
-            <div style="max-width: 580px; margin: 0 auto 20px;">
-                <button class="btn-primary" type="button" onclick="document.getElementById('pricing').scrollIntoView({ behavior: 'smooth', block: 'start' })" style="width: 100%; padding: 18px 32px; font-size: 16px; border-radius: 60px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;">
-                    JOIN WAITLIST BEFORE 14TH APRIL
-                </button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <img src="https://snsgroups.com/sns.png" alt="SNS iNNovation Hub" class="footer-brand-logo" onerror="this.style.display='none';">
-                <p>Redesigning common minds and business. Building entrepreneurial mindsets through design thinking. India's boldest AI challenge — backed by a mission to create 1000 AI startups in 10 years.</p>
-            </div>
-            <div class="footer-col">
-                <h5>Challenge</h5>
-                <a href="#challenge">Who It's For</a>
-                <a href="#phases">3 Phases</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#faq">FAQ</a>
-            </div>
-         
-            <div class="footer-col">
-                <h5>Contact</h5>
-                <a href="tel:+919566423456">+91 95664 23456</a>
-                <a href="https://wa.me/919566423456" target="_blank">WhatsApp Us</a>
-                <a href="https://www.snsihub.ai" target="_blank">www.snsihub.ai</a>
-        
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 SNS iNNovation Hub. All rights reserved.</p>
-            <div class="footer-locations">
-                <span>CBE</span>
-                <span>BLR</span>
-                <span>CHE</span>
-                <span>HYD</span>
-                <span>PUNE</span>
-                <span>DELHI NCR</span>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!-- Toast -->
-<div class="toast" id="toast">
-    <div class="toast-icon">&#10003;</div>
-    <div class="toast-text">
-        <strong>You're on the waitlist!</strong>
-        <span>Check your phone for confirmation.</span>
-    </div>
-</div>
-
-<!-- Enquiry Modal -->
-<div class="modal-overlay" id="enquiryModal">
-    <div class="modal-content">
-        <button class="modal-close" onclick="closeEnquiryModal()">×</button>
-        <div class="modal-header">
-            <h2>Begin Your AI Journey</h2>
-            <p>Fill out the enquiry form and our team will reach out with complete details about the bootcamp.</p>
-        </div>
-        <form class="modal-form" id="enquiryForm" onsubmit="submitEnquiryForm(event)">
-            <div class="form-group">
-                <label>Name <span class="required">*</span></label>
-                <input type="text" id="enquiryName" name="name" placeholder="Enter your name" required>
-            </div>
-            <div class="form-group">
-                <label>E-Mail <span class="required">*</span></label>
-                <input type="email" id="enquiryEmail" name="email" placeholder="Enter your email" required>
-            </div>
-            <div class="form-group">
-                <label>Mobile number <span class="required">*</span></label>
-                <input type="tel" id="enquiryMobile" name="mobile" placeholder="+91-9344557376" pattern="[0-9]{10}" maxlength="10" required>
-            </div>
-            <div class="quick-questions">
-                <h3>Quick Questions:</h3>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="q1" name="student" value="yes">
-                    <label for="q1">Are you a +2 student?</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="q2" name="idle" value="yes">
-                    <label for="q2">Are you going to be idle for 100+ days?</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="q3" name="future" value="yes">
-                    <label for="q3">Is AI and Agentic AI the future?</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="q4" name="ready" value="yes">
-                    <label for="q4">Ready to master AI in 100 days?</label>
-                </div>
-            </div>
-            <button type="submit" class="modal-submit" id="modalSubmitBtn">Submit Enquiry!!!</button>
-        </form>
-    </div>
-</div>
-
-<!-- Register/OTP Modal -->
-<div class="modal-overlay" id="registerModal">
-    <div class="modal-content" style="max-width: 500px;">
-        <button class="modal-close" onclick="closeRegisterModal()">×</button>
-        
-        <!-- Phone Input State -->
-        <div id="modalFormState">
+    <!-- Enquiry Modal -->
+    <div class="modal-overlay" id="enquiryModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeEnquiryModal()">×</button>
             <div class="modal-header">
-                <h2>Join Waitlist</h2>
-                <p>Enter your phone number to receive OTP and join the waitlist.</p>
+                <h2>Begin Your AI Journey</h2>
+                <p>Fill out the enquiry form and our team will reach out with complete details about the bootcamp.</p>
             </div>
-            <div class="modal-form">
-                <div class="form-group">
-                    <label>Phone Number <span class="required">*</span></label>
-                    <div style="display: flex; gap: 12px; align-items: center;">
-                        <div style="padding: 14px 16px; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; font-weight: 600; color: #475569; display: flex; align-items: center; gap: 6px;">
-                            <span style="font-size: 18px;">🇮🇳</span> +91
-                        </div>
-                        <input type="tel" id="modalPhoneInput" placeholder="Enter your phone number" maxlength="10" pattern="[0-9]{10}" required style="flex: 1; padding: 14px 16px; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; font-size: 15px; color: #1e293b;">
-                    </div>
-                </div>
-                <button type="button" class="modal-submit" onclick="sendModalOTP()">Get OTP</button>
-                <p style="text-align: center; color: #64748B; font-size: 13px; margin-top: 12px;">OTP will be sent to your phone via SMS</p>
-            </div>
-        </div>
-
-        <!-- OTP Verification State -->
-        <div id="modalOtpState" style="display: none;">
-            <div class="modal-header">
-                <h2>Verify OTP</h2>
-                <p>OTP sent to <strong id="modalOtpPhone" style="color: var(--sns-saffron);">+91 98765 43210</strong> via SMS</p>
-            </div>
-            <div class="modal-form">
-                <div class="form-group">
-                    <label>Enter 6-digit OTP</label>
-                    <div style="display: flex; gap: 8px; justify-content: center; margin-top: 12px;">
-                        <input type="text" maxlength="1" class="otp-digit modal-otp-digit" oninput="otpAutoFocus(this)" onkeydown="otpBackspace(event, this)" style="width: 50px; height: 56px; text-align: center; font-size: 20px; font-weight: 700; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; color: #1e293b;">
-                        <input type="text" maxlength="1" class="otp-digit modal-otp-digit" oninput="otpAutoFocus(this)" onkeydown="otpBackspace(event, this)" style="width: 50px; height: 56px; text-align: center; font-size: 20px; font-weight: 700; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; color: #1e293b;">
-                        <input type="text" maxlength="1" class="otp-digit modal-otp-digit" oninput="otpAutoFocus(this)" onkeydown="otpBackspace(event, this)" style="width: 50px; height: 56px; text-align: center; font-size: 20px; font-weight: 700; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; color: #1e293b;">
-                        <input type="text" maxlength="1" class="otp-digit modal-otp-digit" oninput="otpAutoFocus(this)" onkeydown="otpBackspace(event, this)" style="width: 50px; height: 56px; text-align: center; font-size: 20px; font-weight: 700; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; color: #1e293b;">
-                        <input type="text" maxlength="1" class="otp-digit modal-otp-digit" oninput="otpAutoFocus(this)" onkeydown="otpBackspace(event, this)" style="width: 50px; height: 56px; text-align: center; font-size: 20px; font-weight: 700; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; color: #1e293b;">
-                        <input type="text" maxlength="1" class="otp-digit modal-otp-digit" oninput="otpAutoFocus(this)" onkeydown="otpBackspace(event, this)" style="width: 50px; height: 56px; text-align: center; font-size: 20px; font-weight: 700; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; color: #1e293b;">
-                    </div>
-                </div>
-                <button type="button" class="modal-submit" onclick="verifyModalOTP()">Verify & Continue</button>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
-                    <button type="button" id="modalResendBtn" onclick="resendModalOTP()" disabled style="background: transparent; border: none; color: #64748B; text-decoration: underline; cursor: pointer; font-size: 14px;">Resend in <span id="modalResendTimer">30</span>s</button>
-                    <a href="#" onclick="changeModalNumber(event)" style="color: var(--sns-saffron); text-decoration: underline; font-size: 14px;">Change number</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Registration Form State -->
-        <div id="modalFormDetailsState" style="display: none;">
-            <div class="modal-header">
-                <h2 id="regFormTitle">Complete Your Registration</h2>
-                <p id="regFormDesc">Fill out your details to join the AI Challenge</p>
-                <div id="regPlanBadge" style="display:inline-block; margin-top: 10px; padding: 5px 16px; border-radius: 20px; font-size: 13px; font-weight: 700;"></div>
-            </div>
-            <form class="modal-form" id="registrationForm" onsubmit="submitRegistrationForm(event)">
+            <form class="modal-form" id="enquiryForm" onsubmit="submitEnquiryForm(event)">
                 <div class="form-group">
                     <label>Name <span class="required">*</span></label>
-                    <input type="text" id="regName" name="name" placeholder="Enter your name" required>
+                    <input type="text" id="enquiryName" name="name" placeholder="Enter your name" required>
                 </div>
                 <div class="form-group">
                     <label>E-Mail <span class="required">*</span></label>
-                    <input type="email" id="regEmail" name="email" placeholder="Enter your email" required>
+                    <input type="email" id="enquiryEmail" name="email" placeholder="Enter your email" required>
                 </div>
                 <div class="form-group">
-                    <label>Mobile Number <span style="font-size:11px;color:#22C55E;font-weight:600;">✓ Verified</span></label>
-                    <input type="text" id="regPhone" name="phone" readonly style="background:rgba(34,197,94,0.07);color:#94a3b8;cursor:not-allowed;border-color:rgba(34,197,94,0.3);" placeholder="Verified number will appear here">
+                    <label>Mobile number <span class="required">*</span></label>
+                    <input type="tel" id="enquiryMobile" name="mobile" placeholder="+91-9344557376" pattern="[0-9]{10}"
+                        maxlength="10" required>
                 </div>
                 <div class="quick-questions">
                     <h3>Quick Questions:</h3>
                     <div class="checkbox-group">
-                        <input type="checkbox" id="regQ1" name="student" value="yes">
-                        <label for="regQ1">Are you a +2 student?</label>
+                        <input type="checkbox" id="q1" name="student" value="yes">
+                        <label for="q1">Are you a +2 student?</label>
                     </div>
                     <div class="checkbox-group">
-                        <input type="checkbox" id="regQ2" name="idle" value="yes">
-                        <label for="regQ2">Are you going to be idle for 100+ days?</label>
+                        <input type="checkbox" id="q2" name="idle" value="yes">
+                        <label for="q2">Are you going to be idle for 100+ days?</label>
                     </div>
                     <div class="checkbox-group">
-                        <input type="checkbox" id="regQ3" name="future" value="yes">
-                        <label for="regQ3">Is AI and Agentic AI the future?</label>
+                        <input type="checkbox" id="q3" name="future" value="yes">
+                        <label for="q3">Is AI and Agentic AI the future?</label>
                     </div>
                     <div class="checkbox-group">
-                        <input type="checkbox" id="regQ4" name="ready" value="yes">
-                        <label for="regQ4">Ready to master AI in 100 days?</label>
+                        <input type="checkbox" id="q4" name="ready" value="yes">
+                        <label for="q4">Ready to master AI in 100 days?</label>
                     </div>
                 </div>
-                <button type="submit" class="modal-submit" id="regSubmitBtn">Submit &amp; Proceed to Payment</button>
+                <button type="submit" class="modal-submit" id="modalSubmitBtn">Submit Enquiry!!!</button>
             </form>
         </div>
+    </div>
 
-        <!-- Payment State -->
-        <div id="modalPaymentState" style="display: none;">
-            <div class="modal-header">
-                <h2>Secure Your Slot</h2>
-                <p>Complete payment to confirm your registration</p>
-            </div>
-            <div class="modal-form">
-                <div style="background: linear-gradient(135deg, #1e293b, #0f172a); border: 1.5px solid rgba(245,166,35,0.3); border-radius: 16px; padding: 20px; margin-bottom: 20px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-                        <span id="paymentPlanTier" style="background: rgba(245,166,35,0.15); color: var(--sns-saffron); padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase;"></span>
-                        <span id="paymentPlanPrice" style="font-size: 28px; font-weight: 800; color: var(--sns-saffron);"></span>
-                    </div>
-                    <div id="paymentUserName" style="color: #cbd5e1; font-size: 14px; margin-bottom: 4px;"></div>
-                    <div id="paymentUserPhone" style="color: #94A3B8; font-size: 14px;"></div>
+    <!-- Register/OTP Modal -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal-content" style="max-width: 500px;">
+            <button class="modal-close" onclick="closeRegisterModal()">×</button>
+
+            <!-- Phone Input State -->
+            <div id="modalFormState">
+                <div class="modal-header">
+                    <h2>Join Waitlist</h2>
+                    <p>Enter your phone number to receive OTP and join the waitlist.</p>
                 </div>
-                <button type="button" class="modal-submit" id="payNowBtn" onclick="initiatePayment()">Pay &#8377;<span id="payButtonAmount"></span> &mdash; Confirm Registration</button>
-                <p style="text-align: center; color: #64748B; font-size: 12px; margin-top: 12px;">&#128274; Secure &middot; UPI &middot; Cards &middot; Net Banking</p>
-                <button type="button" onclick="backToRegForm()" style="display: block; width: 100%; background: transparent; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; color: #94A3B8; font-size: 13px; margin-top: 10px; cursor: pointer;">&#8592; Back to Form</button>
+                <div class="modal-form">
+                    <div class="form-group">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <div
+                                style="padding: 14px 16px; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; font-weight: 600; color: #475569; display: flex; align-items: center; gap: 6px;">
+                                <span style="font-size: 18px;">🇮🇳</span> +91
+                            </div>
+                            <input type="tel" id="modalPhoneInput" placeholder="Enter your phone number" maxlength="10"
+                                pattern="[0-9]{10}" required
+                                style="flex: 1; padding: 14px 16px; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; font-size: 15px; color: #1e293b;">
+                        </div>
+                    </div>
+                    <button type="button" class="modal-submit" onclick="sendModalOTP()">Get OTP</button>
+                    <p style="text-align: center; color: #64748B; font-size: 13px; margin-top: 12px;">OTP will be sent
+                        to your phone via SMS</p>
+                </div>
+            </div>
+
+            <!-- OTP Verification State -->
+            <div id="modalOtpState" style="display: none;">
+                <div class="modal-header">
+                    <h2>Verify OTP</h2>
+                    <p>OTP sent to <strong id="modalOtpPhone" style="color: var(--sns-saffron);">+91 98765
+                            43210</strong> via SMS</p>
+                </div>
+                <div class="modal-form">
+                    <div class="form-group">
+                        <label>Enter 6-digit OTP</label>
+                        <div style="display: flex; gap: 8px; justify-content: center; margin-top: 12px;">
+                            <input type="text" maxlength="1" class="otp-digit modal-otp-digit"
+                                oninput="otpAutoFocus(this)" onkeydown="otpBackspace(event, this)"
+                                style="width: 50px; height: 56px; text-align: center; font-size: 20px; font-weight: 700; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; color: #1e293b;">
+                            <input type="text" maxlength="1" class="otp-digit modal-otp-digit"
+                                oninput="otpAutoFocus(this)" onkeydown="otpBackspace(event, this)"
+                                style="width: 50px; height: 56px; text-align: center; font-size: 20px; font-weight: 700; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; color: #1e293b;">
+                            <input type="text" maxlength="1" class="otp-digit modal-otp-digit"
+                                oninput="otpAutoFocus(this)" onkeydown="otpBackspace(event, this)"
+                                style="width: 50px; height: 56px; text-align: center; font-size: 20px; font-weight: 700; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; color: #1e293b;">
+                            <input type="text" maxlength="1" class="otp-digit modal-otp-digit"
+                                oninput="otpAutoFocus(this)" onkeydown="otpBackspace(event, this)"
+                                style="width: 50px; height: 56px; text-align: center; font-size: 20px; font-weight: 700; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; color: #1e293b;">
+                            <input type="text" maxlength="1" class="otp-digit modal-otp-digit"
+                                oninput="otpAutoFocus(this)" onkeydown="otpBackspace(event, this)"
+                                style="width: 50px; height: 56px; text-align: center; font-size: 20px; font-weight: 700; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; color: #1e293b;">
+                            <input type="text" maxlength="1" class="otp-digit modal-otp-digit"
+                                oninput="otpAutoFocus(this)" onkeydown="otpBackspace(event, this)"
+                                style="width: 50px; height: 56px; text-align: center; font-size: 20px; font-weight: 700; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; color: #1e293b;">
+                        </div>
+                    </div>
+                    <button type="button" class="modal-submit" onclick="verifyModalOTP()">Verify & Continue</button>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+                        <button type="button" id="modalResendBtn" onclick="resendModalOTP()" disabled
+                            style="background: transparent; border: none; color: #64748B; text-decoration: underline; cursor: pointer; font-size: 14px;">Resend
+                            in <span id="modalResendTimer">30</span>s</button>
+                        <a href="#" onclick="changeModalNumber(event)"
+                            style="color: var(--sns-saffron); text-decoration: underline; font-size: 14px;">Change
+                            number</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registration Form State -->
+            <div id="modalFormDetailsState" style="display: none;">
+                <div class="modal-header">
+                    <h2 id="regFormTitle">Complete Your Registration</h2>
+                    <p id="regFormDesc">Fill out your details to join the AI Challenge</p>
+                    <div id="regPlanBadge"
+                        style="display:inline-block; margin-top: 10px; padding: 5px 16px; border-radius: 20px; font-size: 13px; font-weight: 700;">
+                    </div>
+                </div>
+                <form class="modal-form" id="registrationForm" onsubmit="submitRegistrationForm(event)">
+                    <div class="form-group">
+                        <label>Name <span class="required">*</span></label>
+                        <input type="text" id="regName" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>E-Mail <span class="required">*</span></label>
+                        <input type="email" id="regEmail" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile Number <span style="font-size:11px;color:#22C55E;font-weight:600;">✓
+                                Verified</span></label>
+                        <input type="text" id="regPhone" name="phone" readonly
+                            style="background:rgba(34,197,94,0.07);color:#94a3b8;cursor:not-allowed;border-color:rgba(34,197,94,0.3);"
+                            placeholder="Verified number will appear here">
+                    </div>
+                    <div class="quick-questions">
+                        <h3>Quick Questions:</h3>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="regQ1" name="student" value="yes">
+                            <label for="regQ1">Are you a +2 student?</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="regQ2" name="idle" value="yes">
+                            <label for="regQ2">Are you going to be idle for 100+ days?</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="regQ3" name="future" value="yes">
+                            <label for="regQ3">Is AI and Agentic AI the future?</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="regQ4" name="ready" value="yes">
+                            <label for="regQ4">Ready to master AI in 100 days?</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="modal-submit" id="regSubmitBtn">Submit &amp; Proceed to
+                        Payment</button>
+                </form>
+            </div>
+
+            <!-- Payment State -->
+            <div id="modalPaymentState" style="display: none;">
+                <div class="modal-header">
+                    <h2>Secure Your Slot</h2>
+                    <p>Complete payment to confirm your registration</p>
+                </div>
+                <div class="modal-form">
+                    <div
+                        style="background: linear-gradient(135deg, #1e293b, #0f172a); border: 1.5px solid rgba(245,166,35,0.3); border-radius: 16px; padding: 20px; margin-bottom: 20px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                            <span id="paymentPlanTier"
+                                style="background: rgba(245,166,35,0.15); color: var(--sns-saffron); padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase;"></span>
+                            <span id="paymentPlanPrice"
+                                style="font-size: 28px; font-weight: 800; color: var(--sns-saffron);"></span>
+                        </div>
+                        <div id="paymentUserName" style="color: #cbd5e1; font-size: 14px; margin-bottom: 4px;"></div>
+                        <div id="paymentUserPhone" style="color: #94A3B8; font-size: 14px;"></div>
+                    </div>
+                    <button type="button" class="modal-submit" id="payNowBtn" onclick="initiatePayment()">Pay
+                        &#8377;<span id="payButtonAmount"></span> &mdash; Confirm Registration</button>
+                    <p style="text-align: center; color: #64748B; font-size: 12px; margin-top: 12px;">&#128274; Secure
+                        &middot; UPI &middot; Cards &middot; Net Banking</p>
+                    <button type="button" onclick="backToRegForm()"
+                        style="display: block; width: 100%; background: transparent; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; color: #94A3B8; font-size: 13px; margin-top: 10px; cursor: pointer;">&#8592;
+                        Back to Form</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- ===== JAVASCRIPT ===== -->
-<script>
-    // === Particles ===
-    (function() {
-        const container = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.style.left = Math.random() * 100 + '%';
-            p.style.animationDuration = (15 + Math.random() * 25) + 's';
-            p.style.animationDelay = Math.random() * 20 + 's';
-            p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
-            container.appendChild(p);
-        }
-    })();
-
-    // === Navbar scroll ===
-    window.addEventListener('scroll', () => {
-        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
-    });
-
-    // === Mobile menu ===
-    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-        document.getElementById('navLinks').classList.toggle('active');
-    });
-    document.querySelectorAll('#navLinks a').forEach(a => {
-        a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('active'));
-    });
-
-    // === Scroll reveal ===
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-    // === FAQ Toggle ===
-    function toggleFaq(btn) {
-        const item = btn.parentElement;
-        const wasOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-        if (!wasOpen) item.classList.add('open');
-    }
-
-    // === OTP Auto Focus ===
-    function otpAutoFocus(input) {
-        input.value = input.value.replace(/[^0-9]/g, '');
-        if (input.value.length === 1 && input.nextElementSibling) {
-            input.nextElementSibling.focus();
-        }
-    }
-    function otpBackspace(e, input) {
-        if (e.key === 'Backspace' && input.value === '' && input.previousElementSibling) {
-            input.previousElementSibling.focus();
-        }
-    }
-
-    // === Phone validation ===
-    function isValidPhone(phone) {
-        return /^[6-9]\d{9}$/.test(phone);
-    }
-    function formatPhone(phone) {
-        return '+91 ' + phone.substring(0,5) + ' ' + phone.substring(5);
-    }
-
-    // === Hero OTP Flow ===
-    let resendInterval;
-
-    function startResendTimer() {
-        let seconds = 30;
-        const timerEl = document.getElementById('resendTimer');
-        const btn = document.getElementById('resendBtn');
-        btn.disabled = true;
-        clearInterval(resendInterval);
-        resendInterval = setInterval(() => {
-            seconds--;
-            timerEl.textContent = seconds;
-            if (seconds <= 0) {
-                clearInterval(resendInterval);
-                btn.disabled = false;
-                btn.innerHTML = 'Resend OTP';
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // === Particles ===
+        (function () {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = (15 + Math.random() * 25) + 's';
+                p.style.animationDelay = Math.random() * 20 + 's';
+                p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+                container.appendChild(p);
             }
-        }, 1000);
-    }
+        })();
 
-    function resendOTP() {
-        const btn = document.getElementById('resendBtn');
-        btn.innerHTML = 'Resend in <span id="resendTimer">30</span>s';
-        // Re-send OTP via API
-        const phone = document.getElementById('phoneInput').value.replace(/\D/g, '');
-        if (isValidPhone(phone)) {
-            sendOTP();
+        // === Navbar scroll ===
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // === Mobile menu ===
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        document.querySelectorAll('#navLinks a').forEach(a => {
+            a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('active'));
+        });
+
+        // === Scroll reveal ===
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // === FAQ Toggle ===
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const wasOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+            if (!wasOpen) item.classList.add('open');
         }
-    }
 
-    function changeNumber(e) {
-        e.preventDefault();
-        document.getElementById('otpState').classList.remove('active');
-        document.getElementById('formState').style.display = 'block';
-        document.getElementById('phoneInput').focus();
-        clearInterval(resendInterval);
-    }
-
-    // === CTA OTP Flow ===
-    function sendCTAOTP() {
-        const phone = document.getElementById('ctaPhoneInput').value.replace(/\D/g, '');
-        if (!isValidPhone(phone)) {
-            document.getElementById('ctaPhoneInput').focus();
-            return;
+        // === OTP Auto Focus ===
+        function otpAutoFocus(input) {
+            input.value = input.value.replace(/[^0-9]/g, '');
+            if (input.value.length === 1 && input.nextElementSibling) {
+                input.nextElementSibling.focus();
+            }
         }
-        document.getElementById('ctaOtpPhone').textContent = formatPhone(phone);
-        document.getElementById('ctaFormState').style.display = 'none';
-        document.getElementById('ctaOtpState').classList.add('active');
-        document.querySelector('#ctaOtpState .otp-digit').focus();
-    }
-
-    function verifyCTAOTP() {
-        const digits = document.querySelectorAll('.cta-otp');
-        let otp = '';
-        digits.forEach(d => otp += d.value);
-        if (otp.length < 6) return;
-        document.getElementById('ctaOtpState').classList.remove('active');
-        document.getElementById('ctaSuccessState').classList.add('active');
-        const counter = document.getElementById('liveCounter');
-        const current = parseInt(counter.textContent.replace(/,/g, ''));
-        counter.textContent = (current + 1).toLocaleString();
-        showToast();
-    }
-
-    function showToast() {
-        const toast = document.getElementById('toast');
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 4000);
-    }
-
-    function scrollToWaitlist() {
-        document.getElementById('waitlist').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // === Live counter simulation ===
-    setInterval(() => {
-        const counter = document.getElementById('liveCounter');
-        const current = parseInt(counter.textContent.replace(/,/g, ''));
-        if (Math.random() > 0.6) {
-            counter.textContent = (current + Math.floor(Math.random() * 3) + 1).toLocaleString();
+        function otpBackspace(e, input) {
+            if (e.key === 'Backspace' && input.value === '' && input.previousElementSibling) {
+                input.previousElementSibling.focus();
+            }
         }
-    }, 8000);
 
-    // === Phone input: numbers only ===
-    ['phoneInput', 'ctaPhoneInput', 'modalPhoneInput'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.addEventListener('input', function() {
+        // === Phone validation ===
+        function isValidPhone(phone) {
+            return /^[6-9]\d{9}$/.test(phone);
+        }
+        function formatPhone(phone) {
+            return '+91 ' + phone.substring(0, 5) + ' ' + phone.substring(5);
+        }
+
+        // === Hero OTP Flow ===
+        let resendInterval;
+
+        function startResendTimer() {
+            let seconds = 30;
+            const timerEl = document.getElementById('resendTimer');
+            const btn = document.getElementById('resendBtn');
+            btn.disabled = true;
+            clearInterval(resendInterval);
+            resendInterval = setInterval(() => {
+                seconds--;
+                timerEl.textContent = seconds;
+                if (seconds <= 0) {
+                    clearInterval(resendInterval);
+                    btn.disabled = false;
+                    btn.innerHTML = 'Resend OTP';
+                }
+            }, 1000);
+        }
+
+        function resendOTP() {
+            const btn = document.getElementById('resendBtn');
+            btn.innerHTML = 'Resend in <span id="resendTimer">30</span>s';
+            // Re-send OTP via API
+            const phone = document.getElementById('phoneInput').value.replace(/\D/g, '');
+            if (isValidPhone(phone)) {
+                sendOTP();
+            }
+        }
+
+        function changeNumber(e) {
+            e.preventDefault();
+            document.getElementById('otpState').classList.remove('active');
+            document.getElementById('formState').style.display = 'block';
+            document.getElementById('phoneInput').focus();
+            clearInterval(resendInterval);
+        }
+
+        // === CTA OTP Flow ===
+        function sendCTAOTP() {
+            const phone = document.getElementById('ctaPhoneInput').value.replace(/\D/g, '');
+            if (!isValidPhone(phone)) {
+                document.getElementById('ctaPhoneInput').focus();
+                return;
+            }
+            document.getElementById('ctaOtpPhone').textContent = formatPhone(phone);
+            document.getElementById('ctaFormState').style.display = 'none';
+            document.getElementById('ctaOtpState').classList.add('active');
+            document.querySelector('#ctaOtpState .otp-digit').focus();
+        }
+
+        function verifyCTAOTP() {
+            const digits = document.querySelectorAll('.cta-otp');
+            let otp = '';
+            digits.forEach(d => otp += d.value);
+            if (otp.length < 6) return;
+            document.getElementById('ctaOtpState').classList.remove('active');
+            document.getElementById('ctaSuccessState').classList.add('active');
+            const counter = document.getElementById('liveCounter');
+            const current = parseInt(counter.textContent.replace(/,/g, ''));
+            counter.textContent = (current + 1).toLocaleString();
+            showToast();
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        function scrollToWaitlist() {
+            document.getElementById('waitlist').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // === Live counter simulation ===
+        setInterval(() => {
+            const counter = document.getElementById('liveCounter');
+            const current = parseInt(counter.textContent.replace(/,/g, ''));
+            if (Math.random() > 0.6) {
+                counter.textContent = (current + Math.floor(Math.random() * 3) + 1).toLocaleString();
+            }
+        }, 8000);
+
+        // === Phone input: numbers only ===
+        ['phoneInput', 'ctaPhoneInput', 'modalPhoneInput'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('input', function () {
+                    this.value = this.value.replace(/\D/g, '');
+                });
+            }
+        });
+
+        // === Modal Functions ===
+        function openEnquiryModal() {
+            document.getElementById('enquiryModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEnquiryModal() {
+            document.getElementById('enquiryModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Register Modal Functions
+        function openRegisterModal(plan) {
+            window.selectedPlan = plan || 'free';
+            document.getElementById('registerModal').classList.add('active');
+            document.getElementById('modalFormState').style.display = 'block';
+            document.getElementById('modalOtpState').style.display = 'none';
+            document.getElementById('modalFormDetailsState').style.display = 'none';
+            document.getElementById('modalPaymentState').style.display = 'none';
+            document.body.style.overflow = 'hidden';
+            // Always reset submit button so it's never stuck disabled
+            const sb = document.getElementById('regSubmitBtn');
+            if (sb) { sb.disabled = false; }
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('registerModal').classList.remove('active');
+            document.body.style.overflow = '';
+            // Reset modal states
+            document.getElementById('modalFormState').style.display = 'block';
+            document.getElementById('modalOtpState').style.display = 'none';
+            document.getElementById('modalFormDetailsState').style.display = 'none';
+            document.getElementById('modalPaymentState').style.display = 'none';
+            document.getElementById('modalPhoneInput').value = '';
+            document.querySelectorAll('.modal-otp-digit').forEach(d => d.value = '');
+            document.getElementById('registrationForm').reset();
+            // Reset submit button
+            const sb = document.getElementById('regSubmitBtn');
+            if (sb) { sb.disabled = false; }
+            // Clear verified phone display
+            const phoneField = document.getElementById('regPhone');
+            if (phoneField) phoneField.value = '';
+        }
+
+        function updateModalPlanBadge() {
+            const plan = window.selectedPlan;
+            const badge = document.getElementById('regPlanBadge');
+            const btn = document.getElementById('regSubmitBtn');
+            const title = document.getElementById('regFormTitle');
+            const desc = document.getElementById('regFormDesc');
+            if (!badge) return;
+
+            if (plan === 'waitlist') {
+                badge.style.display = 'none';
+                if (title) title.textContent = 'Join the Waitlist';
+                if (desc) desc.textContent = 'Fill out your details and secure your spot.';
+                if (btn) btn.textContent = 'Join Waitlist';
+            } else if (plan === 'free') {
+                badge.style.display = 'inline-block';
+                badge.textContent = '✓ Early Bird — FREE';
+                badge.style.background = 'rgba(34,197,94,0.15)';
+                badge.style.color = '#22C55E';
+                if (title) title.textContent = 'Join Free — Early Bird';
+                if (desc) desc.textContent = 'You qualify for free access. Fill your details to confirm.';
+                if (btn) btn.textContent = 'Join Free Waitlist';
+            } else if (plan === '1') {
+                badge.style.display = 'inline-block';
+                badge.textContent = 'Phase 2 Bootcamp — ₹1';
+                badge.style.background = 'rgba(59,130,246,0.15)';
+                badge.style.color = 'var(--sns-blue)';
+                if (title) title.textContent = 'Phase 2 — 100-Day Bootcamp';
+                if (desc) desc.textContent = 'Fill your details, then complete ₹1 payment to confirm your bootcamp slot.';
+                if (btn) btn.textContent = 'Submit & Proceed to Payment';
+            } else if (plan === '500') {
+                badge.style.display = 'inline-block';
+                badge.textContent = 'Mid Level — ₹500 + GST';
+                badge.style.background = 'rgba(245,166,35,0.15)';
+                badge.style.color = 'var(--sns-saffron)';
+                if (title) title.textContent = 'Register — Mid Level';
+                if (desc) desc.textContent = 'Fill your details, then complete ₹500 + GST payment to confirm.';
+                if (btn) btn.textContent = 'Submit & Proceed to Payment';
+            } else {
+                badge.style.display = 'inline-block';
+                badge.textContent = 'Regular — ₹1,000 + GST';
+                badge.style.background = 'rgba(245,166,35,0.15)';
+                badge.style.color = 'var(--sns-saffron)';
+                if (title) title.textContent = 'Register — Regular';
+                if (desc) desc.textContent = 'Fill your details, then complete ₹1,000 + GST payment to confirm.';
+                if (btn) btn.textContent = 'Submit & Proceed to Payment';
+            }
+        }
+
+        // Close modals when clicking outside
+        document.getElementById('enquiryModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeEnquiryModal();
+            }
+        });
+
+        document.getElementById('registerModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeRegisterModal();
+            }
+        });
+
+        // Mobile number validation for enquiry form
+        const enquiryMobile = document.getElementById('enquiryMobile');
+        if (enquiryMobile) {
+            enquiryMobile.addEventListener('input', function () {
                 this.value = this.value.replace(/\D/g, '');
             });
         }
-    });
 
-    // === Modal Functions ===
-    function openEnquiryModal() {
-        document.getElementById('enquiryModal').classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+        // === Form Submission with OTP and Bitrix24 Integration ===
+        async function submitEnquiryForm(event) {
+            event.preventDefault();
 
-    function closeEnquiryModal() {
-        document.getElementById('enquiryModal').classList.remove('active');
-        document.body.style.overflow = '';
-    }
+            const submitBtn = document.getElementById('modalSubmitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
 
-    // Register Modal Functions
-    function openRegisterModal(plan) {
-        window.selectedPlan = plan || 'free';
-        document.getElementById('registerModal').classList.add('active');
-        document.getElementById('modalFormState').style.display = 'block';
-        document.getElementById('modalOtpState').style.display = 'none';
-        document.getElementById('modalFormDetailsState').style.display = 'none';
-        document.getElementById('modalPaymentState').style.display = 'none';
-        document.body.style.overflow = 'hidden';
-        // Always reset submit button so it's never stuck disabled
-        const sb = document.getElementById('regSubmitBtn');
-        if (sb) { sb.disabled = false; }
-    }
+            const formData = {
+                name: document.getElementById('enquiryName').value,
+                email: document.getElementById('enquiryEmail').value,
+                mobile: document.getElementById('enquiryMobile').value,
+                student: document.getElementById('q1').checked ? 'Yes' : 'No',
+                idle: document.getElementById('q2').checked ? 'Yes' : 'No',
+                future: document.getElementById('q3').checked ? 'Yes' : 'No',
+                ready: document.getElementById('q4').checked ? 'Yes' : 'No'
+            };
 
-    function closeRegisterModal() {
-        document.getElementById('registerModal').classList.remove('active');
-        document.body.style.overflow = '';
-        // Reset modal states
-        document.getElementById('modalFormState').style.display = 'block';
-        document.getElementById('modalOtpState').style.display = 'none';
-        document.getElementById('modalFormDetailsState').style.display = 'none';
-        document.getElementById('modalPaymentState').style.display = 'none';
-        document.getElementById('modalPhoneInput').value = '';
-        document.querySelectorAll('.modal-otp-digit').forEach(d => d.value = '');
-        document.getElementById('registrationForm').reset();
-        // Reset submit button
-        const sb = document.getElementById('regSubmitBtn');
-        if (sb) { sb.disabled = false; }
-        // Clear verified phone display
-        const phoneField = document.getElementById('regPhone');
-        if (phoneField) phoneField.value = '';
-    }
-
-    function updateModalPlanBadge() {
-        const plan = window.selectedPlan;
-        const badge = document.getElementById('regPlanBadge');
-        const btn   = document.getElementById('regSubmitBtn');
-        const title = document.getElementById('regFormTitle');
-        const desc  = document.getElementById('regFormDesc');
-        if (!badge) return;
-
-        if (plan === 'waitlist') {
-            badge.style.display = 'none';
-            if (title) title.textContent = 'Join the Waitlist';
-            if (desc)  desc.textContent  = 'Fill out your details and secure your spot.';
-            if (btn)   btn.textContent   = 'Join Waitlist';
-        } else if (plan === 'free') {
-            badge.style.display = 'inline-block';
-            badge.textContent = '✓ Early Bird — FREE';
-            badge.style.background = 'rgba(34,197,94,0.15)';
-            badge.style.color = '#22C55E';
-            if (title) title.textContent = 'Join Free — Early Bird';
-            if (desc)  desc.textContent  = 'You qualify for free access. Fill your details to confirm.';
-            if (btn)   btn.textContent   = 'Join Free Waitlist';
-        } else if (plan === '1') {
-            badge.style.display = 'inline-block';
-            badge.textContent = 'Phase 2 Bootcamp — ₹1';
-            badge.style.background = 'rgba(59,130,246,0.15)';
-            badge.style.color = 'var(--sns-blue)';
-            if (title) title.textContent = 'Phase 2 — 100-Day Bootcamp';
-            if (desc)  desc.textContent  = 'Fill your details, then complete ₹1 payment to confirm your bootcamp slot.';
-            if (btn)   btn.textContent   = 'Submit & Proceed to Payment';
-        } else if (plan === '500') {
-            badge.style.display = 'inline-block';
-            badge.textContent = 'Mid Level — ₹500 + GST';
-            badge.style.background = 'rgba(245,166,35,0.15)';
-            badge.style.color = 'var(--sns-saffron)';
-            if (title) title.textContent = 'Register — Mid Level';
-            if (desc)  desc.textContent  = 'Fill your details, then complete ₹500 + GST payment to confirm.';
-            if (btn)   btn.textContent   = 'Submit & Proceed to Payment';
-        } else {
-            badge.style.display = 'inline-block';
-            badge.textContent = 'Regular — ₹1,000 + GST';
-            badge.style.background = 'rgba(245,166,35,0.15)';
-            badge.style.color = 'var(--sns-saffron)';
-            if (title) title.textContent = 'Register — Regular';
-            if (desc)  desc.textContent  = 'Fill your details, then complete ₹1,000 + GST payment to confirm.';
-            if (btn)   btn.textContent   = 'Submit & Proceed to Payment';
-        }
-    }
-
-    // Close modals when clicking outside
-    document.getElementById('enquiryModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeEnquiryModal();
-        }
-    });
-
-    document.getElementById('registerModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeRegisterModal();
-        }
-    });
-
-    // Mobile number validation for enquiry form
-    const enquiryMobile = document.getElementById('enquiryMobile');
-    if (enquiryMobile) {
-        enquiryMobile.addEventListener('input', function() {
-            this.value = this.value.replace(/\D/g, '');
-        });
-    }
-
-    // === Form Submission with OTP and Bitrix24 Integration ===
-    async function submitEnquiryForm(event) {
-        event.preventDefault();
-        
-        const submitBtn = document.getElementById('modalSubmitBtn');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Processing...';
-
-        const formData = {
-            name: document.getElementById('enquiryName').value,
-            email: document.getElementById('enquiryEmail').value,
-            mobile: document.getElementById('enquiryMobile').value,
-            student: document.getElementById('q1').checked ? 'Yes' : 'No',
-            idle: document.getElementById('q2').checked ? 'Yes' : 'No',
-            future: document.getElementById('q3').checked ? 'Yes' : 'No',
-            ready: document.getElementById('q4').checked ? 'Yes' : 'No'
-        };
-
-        try {
-            // Send OTP and submit to Bitrix24
-            const response = await fetch('/api/submit-enquiry', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                alert('Your enquiry has been submitted successfully! OTP has been sent to your phone.');
-                closeEnquiryModal();
-                document.getElementById('enquiryForm').reset();
-            } else {
-                alert('Error: ' + (result.message || 'Failed to submit enquiry'));
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Failed to submit enquiry. Please try again.');
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Submit Enquiry!!!';
-        }
-    }
-
-    // Update OTP flow to use 2Factor API
-    async function sendOTP() {
-        const phone = document.getElementById('phoneInput').value.replace(/\D/g, '');
-        if (!isValidPhone(phone)) {
-            document.getElementById('phoneInput').style.borderColor = '#EF4444';
-            document.getElementById('phoneInput').focus();
-            setTimeout(() => { document.getElementById('phoneInput').parentElement.style.borderColor = ''; }, 2000);
-            return;
-        }
-
-        try {
-            const response = await fetch('/api/send-otp', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ phone: phone })
-            });
-
-            const result = await response.json();
-            
-            if (result.success) {
-                document.getElementById('otpPhone').textContent = formatPhone(phone);
-                document.getElementById('formState').style.display = 'none';
-                document.getElementById('otpState').classList.add('active');
-                document.querySelector('#otpState .otp-digit').focus();
-                startResendTimer();
-                
-                // Store session ID for verification
-                window.otpSession = result.sessionId;
-            } else {
-                alert('Failed to send OTP: ' + (result.message || 'Unknown error'));
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Failed to send OTP. Please try again.');
-        }
-    }
-
-    // Update verify OTP to use backend verification
-    async function verifyOTP() {
-        const digits = document.querySelectorAll('#otpState .otp-digit');
-        let otp = '';
-        digits.forEach(d => otp += d.value);
-        if (otp.length < 6) {
-            digits.forEach(d => d.style.borderColor = '#EF4444');
-            setTimeout(() => digits.forEach(d => d.style.borderColor = ''), 2000);
-            return;
-        }
-
-        try {
-            const response = await fetch('/api/verify-otp', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    phone: document.getElementById('phoneInput').value.replace(/\D/g, ''),
-                    otp: otp
-                })
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                document.getElementById('otpState').classList.remove('active');
-                document.getElementById('successState').classList.add('active');
-                const counter = document.getElementById('liveCounter');
-                const current = parseInt(counter.textContent.replace(/,/g, ''));
-                const newCount = current + 1;
-                counter.textContent = newCount.toLocaleString();
-                document.getElementById('userPosition').textContent = newCount.toLocaleString();
-                showToast();
-            } else {
-                alert('Invalid OTP. Please try again.');
-                digits.forEach(d => {
-                    d.value = '';
-                    d.style.borderColor = '#EF4444';
+            try {
+                // Send OTP and submit to Bitrix24
+                const response = await fetch('/api/submit-enquiry', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
                 });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Your enquiry has been submitted successfully! OTP has been sent to your phone.');
+                    closeEnquiryModal();
+                    document.getElementById('enquiryForm').reset();
+                } else {
+                    alert('Error: ' + (result.message || 'Failed to submit enquiry'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to submit enquiry. Please try again.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Enquiry!!!';
+            }
+        }
+
+        // Update OTP flow to use 2Factor API
+        async function sendOTP() {
+            const phone = document.getElementById('phoneInput').value.replace(/\D/g, '');
+            if (!isValidPhone(phone)) {
+                document.getElementById('phoneInput').style.borderColor = '#EF4444';
+                document.getElementById('phoneInput').focus();
+                setTimeout(() => { document.getElementById('phoneInput').parentElement.style.borderColor = ''; }, 2000);
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/send-otp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ phone: phone })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    document.getElementById('otpPhone').textContent = formatPhone(phone);
+                    document.getElementById('formState').style.display = 'none';
+                    document.getElementById('otpState').classList.add('active');
+                    document.querySelector('#otpState .otp-digit').focus();
+                    startResendTimer();
+
+                    // Store session ID for verification
+                    window.otpSession = result.sessionId;
+                } else {
+                    alert('Failed to send OTP: ' + (result.message || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to send OTP. Please try again.');
+            }
+        }
+
+        // Update verify OTP to use backend verification
+        async function verifyOTP() {
+            const digits = document.querySelectorAll('#otpState .otp-digit');
+            let otp = '';
+            digits.forEach(d => otp += d.value);
+            if (otp.length < 6) {
+                digits.forEach(d => d.style.borderColor = '#EF4444');
                 setTimeout(() => digits.forEach(d => d.style.borderColor = ''), 2000);
-                digits[0].focus();
+                return;
             }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Failed to verify OTP. Please try again.');
-        }
-    }
 
-    // === Modal OTP Functions ===
-    let modalResendInterval;
-
-    async function sendModalOTP() {
-        const btn = document.querySelector('#modalFormState .modal-submit');
-        if (btn && btn.disabled) return; // prevent duplicate calls
-        const phone = document.getElementById('modalPhoneInput').value.replace(/\D/g, '');
-        if (!isValidPhone(phone)) {
-            document.getElementById('modalPhoneInput').style.borderColor = '#EF4444';
-            document.getElementById('modalPhoneInput').focus();
-            setTimeout(() => { document.getElementById('modalPhoneInput').style.borderColor = '#E2E8F0'; }, 2000);
-            return;
-        }
-
-        if (btn) { btn.disabled = true; btn.textContent = 'Sending OTP...'; }
-
-        try {
-            const response = await fetch('/api/send-otp', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ phone: phone })
-            });
-
-            const result = await response.json();
-            
-            if (result.success) {
-                document.getElementById('modalOtpPhone').textContent = formatPhone(phone);
-                document.getElementById('modalFormState').style.display = 'none';
-                document.getElementById('modalOtpState').style.display = 'block';
-                document.querySelector('.modal-otp-digit').focus();
-                startModalResendTimer();
-                window.modalOtpSession = result.sessionId;
-                if (btn) { btn.disabled = false; btn.textContent = 'Get OTP'; }
-            } else {
-                if (btn) { btn.disabled = false; btn.textContent = 'Get OTP'; }
-                alert('Failed to send OTP: ' + (result.message || 'Unknown error'));
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            if (btn) { btn.disabled = false; btn.textContent = 'Get OTP'; }
-            alert('Failed to send OTP. Please try again.');
-        }
-    }
-
-    function startModalResendTimer() {
-        let seconds = 30;
-        const btn = document.getElementById('modalResendBtn');
-        btn.disabled = true;
-        btn.innerHTML = 'Resend in <span id="modalResendTimer">30</span>s';
-        const timerEl = document.getElementById('modalResendTimer');
-        clearInterval(modalResendInterval);
-        modalResendInterval = setInterval(() => {
-            seconds--;
-            if (timerEl) timerEl.textContent = seconds;
-            if (seconds <= 0) {
-                clearInterval(modalResendInterval);
-                btn.disabled = false;
-                btn.innerHTML = 'Resend OTP';
-            }
-        }, 1000);
-    }
-
-    function resendModalOTP() {
-        const btn = document.getElementById('modalResendBtn');
-        btn.innerHTML = 'Resend in <span id="modalResendTimer">30</span>s';
-        const phone = document.getElementById('modalPhoneInput').value.replace(/\D/g, '');
-        if (isValidPhone(phone)) {
-            sendModalOTP();
-        }
-    }
-
-    function changeModalNumber(e) {
-        e.preventDefault();
-        document.getElementById('modalOtpState').style.display = 'none';
-        document.getElementById('modalFormState').style.display = 'block';
-        document.getElementById('modalPhoneInput').focus();
-        clearInterval(modalResendInterval);
-    }
-
-    async function verifyModalOTP() {
-        const verifyBtn = document.querySelector('#modalOtpState .modal-submit');
-        if (verifyBtn && verifyBtn.disabled) return; // prevent duplicate calls
-        const digits = document.querySelectorAll('.modal-otp-digit');
-        let otp = '';
-        digits.forEach(d => otp += d.value);
-        if (otp.length < 6) {
-            digits.forEach(d => d.style.borderColor = '#EF4444');
-            setTimeout(() => digits.forEach(d => d.style.borderColor = '#E2E8F0'), 2000);
-            return;
-        }
-
-        if (verifyBtn) { verifyBtn.disabled = true; verifyBtn.textContent = 'Verifying...'; }
-
-        try {
-            const response = await fetch('/api/verify-otp', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    phone: document.getElementById('modalPhoneInput').value.replace(/\D/g, ''),
-                    otp: otp
-                })
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                // Store verified phone number for later use
-                window.verifiedPhone = document.getElementById('modalPhoneInput').value;
-                
-                // Show registration form
-                document.getElementById('modalOtpState').style.display = 'none';
-                document.getElementById('modalFormDetailsState').style.display = 'block';
-                clearInterval(modalResendInterval);
-                updateModalPlanBadge();
-                // Pre-fill verified phone (read-only)
-                const phoneField = document.getElementById('regPhone');
-                if (phoneField) phoneField.value = '+91 ' + window.verifiedPhone;
-                // Ensure submit button is enabled when showing the form
-                const sb = document.getElementById('regSubmitBtn');
-                if (sb) { sb.disabled = false; }
-                if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.textContent = 'Verify & Continue'; }
-            } else {
-                if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.textContent = 'Verify & Continue'; }
-                alert('Invalid OTP. Please try again.');
-                digits.forEach(d => {
-                    d.value = '';
-                    d.style.borderColor = '#EF4444';
+            try {
+                const response = await fetch('/api/verify-otp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        phone: document.getElementById('phoneInput').value.replace(/\D/g, ''),
+                        otp: otp
+                    })
                 });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    document.getElementById('otpState').classList.remove('active');
+                    document.getElementById('successState').classList.add('active');
+                    const counter = document.getElementById('liveCounter');
+                    const current = parseInt(counter.textContent.replace(/,/g, ''));
+                    const newCount = current + 1;
+                    counter.textContent = newCount.toLocaleString();
+                    document.getElementById('userPosition').textContent = newCount.toLocaleString();
+                    showToast();
+                } else {
+                    alert('Invalid OTP. Please try again.');
+                    digits.forEach(d => {
+                        d.value = '';
+                        d.style.borderColor = '#EF4444';
+                    });
+                    setTimeout(() => digits.forEach(d => d.style.borderColor = ''), 2000);
+                    digits[0].focus();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to verify OTP. Please try again.');
+            }
+        }
+
+        // === Modal OTP Functions ===
+        let modalResendInterval;
+
+        async function sendModalOTP() {
+            const btn = document.querySelector('#modalFormState .modal-submit');
+            if (btn && btn.disabled) return; // prevent duplicate calls
+            const phone = document.getElementById('modalPhoneInput').value.replace(/\D/g, '');
+            if (!isValidPhone(phone)) {
+                document.getElementById('modalPhoneInput').style.borderColor = '#EF4444';
+                document.getElementById('modalPhoneInput').focus();
+                setTimeout(() => { document.getElementById('modalPhoneInput').style.borderColor = '#E2E8F0'; }, 2000);
+                return;
+            }
+
+            if (btn) { btn.disabled = true; btn.textContent = 'Sending OTP...'; }
+
+            try {
+                const response = await fetch('/api/send-otp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ phone: phone })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    document.getElementById('modalOtpPhone').textContent = formatPhone(phone);
+                    document.getElementById('modalFormState').style.display = 'none';
+                    document.getElementById('modalOtpState').style.display = 'block';
+                    document.querySelector('.modal-otp-digit').focus();
+                    startModalResendTimer();
+                    window.modalOtpSession = result.sessionId;
+                    if (btn) { btn.disabled = false; btn.textContent = 'Get OTP'; }
+                } else {
+                    if (btn) { btn.disabled = false; btn.textContent = 'Get OTP'; }
+                    alert('Failed to send OTP: ' + (result.message || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                if (btn) { btn.disabled = false; btn.textContent = 'Get OTP'; }
+                alert('Failed to send OTP. Please try again.');
+            }
+        }
+
+        function startModalResendTimer() {
+            let seconds = 30;
+            const btn = document.getElementById('modalResendBtn');
+            btn.disabled = true;
+            btn.innerHTML = 'Resend in <span id="modalResendTimer">30</span>s';
+            const timerEl = document.getElementById('modalResendTimer');
+            clearInterval(modalResendInterval);
+            modalResendInterval = setInterval(() => {
+                seconds--;
+                if (timerEl) timerEl.textContent = seconds;
+                if (seconds <= 0) {
+                    clearInterval(modalResendInterval);
+                    btn.disabled = false;
+                    btn.innerHTML = 'Resend OTP';
+                }
+            }, 1000);
+        }
+
+        function resendModalOTP() {
+            const btn = document.getElementById('modalResendBtn');
+            btn.innerHTML = 'Resend in <span id="modalResendTimer">30</span>s';
+            const phone = document.getElementById('modalPhoneInput').value.replace(/\D/g, '');
+            if (isValidPhone(phone)) {
+                sendModalOTP();
+            }
+        }
+
+        function changeModalNumber(e) {
+            e.preventDefault();
+            document.getElementById('modalOtpState').style.display = 'none';
+            document.getElementById('modalFormState').style.display = 'block';
+            document.getElementById('modalPhoneInput').focus();
+            clearInterval(modalResendInterval);
+        }
+
+        async function verifyModalOTP() {
+            const verifyBtn = document.querySelector('#modalOtpState .modal-submit');
+            if (verifyBtn && verifyBtn.disabled) return; // prevent duplicate calls
+            const digits = document.querySelectorAll('.modal-otp-digit');
+            let otp = '';
+            digits.forEach(d => otp += d.value);
+            if (otp.length < 6) {
+                digits.forEach(d => d.style.borderColor = '#EF4444');
                 setTimeout(() => digits.forEach(d => d.style.borderColor = '#E2E8F0'), 2000);
-                digits[0].focus();
+                return;
             }
-        } catch (error) {
-            console.error('Error:', error);
-            if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.textContent = 'Verify & Continue'; }
-            alert('Failed to verify OTP. Please try again.');
-        }
-    }
 
-    // === Payment Functions ===
-    function showPaymentState(formData) {
-        const plan = window.selectedPlan;
-        const amount = plan === '1' ? '1' : plan === '500' ? '500' : '1,000';
-        const tier   = plan === '1' ? 'Phase 2 Bootcamp' : plan === '500' ? 'Mid Level' : 'Regular';
+            if (verifyBtn) { verifyBtn.disabled = true; verifyBtn.textContent = 'Verifying...'; }
 
-        document.getElementById('paymentPlanTier').textContent  = tier;
-        document.getElementById('paymentPlanPrice').textContent = '₹' + amount;
-        document.getElementById('paymentUserName').textContent  = '👤 ' + (formData.name   || '');
-        document.getElementById('paymentUserPhone').textContent = '📱 +91 ' + (formData.mobile || '');
+            try {
+                const response = await fetch('/api/verify-otp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        phone: document.getElementById('modalPhoneInput').value.replace(/\D/g, ''),
+                        otp: otp
+                    })
+                });
 
-        // Rebuild the pay button fully — textContent in initiatePayment destroys the child span
-        const payBtn = document.getElementById('payNowBtn');
-        if (payBtn) {
-            payBtn.disabled = false;
-            payBtn.innerHTML = 'Pay &#8377;<span id="payButtonAmount">' + amount + '</span> &mdash; Confirm Registration';
-        }
+                const result = await response.json();
 
-        document.getElementById('modalFormDetailsState').style.display = 'none';
-        document.getElementById('modalPaymentState').style.display = 'block';
-    }
+                if (result.success) {
+                    // Store verified phone number for later use
+                    window.verifiedPhone = document.getElementById('modalPhoneInput').value;
 
-    function backToRegForm() {
-        document.getElementById('modalPaymentState').style.display = 'none';
-        document.getElementById('modalFormDetailsState').style.display = 'block';
-    }
-
-    async function initiatePayment() {
-        const btn = document.getElementById('payNowBtn');
-        const userData = JSON.parse(sessionStorage.getItem('userData') || '{}');
-        const amountDisplay = window.selectedPlan === '1' ? '1' : window.selectedPlan === '500' ? '500' : '1,000';
-
-        btn.disabled = true;
-        btn.innerHTML = 'Creating payment link&hellip;';
-
-        try {
-            const response = await fetch('/api/create-payment', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name:   userData.name   || '',
-                    email:  userData.email  || '',
-                    mobile: userData.mobile || '',
-                    plan:   window.selectedPlan
-                })
-            });
-
-            const result = await response.json();
-
-            if (result.success && result.paymentLink) {
-                // Open Zoho Books payment page in new tab
-                window.open(result.paymentLink, '_blank');
-                closeRegisterModal();
-                showToast();
-            } else {
-                alert('Could not create payment link: ' + (result.message || 'Please try again or contact +91 95664 23456.'));
-                btn.disabled = false;
-                btn.innerHTML = 'Pay &#8377;' + amountDisplay + ' &mdash; Confirm Registration';
+                    // Show registration form
+                    document.getElementById('modalOtpState').style.display = 'none';
+                    document.getElementById('modalFormDetailsState').style.display = 'block';
+                    clearInterval(modalResendInterval);
+                    updateModalPlanBadge();
+                    // Pre-fill verified phone (read-only)
+                    const phoneField = document.getElementById('regPhone');
+                    if (phoneField) phoneField.value = '+91 ' + window.verifiedPhone;
+                    // Ensure submit button is enabled when showing the form
+                    const sb = document.getElementById('regSubmitBtn');
+                    if (sb) { sb.disabled = false; }
+                    if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.textContent = 'Verify & Continue'; }
+                } else {
+                    if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.textContent = 'Verify & Continue'; }
+                    alert('Invalid OTP. Please try again.');
+                    digits.forEach(d => {
+                        d.value = '';
+                        d.style.borderColor = '#EF4444';
+                    });
+                    setTimeout(() => digits.forEach(d => d.style.borderColor = '#E2E8F0'), 2000);
+                    digits[0].focus();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.textContent = 'Verify & Continue'; }
+                alert('Failed to verify OTP. Please try again.');
             }
-        } catch (error) {
-            console.error('Payment error:', error);
-            alert('Failed to create payment. Please try again.');
-            btn.disabled = false;
-            btn.innerHTML = 'Pay &#8377;' + amountDisplay + ' &mdash; Confirm Registration';
         }
-    }
 
-    // === Registration Form Submission ===
-    async function submitRegistrationForm(event) {
-        event.preventDefault();
-        
-        const submitBtn = document.getElementById('regSubmitBtn');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Processing...';
+        // === Payment Functions ===
+        function showPaymentState(formData) {
+            const plan = window.selectedPlan;
+            const amount = plan === '1' ? '1' : plan === '500' ? '500' : '1,000';
+            const tier = plan === '1' ? 'Phase 2 Bootcamp' : plan === '500' ? 'Mid Level' : 'Regular';
 
-        const formData = {
-            name: document.getElementById('regName').value,
-            email: document.getElementById('regEmail').value,
-            mobile: window.verifiedPhone || '',
-            student: document.getElementById('regQ1').checked ? 'Yes' : 'No',
-            idle: document.getElementById('regQ2').checked ? 'Yes' : 'No',
-            future: document.getElementById('regQ3').checked ? 'Yes' : 'No',
-            ready: document.getElementById('regQ4').checked ? 'Yes' : 'No',
-            plan: window.selectedPlan || 'free'
-        };
+            document.getElementById('paymentPlanTier').textContent = tier;
+            document.getElementById('paymentPlanPrice').textContent = '₹' + amount;
+            document.getElementById('paymentUserName').textContent = '👤 ' + (formData.name || '');
+            document.getElementById('paymentUserPhone').textContent = '📱 +91 ' + (formData.mobile || '');
 
-        try {
-            // Submit to Bitrix24
-            const response = await fetch('/api/submit-enquiry', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
+            // Rebuild the pay button fully — textContent in initiatePayment destroys the child span
+            const payBtn = document.getElementById('payNowBtn');
+            if (payBtn) {
+                payBtn.disabled = false;
+                payBtn.innerHTML = 'Pay &#8377;<span id="payButtonAmount">' + amount + '</span> &mdash; Confirm Registration';
+            }
 
-            const result = await response.json();
+            document.getElementById('modalFormDetailsState').style.display = 'none';
+            document.getElementById('modalPaymentState').style.display = 'block';
+        }
 
-            if (result.success) {
-                // Update counter
-                const counter = document.getElementById('liveCounter');
-                const current = parseInt(counter.textContent.replace(/,/g, ''));
-                counter.textContent = (current + 1).toLocaleString();
-                
-                // Store user data for payment
-                sessionStorage.setItem('userData', JSON.stringify(formData));
-                
-                if (window.selectedPlan === 'free' || window.selectedPlan === 'waitlist') {
-                    // Free / general waitlist — close and show toast
+        function backToRegForm() {
+            document.getElementById('modalPaymentState').style.display = 'none';
+            document.getElementById('modalFormDetailsState').style.display = 'block';
+        }
+
+        async function initiatePayment() {
+            const btn = document.getElementById('payNowBtn');
+            const userData = JSON.parse(sessionStorage.getItem('userData') || '{}');
+            const amountDisplay = window.selectedPlan === '1' ? '1' : window.selectedPlan === '500' ? '500' : '1,000';
+
+            btn.disabled = true;
+            btn.innerHTML = 'Creating payment link&hellip;';
+
+            try {
+                const response = await fetch('/api/create-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: userData.name || '',
+                        email: userData.email || '',
+                        mobile: userData.mobile || '',
+                        plan: window.selectedPlan
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success && result.paymentLink) {
+                    // Open Zoho Books payment page in new tab
+                    window.open(result.paymentLink, '_blank');
                     closeRegisterModal();
                     showToast();
                 } else {
-                    // Paid plan — show payment step
-                    showPaymentState(formData);
+                    alert('Could not create payment link: ' + (result.message || 'Please try again or contact +91 95664 23456.'));
+                    btn.disabled = false;
+                    btn.innerHTML = 'Pay &#8377;' + amountDisplay + ' &mdash; Confirm Registration';
                 }
-                
-            } else {
-                alert('Error: ' + (result.message || 'Failed to submit registration'));
+            } catch (error) {
+                console.error('Payment error:', error);
+                alert('Failed to create payment. Please try again.');
+                btn.disabled = false;
+                btn.innerHTML = 'Pay &#8377;' + amountDisplay + ' &mdash; Confirm Registration';
+            }
+        }
+
+        // === Registration Form Submission ===
+        async function submitRegistrationForm(event) {
+            event.preventDefault();
+
+            const submitBtn = document.getElementById('regSubmitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
+
+            const formData = {
+                name: document.getElementById('regName').value,
+                email: document.getElementById('regEmail').value,
+                mobile: window.verifiedPhone || '',
+                student: document.getElementById('regQ1').checked ? 'Yes' : 'No',
+                idle: document.getElementById('regQ2').checked ? 'Yes' : 'No',
+                future: document.getElementById('regQ3').checked ? 'Yes' : 'No',
+                ready: document.getElementById('regQ4').checked ? 'Yes' : 'No',
+                plan: window.selectedPlan || 'free'
+            };
+
+            try {
+                // Submit to Bitrix24
+                const response = await fetch('/api/submit-enquiry', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Update counter
+                    const counter = document.getElementById('liveCounter');
+                    const current = parseInt(counter.textContent.replace(/,/g, ''));
+                    counter.textContent = (current + 1).toLocaleString();
+
+                    // Store user data for payment
+                    sessionStorage.setItem('userData', JSON.stringify(formData));
+
+                    if (window.selectedPlan === 'free' || window.selectedPlan === 'waitlist') {
+                        // Free / general waitlist — close and show toast
+                        closeRegisterModal();
+                        showToast();
+                    } else {
+                        // Paid plan — show payment step
+                        showPaymentState(formData);
+                    }
+
+                } else {
+                    alert('Error: ' + (result.message || 'Failed to submit registration'));
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit & Proceed to Payment';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to submit registration. Please try again.');
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Submit & Proceed to Payment';
             }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Failed to submit registration. Please try again.');
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Submit & Proceed to Payment';
         }
-    }
-</script>
+    </script>
 
 </body>
+
 </html>

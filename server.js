@@ -82,7 +82,7 @@ async function sendSMS(phoneNumber, otp) {
         // METHOD 1: Transactional SMS API
         console.log('\n🔄 Trying METHOD 1: Transactional SMS API...');
         try {
-            const smsUrl1 = `https://2factor.in/API/V1/${apiKey}/ADDON_SERVICES/SEND/SMS`;
+            const smsUrl1 = `https://2factor.in/API/V1/${apiKey}/ADDON_SERVICES/SEND/TSMS`;
             const smsPayload = {
                 From: 'SNSCPL',
                 To: cleanPhone,
@@ -106,7 +106,7 @@ async function sendSMS(phoneNumber, otp) {
         console.log('\n🔄 Trying METHOD 2: SMS with Sender ID...');
         try {
             const smsResp2 = await axios.get(
-                `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}/SNSCPL`,
+                `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}/SNSSquareBoldAICamp`,
                 { timeout: 10000 }
             );
             console.log('📡 SMS Response:', JSON.stringify(smsResp2.data));

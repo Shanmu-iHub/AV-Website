@@ -618,9 +618,12 @@ app.post('/api/submit-enquiry', async (req, res) => {
 
             const webhookBase = BITRIX24_WEBHOOK.replace(/crm\.lead\.add\.json\/?$/, '').replace(/\/?$/, '/');
 
+            const leadTitle = `Agentic AI-Bootcamp - ${name}`;
+            console.log(`📝 Setting Bitrix24 Lead Title: ${leadTitle}`);
+
             const leadData = {
                 fields: {
-                    TITLE: `Agentic AI-Bootcamp | ${name}`,
+                    TITLE: leadTitle,
                     NAME: firstName,
                     LAST_NAME: lastName,
                     EMAIL: [{ VALUE: email, VALUE_TYPE: 'WORK' }],

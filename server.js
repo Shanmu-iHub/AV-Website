@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,6 +23,42 @@ const MAX_OTP_ATTEMPTS = 3;
 
 // In-memory OTP storage (use Redis or database in production)
 const otpStorage = new Map();
+
+// Local Registration Tracking (for duplicate prevention)
+const REGISTRATIONS_FILE = path.join(__dirname, 'registrations.json');
+
+function getRegistrations() {
+    try {
+        if (!fs.existsSync(REGISTRATIONS_FILE)) {
+            return { phones: [], emails: [] };
+        }
+        const data = fs.readFileSync(REGISTRATIONS_FILE, 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Error reading registrations file:', error);
+        return { phones: [], emails: [] };
+    }
+}
+
+function addRegistration(email, phone) {
+    try {
+        const registrations = getRegistrations();
+        if (email && !registrations.emails.includes(email.toLowerCase())) {
+            registrations.emails.push(email.toLowerCase());
+        }
+        if (phone) {
+            const cleanPhone = phone.replace(/\D/g, '').slice(-10);
+            if (!registrations.phones.includes(cleanPhone)) {
+                registrations.phones.push(cleanPhone);
+            }
+        }
+        fs.writeFileSync(REGISTRATIONS_FILE, JSON.stringify(registrations, null, 4));
+        return true;
+    } catch (error) {
+        console.error('Error saving registration:', error);
+        return false;
+    }
+}
 
 // Generate cryptographically-secure 6-digit OTP
 function generateOTP() {
@@ -364,6 +401,15 @@ app.post('/api/send-otp', async (req, res) => {
             });
         }
 
+        // Check if phone is already registered
+        const registrations = getRegistrations();
+        if (registrations.phones.includes(phone)) {
+            return res.status(400).json({
+                success: false,
+                message: 'This phone number is already registered'
+            });
+        }
+
         const fullPhone = `+91${phone}`;
 
         const existing = otpStorage.get(fullPhone);
@@ -524,6 +570,15 @@ app.post('/api/submit-enquiry', async (req, res) => {
             return res.status(400).json({ success: false, message: 'Name, email, and phone are required' });
         }
 
+        // Check if email is already registered
+        const registrations = getRegistrations();
+        if (registrations.emails.includes(email.toLowerCase())) {
+            return res.status(400).json({
+                success: false,
+                message: 'This email is already registered'
+            });
+        }
+
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             return res.status(400).json({ success: false, message: 'Invalid email format' });
@@ -677,11 +732,15 @@ app.post('/api/submit-enquiry', async (req, res) => {
             }
         }
 
-        res.json({
+        if (leadId) {
+            // Persist the registration locally upon success
+            addRegistration(email, contactPhone);
+        }
+
+        res.status(200).json({
             success: true,
-            message: 'Enquiry submitted successfully',
-            leadId,
-            data: enquiryData
+            message: 'Registration successful! See you at the bootcamp.',
+            leadId: leadId
         });
 
     } catch (error) {

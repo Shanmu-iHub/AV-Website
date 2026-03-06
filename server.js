@@ -17,6 +17,12 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 
+// Request Logger Middleware
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    next();
+});
+
 // OTP Configuration
 const OTP_EXPIRY_TIME = 5 * 60 * 1000; // 5 minutes in milliseconds
 const MAX_OTP_ATTEMPTS = 3;
@@ -397,16 +403,19 @@ app.post('/api/send-otp', async (req, res) => {
 
         const existing = otpStorage.get(fullPhone);
 
-        if (existing && Date.now() - existing.sentAt < 60000) {
+        if (existing && Date.now() - existing.sentAt < 30000) {
             return res.status(429).json({
                 success: false,
-                message: 'Please wait before requesting new OTP'
+                message: 'Please wait (30s) before requesting new OTP'
             });
         }
 
         const otp = generateOTP();
 
-        otpStorage.set(fullPhone, {
+        // Ensure we store and send with the same format (+91XXXXXXXXXX)
+        const storageKey = fullPhone.startsWith('+') ? fullPhone : `+${fullPhone.replace(/^\+/, '')}`;
+
+        otpStorage.set(storageKey, {
             otp,
             sentAt: Date.now(),
             expiresAt: Date.now() + OTP_EXPIRY_TIME,
@@ -414,9 +423,9 @@ app.post('/api/send-otp', async (req, res) => {
             verified: false
         });
 
-        await sendSMS(fullPhone, otp);
+        await sendSMS(storageKey, otp);
 
-        console.log(`OTP generated for ${fullPhone}: ${otp}`);
+        console.log(`OTP generated for ${storageKey}: ${otp}`);
 
         res.json({
             success: true,

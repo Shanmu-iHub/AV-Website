@@ -1,12 +1,14 @@
 RewriteEngine On
 
-# Forward API requests to Node server via PHP Proxy
-RewriteRule ^api/(.*)$ api/index.php [QSA,L]
+# 1. Forward API requests to Node server via PHP Proxy
+# We pass the path as a 'path' parameter to handle subdirectory hosting reliably
+RewriteCond %{REQUEST_URI} !^/api/index.php
+RewriteRule ^api/(.*)$ api/index.php?path=$1 [QSA,L]
 
-# Forward health check directly if possible, or via proxy
+# 2. Forward health check
 RewriteRule ^health$ http://127.0.0.1:3000/health [P,L]
 
-# Existing rules (keep them)
+# 3. Static files: If not a file or directory, send to index.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.html [L]

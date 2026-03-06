@@ -2215,11 +2215,23 @@
                                 const data = await res.json();
 
                                 if (data.success) {
-                                    // OTP verified — open registration modal
-                                    if (typeof openRegisterModal === 'function') {
+                                    // OTP verified — open registration form directly (skip modal OTP step)
+                                    window.verifiedPhone = _heroPhone;
+                                    if (document.getElementById('registerModal')) {
+                                        window.selectedPlan = window.selectedPlan || 'free';
+                                        document.getElementById('registerModal').classList.add('active');
+                                        document.getElementById('modalFormState').style.display = 'none';
+                                        document.getElementById('modalOtpState').style.display = 'none';
+                                        document.getElementById('modalFormDetailsState').style.display = 'block';
+                                        if (document.getElementById('modalPaymentState')) document.getElementById('modalPaymentState').style.display = 'none';
+                                        document.body.style.overflow = 'hidden';
+                                        const phoneField = document.getElementById('regPhone');
+                                        if (phoneField) phoneField.value = '+91 ' + _heroPhone;
+                                        if (typeof updateModalPlanBadge === 'function') updateModalPlanBadge();
+                                        const sb = document.getElementById('regSubmitBtn');
+                                        if (sb) sb.disabled = false;
+                                    } else if (typeof openRegisterModal === 'function') {
                                         openRegisterModal('free');
-                                    } else {
-                                        document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
                                     }
                                 } else {
                                     alert(data.message || 'Invalid OTP. Try again.');
@@ -2637,14 +2649,172 @@
                 <p class="cta-sub">12,847 people are already ahead of you. Every day you wait, the free slots shrink.
                     Join now and pay nothing — or pay later and wish you hadn't.</p>
 
-                <!-- CTA Join Button -->
-                <div style="max-width: 580px; margin: 0 auto 20px;">
-                    <button class="btn-primary" type="button"
-                        onclick="document.getElementById('pricing').scrollIntoView({ behavior: 'smooth', block: 'start' })"
-                        style="width: 100%; padding: 18px 32px; font-size: 16px; border-radius: 60px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;">
-                        JOIN WAITLIST BEFORE 14TH APRIL
-                    </button>
+                <!-- CTA OTP Flow -->
+                <div style="max-width: 520px; margin: 0 auto 20px;">
+
+                    <!-- Step 1: Phone Input -->
+                    <div id="ctaPhoneStep"
+                        style="display:flex; align-items:center; background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.15); border-radius:60px; padding:6px 6px 6px 20px; gap:8px; backdrop-filter:blur(8px);">
+                        <span style="font-size:18px; flex-shrink:0;">🇮🇳</span>
+                        <span style="color:#94A3B8; font-weight:600; font-size:15px; flex-shrink:0;">+91</span>
+                        <input type="tel" id="ctaPhoneInput2" placeholder="Your phone number" maxlength="10"
+                            inputmode="numeric"
+                            style="flex:1; background:transparent; border:none; outline:none; color:#fff; font-size:15px; font-family:inherit; min-width:0;"
+                            onkeydown="if(event.key==='Enter') ctaSendOTP()">
+                        <button id="ctaGetOtpBtn" onclick="ctaSendOTP()"
+                            style="background:linear-gradient(90deg,#E8372A,#F5831F,#F5A623); color:#0A1628; font-weight:800; font-size:14px; border:none; border-radius:50px; padding:12px 24px; cursor:pointer; white-space:nowrap; flex-shrink:0; transition:all 0.3s;"
+                            onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform=''">Get
+                            OTP</button>
+                    </div>
+
+                    <!-- Step 2: OTP Input -->
+                    <div id="ctaOtpStep2" style="display:none; flex-direction:column; gap:10px;">
+                        <div
+                            style="display:flex; align-items:center; background:rgba(255,255,255,0.07); border:1.5px solid rgba(245,166,35,0.4); border-radius:60px; padding:6px 6px 6px 20px; gap:8px; backdrop-filter:blur(8px);">
+                            <span style="font-size:18px; flex-shrink:0;">🔐</span>
+                            <span id="ctaPhoneDisplay"
+                                style="color:#F5A623; font-weight:700; font-size:14px; flex-shrink:0;"></span>
+                            <input type="tel" id="ctaOtpInput2" placeholder="Enter 6-digit OTP" maxlength="6"
+                                inputmode="numeric"
+                                style="flex:1; background:transparent; border:none; outline:none; color:#fff; font-size:15px; font-family:inherit; min-width:0; letter-spacing:4px;"
+                                onkeydown="if(event.key==='Enter') ctaVerifyOTP()">
+                            <button id="ctaVerifyBtn" onclick="ctaVerifyOTP()"
+                                style="background:linear-gradient(90deg,#22C55E,#16A34A); color:#fff; font-weight:800; font-size:14px; border:none; border-radius:50px; padding:12px 24px; cursor:pointer; white-space:nowrap; flex-shrink:0; transition:all 0.3s;"
+                                onmouseover="this.style.transform='scale(1.04)'"
+                                onmouseout="this.style.transform=''">Verify OTP</button>
+                        </div>
+                        <div style="text-align:center;">
+                            <span style="font-size:13px; color:#64748B;">Didn't receive? </span>
+                            <button onclick="ctaResendOTP()"
+                                style="background:none; border:none; color:#F5A623; font-size:13px; cursor:pointer; font-weight:600; padding:0;">Resend
+                                OTP</button>
+                            &nbsp;·&nbsp;
+                            <button onclick="ctaResetFlow()"
+                                style="background:none; border:none; color:#64748B; font-size:13px; cursor:pointer; padding:0;">Change
+                                number</button>
+                        </div>
+                    </div>
+
+                    <p style="text-align:center; font-size:13px; color:#64748B; margin-top:10px; margin-bottom:0;"
+                        id="ctaFormNote">
+                        Verified via <strong style="color:#25D366;">WhatsApp</strong> OTP · Sincerity. Nobility.
+                        Service.
+                    </p>
                 </div>
+
+                <script>
+                    (function () {
+                        let _ctaPhone = '';
+
+                        window.ctaSendOTP = async function () {
+                            const input = document.getElementById('ctaPhoneInput2');
+                            const btn = document.getElementById('ctaGetOtpBtn');
+                            const phone = input.value.replace(/\D/g, '').slice(-10);
+
+                            if (!/^[6-9]\d{9}$/.test(phone)) {
+                                input.placeholder = 'Enter valid 10-digit number';
+                                setTimeout(() => { input.placeholder = 'Your phone number'; }, 2000);
+                                return;
+                            }
+
+                            btn.disabled = true;
+                            btn.textContent = 'Sending…';
+
+                            try {
+                                const res = await fetch('/api/send-otp', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ phone })
+                                });
+                                const data = await res.json();
+
+                                if (data.success) {
+                                    _ctaPhone = phone;
+                                    document.getElementById('ctaPhoneDisplay').textContent = '+91 ' + phone;
+                                    document.getElementById('ctaPhoneStep').style.display = 'none';
+                                    document.getElementById('ctaOtpStep2').style.display = 'flex';
+                                    document.getElementById('ctaFormNote').textContent = 'OTP sent to +91 ' + phone;
+                                    setTimeout(() => document.getElementById('ctaOtpInput2').focus(), 100);
+                                } else {
+                                    alert(data.message || 'Failed to send OTP.');
+                                    btn.disabled = false;
+                                    btn.textContent = 'Get OTP';
+                                }
+                            } catch (e) {
+                                alert('Network error. Please try again.');
+                                btn.disabled = false;
+                                btn.textContent = 'Get OTP';
+                            }
+                        };
+
+                        window.ctaVerifyOTP = async function () {
+                            const otp = document.getElementById('ctaOtpInput2').value.replace(/\D/g, '');
+                            const btn = document.getElementById('ctaVerifyBtn');
+
+                            if (otp.length !== 6) return;
+
+                            btn.disabled = true;
+                            btn.textContent = 'Verifying…';
+
+                            try {
+                                const res = await fetch('/api/verify-otp', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ phone: _ctaPhone, otp })
+                                });
+                                const data = await res.json();
+
+                                if (data.success) {
+                                    window.verifiedPhone = _ctaPhone;
+                                    window.selectedPlan = window.selectedPlan || 'free';
+                                    document.getElementById('registerModal').classList.add('active');
+                                    document.getElementById('modalFormState').style.display = 'none';
+                                    document.getElementById('modalOtpState').style.display = 'none';
+                                    document.getElementById('modalFormDetailsState').style.display = 'block';
+                                    if (document.getElementById('modalPaymentState')) document.getElementById('modalPaymentState').style.display = 'none';
+                                    document.body.style.overflow = 'hidden';
+                                    const phoneField = document.getElementById('regPhone');
+                                    if (phoneField) phoneField.value = '+91 ' + _ctaPhone;
+                                    if (typeof updateModalPlanBadge === 'function') updateModalPlanBadge();
+                                    const sb = document.getElementById('regSubmitBtn');
+                                    if (sb) sb.disabled = false;
+                                } else {
+                                    alert(data.message || 'Invalid OTP. Try again.');
+                                    btn.disabled = false;
+                                    btn.textContent = 'Verify OTP';
+                                }
+                            } catch (e) {
+                                alert('Network error. Please try again.');
+                                btn.disabled = false;
+                                btn.textContent = 'Verify OTP';
+                            }
+                        };
+
+                        window.ctaResendOTP = async function () {
+                            if (!_ctaPhone) return;
+                            document.getElementById('ctaOtpInput2').value = '';
+                            try {
+                                await fetch('/api/send-otp', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ phone: _ctaPhone })
+                                });
+                                document.getElementById('ctaFormNote').textContent = 'OTP resent to +91 ' + _ctaPhone;
+                            } catch (e) { }
+                        };
+
+                        window.ctaResetFlow = function () {
+                            _ctaPhone = '';
+                            document.getElementById('ctaPhoneInput2').value = '';
+                            document.getElementById('ctaOtpInput2').value = '';
+                            document.getElementById('ctaGetOtpBtn').disabled = false;
+                            document.getElementById('ctaGetOtpBtn').textContent = 'Get OTP';
+                            document.getElementById('ctaPhoneStep').style.display = 'flex';
+                            document.getElementById('ctaOtpStep2').style.display = 'none';
+                            document.getElementById('ctaFormNote').innerHTML = 'Verified via <strong style="color:#25D366;">WhatsApp</strong> OTP · Sincerity. Nobility. Service.';
+                        };
+                    })();
+                </script>
             </div>
         </div>
     </section>

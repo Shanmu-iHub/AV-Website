@@ -2035,6 +2035,30 @@
                 font-size: 20px;
             }
         }
+
+        /* Fix input background when typing */
+        #heroPhoneInput,
+        #heroOtpInput,
+        #ctaPhoneInput2,
+        #ctaOtpInput2 {
+            background: transparent !important;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+            caret-color: #F5A623;
+        }
+
+        #heroPhoneInput:-webkit-autofill,
+        #ctaPhoneInput2:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 50px #0d1526 inset !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+
+        #heroPhoneInput::placeholder,
+        #heroOtpInput::placeholder,
+        #ctaPhoneInput2::placeholder,
+        #ctaOtpInput2::placeholder {
+            color: #64748B !important;
+        }
     </style>
 </head>
 

@@ -351,8 +351,8 @@ app.post('/api/send-otp', async (req, res) => {
             });
         }
 
-        // remove +91, spaces etc
-        phone = phone.toString().replace(/\D/g, '');
+        // convert to string and clean number
+        phone = String(phone).replace(/\D/g, '');
 
         // keep last 10 digits
         phone = phone.slice(-10);
@@ -400,7 +400,7 @@ app.post('/api/send-otp', async (req, res) => {
 
         res.status(500).json({
             success: false,
-            message: 'OTP send failed'
+            message: 'Failed to send OTP'
         });
 
     }

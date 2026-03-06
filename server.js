@@ -84,9 +84,9 @@ async function sendSMS(phoneNumber, otp) {
         try {
             const smsUrl1 = `https://2factor.in/API/V1/${apiKey}/ADDON_SERVICES/SEND/SMS`;
             const smsPayload = {
-                From: 'SNSQCN',
+                From: 'SNSCPL',
                 To: cleanPhone,
-                TemplateName: 'snsagenticAIBootcampOTP',
+                TemplateName: 'SNSSquareBoldAICamp',
                 VAR1: otp.toString()
             };
             const smsResp1 = await axios.post(smsUrl1, smsPayload, {
@@ -106,7 +106,7 @@ async function sendSMS(phoneNumber, otp) {
         console.log('\n🔄 Trying METHOD 2: SMS with Sender ID...');
         try {
             const smsResp2 = await axios.get(
-                `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}/SNSQCN`,
+                `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}/SNSCPL`,
                 { timeout: 10000 }
             );
             console.log('📡 SMS Response:', JSON.stringify(smsResp2.data));

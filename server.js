@@ -1,3 +1,4 @@
+require('dotenv').config(); // Load .env file into process.env
 const express = require('express');
 const cors = require('cors');
 const crypto = require('crypto');
@@ -109,18 +110,18 @@ async function sendSMS(phoneNumber, otp) {
 
 // Configuration — values hardcoded directly (no .env required)
 const CONFIG = {
-    TWO_FACTOR_API_KEY:   '2df45c64-1781-11f1-bcb0-0200cd936042',
+    TWO_FACTOR_API_KEY: '2df45c64-1781-11f1-bcb0-0200cd936042',
     BITRIX24_WEBHOOK_URL: 'https://sns.bitrix24.in/rest/196/x3qk76bnwzi18ta6/',
-    ZOHO_CLIENT_ID:       process.env.ZOHO_CLIENT_ID       || '',
-    ZOHO_CLIENT_SECRET:   process.env.ZOHO_CLIENT_SECRET   || '',
-    ZOHO_REFRESH_TOKEN:   process.env.ZOHO_REFRESH_TOKEN   || '',
+    ZOHO_CLIENT_ID: process.env.ZOHO_CLIENT_ID || '',
+    ZOHO_CLIENT_SECRET: process.env.ZOHO_CLIENT_SECRET || '',
+    ZOHO_REFRESH_TOKEN: process.env.ZOHO_REFRESH_TOKEN || '',
     ZOHO_ORGANIZATION_ID: process.env.ZOHO_ORGANIZATION_ID || '',
-    ZOHO_REGION:          process.env.ZOHO_REGION          || 'in'
+    ZOHO_REGION: process.env.ZOHO_REGION || 'in'
 };
 
 // Zoho Books base URLs (region-aware)
 const ZOHO_AUTH_URL = () => `https://accounts.zoho.${CONFIG.ZOHO_REGION}/oauth/v2/token`;
-const ZOHO_API_URL  = () => `https://www.zohoapis.${CONFIG.ZOHO_REGION}/books/v3`;
+const ZOHO_API_URL = () => `https://www.zohoapis.${CONFIG.ZOHO_REGION}/books/v3`;
 
 // In-memory token cache (refreshed automatically before expiry)
 let zohoTokenCache = { accessToken: null, expiresAt: 0 };
@@ -134,9 +135,9 @@ async function getZohoAccessToken() {
     }
     const params = new URLSearchParams({
         refresh_token: CONFIG.ZOHO_REFRESH_TOKEN,
-        client_id:     CONFIG.ZOHO_CLIENT_ID,
+        client_id: CONFIG.ZOHO_CLIENT_ID,
         client_secret: CONFIG.ZOHO_CLIENT_SECRET,
-        grant_type:    'refresh_token'
+        grant_type: 'refresh_token'
     });
     const response = await axios.post(ZOHO_AUTH_URL(), params.toString(), {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -146,7 +147,7 @@ async function getZohoAccessToken() {
     }
     zohoTokenCache = {
         accessToken: response.data.access_token,
-        expiresAt:   Date.now() + (response.data.expires_in || 3600) * 1000
+        expiresAt: Date.now() + (response.data.expires_in || 3600) * 1000
     };
     console.log('Zoho access token refreshed OK');
     return zohoTokenCache.accessToken;
@@ -176,10 +177,10 @@ async function findOrCreateZohoContact(token, { name, email, mobile }) {
         const createResp = await axios.post(
             `${ZOHO_API_URL()}/contacts?organization_id=${orgId}`,
             {
-                contact_name:  name,
-                contact_type:  'customer',
-                email:         email,
-                mobile:        `+91${mobile}`
+                contact_name: name,
+                contact_type: 'customer',
+                email: email,
+                mobile: `+91${mobile}`
             },
             { headers }
         );
@@ -225,27 +226,27 @@ async function findOrCreateZohoContact(token, { name, email, mobile }) {
 async function createZohoInvoice(token, { contactId, name, plan }) {
     const orgId = CONFIG.ZOHO_ORGANIZATION_ID;
     const planDetails = {
-        '1':    { amount: 1,    description: 'Phase 2 — 100-Day Bootcamp Registration' },
-        '500':  { amount: 500,  description: 'AI Challenge Registration — Mid Level' },
+        '1': { amount: 1, description: 'Phase 2 — 100-Day Bootcamp Registration' },
+        '500': { amount: 500, description: 'AI Challenge Registration — Mid Level' },
         '1000': { amount: 1000, description: 'AI Challenge Registration — Regular' }
     };
     const item = planDetails[plan] || planDetails['500'];
 
     const payload = {
-        customer_id:    contactId,
+        customer_id: contactId,
         invoice_number: `AV-${Date.now()}`,
         line_items: [{
-            item_name:   item.description,
+            item_name: item.description,
             description: 'SNS iNNovation Hub — AI Challenge',
-            quantity:    1,
-            rate:        item.amount
+            quantity: 1,
+            rate: item.amount
         }],
         // Tax-inclusive so the balance due equals exactly the plan amount
         is_inclusive_of_tax: true,
         // Enable Razorpay payment gateway so the "Pay Now" button appears
         payment_options: {
             payment_gateways: [{
-                configured:   true,
+                configured: true,
                 gateway_name: 'razorpay'
             }]
         },
@@ -284,8 +285,8 @@ async function createZohoInvoice(token, { contactId, name, plan }) {
 
     // invoice_url is the public payment page
     return {
-        invoiceId:   invoice.invoice_id,
-        invoiceNo:   invoice.invoice_number,
+        invoiceId: invoice.invoice_id,
+        invoiceNo: invoice.invoice_number,
         paymentLink: invoice.invoice_url
     };
 }
@@ -318,11 +319,11 @@ app.post('/api/create-payment', async (req, res) => {
         const { invoiceId, invoiceNo, paymentLink } = await createZohoInvoice(token, { contactId, name, plan });
 
         res.json({
-            success:     true,
+            success: true,
             paymentLink: paymentLink,
-            invoiceId:   invoiceId,
-            invoiceNo:   invoiceNo,
-            message:     'Invoice created successfully'
+            invoiceId: invoiceId,
+            invoiceNo: invoiceNo,
+            message: 'Invoice created successfully'
         });
     } catch (error) {
         const detail = error.response?.data?.message || error.response?.data || error.message;
@@ -486,10 +487,10 @@ app.post('/api/submit-enquiry', async (req, res) => {
 
         // Normalise field names — accept both old and new naming
         const contactPhone = phone || mobile;
-        const isStudent    = plus2Student ?? student;
-        const isIdle       = idle100Days  ?? idle;
-        const isFuture     = aiIsFuture   ?? future;
-        const isReady      = readyToMaster ?? ready;
+        const isStudent = plus2Student ?? student;
+        const isIdle = idle100Days ?? idle;
+        const isFuture = aiIsFuture ?? future;
+        const isReady = readyToMaster ?? ready;
 
         console.log('🔍 Raw enquiry body:', JSON.stringify(req.body, null, 2));
 
@@ -504,25 +505,25 @@ app.post('/api/submit-enquiry', async (req, res) => {
         }
 
         const planLabels = {
-            free:     'Early Bird — FREE',
+            free: 'Early Bird — FREE',
             waitlist: 'General Waitlist — FREE',
-            '500':    'Mid Level — ₹500',
-            '1000':   'Regular — ₹1,000'
+            '500': 'Mid Level — ₹500',
+            '1000': 'Regular — ₹1,000'
         };
         const planLabel = planLabels[plan] || 'General Enquiry';
 
         const nameParts = name.trim().split(/\s+/);
-        const firstName  = nameParts[0];
-        const lastName   = nameParts.slice(1).join(' ') || '-';
+        const firstName = nameParts[0];
+        const lastName = nameParts.slice(1).join(' ') || '-';
 
         const enquiryData = {
             name, email,
             phone: contactPhone,
             questions: {
-                plus2Student:  isStudent || false,
-                idle100Days:   isIdle    || false,
-                aiIsFuture:    isFuture  || false,
-                readyToMaster: isReady   || false
+                plus2Student: isStudent || false,
+                idle100Days: isIdle || false,
+                aiIsFuture: isFuture || false,
+                readyToMaster: isReady || false
             },
             submittedAt: new Date().toISOString(),
             ipAddress: req.ip
@@ -546,26 +547,26 @@ app.post('/api/submit-enquiry', async (req, res) => {
 
             const leadData = {
                 fields: {
-                    TITLE:      `Agentic AI-Bootcamp | ${name}`,
-                    NAME:       firstName,
-                    LAST_NAME:  lastName,
-                    EMAIL: [{ VALUE: email,                VALUE_TYPE: 'WORK' }],
+                    TITLE: `Agentic AI-Bootcamp | ${name}`,
+                    NAME: firstName,
+                    LAST_NAME: lastName,
+                    EMAIL: [{ VALUE: email, VALUE_TYPE: 'WORK' }],
                     PHONE: [{ VALUE: `+91${contactPhone}`, VALUE_TYPE: 'MOBILE' }],
-                    SOURCE_ID:          'WEB',
+                    SOURCE_ID: 'WEB',
                     SOURCE_DESCRIPTION: `Agentic AI-Bootcamp Landing Page — ${planLabel}`,
 
                     // College — Agentic AI-Bootcamp
-                    'UF_CRM_1585031750':         '132255',
+                    'UF_CRM_1585031750': '132255',
 
                     // Custom email & mobile
                     'UF_CRM_LEAD_1735650782896': email,
-                    'UF_CRM_67D80C3A4E2D8':      contactPhone,
+                    'UF_CRM_67D80C3A4E2D8': contactPhone,
 
                     // Quick Questions (boolean)
                     'UF_CRM_LEAD_1770358477232': isStudent ? true : false,
-                    'UF_CRM_LEAD_1770358505353': isIdle    ? true : false,
-                    'UF_CRM_LEAD_1770358528297': isFuture  ? true : false,
-                    'UF_CRM_LEAD_1770358547490': isReady   ? true : false,
+                    'UF_CRM_LEAD_1770358505353': isIdle ? true : false,
+                    'UF_CRM_LEAD_1770358528297': isFuture ? true : false,
+                    'UF_CRM_LEAD_1770358547490': isReady ? true : false,
 
                     COMMENTS: [
                         '📋 Agentic AI-Bootcamp Lead Submission',
@@ -578,9 +579,9 @@ app.post('/api/submit-enquiry', async (req, res) => {
                         '',
                         '📝 Quick Questions:',
                         `   Are you a +2 student?             ${isStudent ? '✅ Yes' : '❌ No'}`,
-                        `   Idle for 100+ days?               ${isIdle    ? '✅ Yes' : '❌ No'}`,
-                        `   Is AI and Agentic AI the future?  ${isFuture  ? '✅ Yes' : '❌ No'}`,
-                        `   Ready to master AI in 100 days?   ${isReady   ? '✅ Yes' : '❌ No'}`,
+                        `   Idle for 100+ days?               ${isIdle ? '✅ Yes' : '❌ No'}`,
+                        `   Is AI and Agentic AI the future?  ${isFuture ? '✅ Yes' : '❌ No'}`,
+                        `   Ready to master AI in 100 days?   ${isReady ? '✅ Yes' : '❌ No'}`,
                         '',
                         `🕐 Submitted: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`,
                         '📍 Source: Landing Page Form (OTP Verified)'
@@ -614,21 +615,21 @@ app.post('/api/submit-enquiry', async (req, res) => {
                 console.log('\n📤 Sending to Bitrix24 via public CRM form...');
 
                 const formPayload = new URLSearchParams();
-                formPayload.append('id',  '345');
+                formPayload.append('id', '345');
                 formPayload.append('sec', 'w24l0q');
-                formPayload.append('fields[LEAD_NAME]',      firstName);
+                formPayload.append('fields[LEAD_NAME]', firstName);
                 formPayload.append('fields[LEAD_LAST_NAME]', lastName);
-                formPayload.append('fields[LEAD_TITLE]',     `Agentic AI-Bootcamp | ${name}`);
-                formPayload.append('fields[LEAD_EMAIL][0][VALUE]',      email);
+                formPayload.append('fields[LEAD_TITLE]', `Agentic AI-Bootcamp | ${name}`);
+                formPayload.append('fields[LEAD_EMAIL][0][VALUE]', email);
                 formPayload.append('fields[LEAD_EMAIL][0][VALUE_TYPE]', 'WORK');
-                formPayload.append('fields[LEAD_PHONE][0][VALUE]',      `+91${contactPhone}`);
+                formPayload.append('fields[LEAD_PHONE][0][VALUE]', `+91${contactPhone}`);
                 formPayload.append('fields[LEAD_PHONE][0][VALUE_TYPE]', 'MOBILE');
-                formPayload.append('fields[LEAD_UF_CRM_LEAD_1735650782896]',  email);
-                formPayload.append('fields[LEAD_UF_CRM_67D80C3A4E2D8]',      contactPhone);
-                formPayload.append('fields[LEAD_UF_CRM_LEAD_1770358477232]',  isStudent ? '1' : '0');
-                formPayload.append('fields[LEAD_UF_CRM_LEAD_1770358505353]',  isIdle    ? '1' : '0');
-                formPayload.append('fields[LEAD_UF_CRM_LEAD_1770358528297]',  isFuture  ? '1' : '0');
-                formPayload.append('fields[LEAD_UF_CRM_LEAD_1770358547490]',  isReady   ? '1' : '0');
+                formPayload.append('fields[LEAD_UF_CRM_LEAD_1735650782896]', email);
+                formPayload.append('fields[LEAD_UF_CRM_67D80C3A4E2D8]', contactPhone);
+                formPayload.append('fields[LEAD_UF_CRM_LEAD_1770358477232]', isStudent ? '1' : '0');
+                formPayload.append('fields[LEAD_UF_CRM_LEAD_1770358505353]', isIdle ? '1' : '0');
+                formPayload.append('fields[LEAD_UF_CRM_LEAD_1770358528297]', isFuture ? '1' : '0');
+                formPayload.append('fields[LEAD_UF_CRM_LEAD_1770358547490]', isReady ? '1' : '0');
 
                 const b24Resp = await axios.post(
                     'https://b24-31djjx.bitrix24.site/bitrix/services/main/ajax.php?action=crm.site.form.fill',

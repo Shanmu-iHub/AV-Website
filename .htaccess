@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Route traffic to Node.js application 
+  RewriteRule ^(.*)$ http://127.0.0.1:%{SERVER_PORT}/$1 [P,L]
+</IfModule>

@@ -77,61 +77,41 @@ async function sendSMS(phoneNumber, otp) {
     }
 
     try {
-        const cleanPhone = phoneNumber.replace('+91', '').replace(/\s/g, '');
+        // Clean phone number: keep all digits (91XXXXXXXXXX)
+        const cleanPhone = phoneNumber.replace(/\D/g, '');
 
-        // METHOD 1: Transactional SMS API
-        console.log('\n🔄 Trying METHOD 1: Transactional SMS API...');
-        try {
-            const smsUrl1 = `https://2factor.in/API/V1/${apiKey}/ADDON_SERVICES/SEND/TSMS`;
-            const smsPayload = {
-                From: 'SNSCPL',
-                To: cleanPhone,
-                TemplateName: 'SNSSquareBoldAICamp',
-                VAR1: otp.toString()
-            };
-            const smsResp1 = await axios.post(smsUrl1, smsPayload, {
-                headers: { 'Content-Type': 'application/json' },
-                timeout: 10000
-            });
-            console.log('📡 SMS Response:', JSON.stringify(smsResp1.data));
-            if (smsResp1.data?.Status === 'Success') {
-                console.log('✅ SUCCESS via Transactional SMS!');
-                return true;
-            }
-        } catch (err) {
-            console.log('⚠️ Transactional SMS error:', err.response?.data || err.message);
-        }
+        console.log(`� Sending SMS OTP ${otp} via 2Factor... Targeting: ${cleanPhone}`);
 
-        // METHOD 2: SMS with Sender ID
-        console.log('\n🔄 Trying METHOD 2: SMS with Sender ID...');
+        // METHOD 1: SMS OTP with Template (Optimized GET - Most likely to work for custom DLT)
+        console.log('🔄 Trying METHOD 1: Custom Template API...');
         try {
-            const smsResp2 = await axios.get(
+            const smsResp1 = await axios.get(
                 `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}/SNSSquareBoldAICamp`,
                 { timeout: 10000 }
             );
-            console.log('📡 SMS Response:', JSON.stringify(smsResp2.data));
-            if (smsResp2.data?.Status === 'Success') {
-                console.log('✅ SUCCESS via SMS with Sender ID!');
+            console.log('📡 Response:', JSON.stringify(smsResp1.data));
+            if (smsResp1.data?.Status === 'Success') {
+                console.log('✅ SUCCESS via Custom Template!');
                 return true;
             }
         } catch (err) {
-            console.log('⚠️ SMS with Sender ID error:', err.response?.data || err.message);
+            console.log('⚠️ Custom Template error:', err.response?.data || err.message);
         }
 
-        // METHOD 3: Basic SMS
-        console.log('\n🔄 Trying METHOD 3: Basic SMS...');
+        // METHOD 2: Basic OTP with Sender ID (Fallback)
+        console.log('🔄 Trying METHOD 2: Sender ID Fallback...');
         try {
-            const smsResp3 = await axios.get(
-                `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}`,
+            const smsResp2 = await axios.get(
+                `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}/SNSCPL`,
                 { timeout: 10000 }
             );
-            console.log('📡 Basic Response:', JSON.stringify(smsResp3.data));
-            if (smsResp3.data?.Status === 'Success') {
-                console.log('✅ SUCCESS via Basic SMS!');
+            console.log('📡 Response:', JSON.stringify(smsResp2.data));
+            if (smsResp2.data?.Status === 'Success') {
+                console.log('✅ SUCCESS via Sender ID!');
                 return true;
             }
         } catch (err) {
-            console.log('⚠️ Basic SMS error:', err.response?.data || err.message);
+            console.log('⚠️ Sender ID Fallback error:', err.response?.data || err.message);
         }
 
         console.error('❌ All SMS methods failed');
@@ -388,29 +368,32 @@ app.post('/api/send-otp', async (req, res) => {
             });
         }
 
-        // convert to string and clean number
+        // convert to string and clean number - keep all digits (e.g. 91XXXXXXXXXX)
         phone = String(phone).replace(/\D/g, '');
 
-        // keep last 10 digits
-        phone = phone.slice(-10);
+        // ensure it has 91 prefix if it's 10 digits
+        if (phone.length === 10) {
+            phone = '91' + phone;
+        }
 
-        if (!/^[6-9]\d{9}$/.test(phone)) {
+        if (!/^(91)?[6-9]\d{9}$/.test(phone)) {
             return res.status(400).json({
                 success: false,
                 message: 'Invalid phone number'
             });
         }
 
-        // Check if phone is already registered
+        const fullPhone = `+${phone}`;
+        const cleanPhone10 = phone.slice(-10);
+
+        // Check if phone (10-digit) is already registered
         const registrations = getRegistrations();
-        if (registrations.phones.includes(phone)) {
+        if (registrations.phones.includes(cleanPhone10)) {
             return res.status(400).json({
                 success: false,
                 message: 'This phone number is already registered'
             });
         }
-
-        const fullPhone = `+91${phone}`;
 
         const existing = otpStorage.get(fullPhone);
 

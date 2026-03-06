@@ -1,3 +1,13 @@
 RewriteEngine On
+
+# Forward API requests to Node server
+]
+
+# Forward health check
+RewriteRule ^health$ http://127.0.0.1:3000/health [P,L]
+
+# Existing rules (keep them)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+
+

@@ -1,4 +1,8 @@
-require('dotenv').config(); // Load .env file into process.env
+try {
+    require('dotenv').config();
+} catch (e) {
+    console.warn('⚠️ dotenv not found, using hardcoded config only');
+}
 const express = require('express');
 const cors = require('cors');
 const crypto = require('crypto');
@@ -134,7 +138,7 @@ async function sendSMS(phoneNumber, otp) {
 // Configuration — values hardcoded directly (no .env required)
 const CONFIG = {
     TWO_FACTOR_API_KEY: '2df45c64-1781-11f1-bcb0-0200cd936042',
-    BITRIX24_WEBHOOK_URL: 'https://sns.bitrix24.in/rest/196/x3qk76bnwzi18ta6/',
+    BITRIX24_WEBHOOK_URL: 'https://sns.bitrix24.in/rest/196/zrojlhunxza4f9rx/',
     ZOHO_CLIENT_ID: process.env.ZOHO_CLIENT_ID || '',
     ZOHO_CLIENT_SECRET: process.env.ZOHO_CLIENT_SECRET || '',
     ZOHO_REFRESH_TOKEN: process.env.ZOHO_REFRESH_TOKEN || '',
@@ -608,7 +612,7 @@ app.post('/api/submit-enquiry', async (req, res) => {
 
         // ── METHOD 1: REST API Webhook (primary — maps ALL fields correctly) ──
         try {
-            const BITRIX24_WEBHOOK = process.env.BITRIX24_WEBHOOK_URL;
+            const BITRIX24_WEBHOOK = process.env.BITRIX24_WEBHOOK_URL || CONFIG.BITRIX24_WEBHOOK_URL;
 
             if (!BITRIX24_WEBHOOK ||
                 BITRIX24_WEBHOOK === 'YOUR_WEBHOOK_URL_HERE' ||
@@ -618,7 +622,7 @@ app.post('/api/submit-enquiry', async (req, res) => {
 
             const webhookBase = BITRIX24_WEBHOOK.replace(/crm\.lead\.add\.json\/?$/, '').replace(/\/?$/, '/');
 
-            const leadTitle = `Agentic AI-Bootcamp - ${name}`;
+            const leadTitle = `Agentic AI-Bootcamp ${name}`; // Removed dash for literal match or kept a space
             console.log(`📝 Setting Bitrix24 Lead Title: ${leadTitle}`);
 
             const leadData = {
@@ -756,11 +760,33 @@ app.get('/', (req, res) => {
  * Health check
  * GET /api/health  (also kept at /health for backward compatibility)
  */
-app.get(['/api/health', '/health'], (req, res) => {
+app.get(['/api/health', '/health'], async (req, res) => {
+    let bitrixStatus = 'CONFIG_MISSING';
+    try {
+        const webhook = process.env.BITRIX24_WEBHOOK_URL || CONFIG.BITRIX24_WEBHOOK_URL;
+        if (webhook && !webhook.includes('your-domain')) {
+            const webhookBase = webhook.replace(/crm\.lead\.add\.json\/?$/, '').replace(/\/?$/, '/');
+            // Try a simple profile call to check connectivity
+            const testResp = await axios.get(`${webhookBase}profile`, { timeout: 5000 });
+            if (testResp.data?.result) bitrixStatus = 'CONNECTED';
+            else bitrixStatus = 'INVALID_RESPONSE';
+        }
+    } catch (err) {
+        bitrixStatus = `ERROR: ${err.message}`;
+    }
+
     res.json({
-        status: 'ok',
+        success: true,
+        status: 'UP',
         timestamp: new Date().toISOString(),
-        otpSessions: otpStorage.size
+        integrations: {
+            twoFactor: (process.env.TWO_FACTOR_API_KEY || CONFIG.TWO_FACTOR_API_KEY) ? 'CONFIGURED' : 'MISSING',
+            bitrix24: bitrixStatus,
+            zohoBooks: (process.env.ZOHO_CLIENT_ID || CONFIG.ZOHO_CLIENT_ID) ? 'CONFIGURED' : 'MISSING'
+        },
+        sessions: {
+            otp: otpStorage.size
+        }
     });
 });
 

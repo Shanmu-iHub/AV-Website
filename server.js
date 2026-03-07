@@ -139,10 +139,10 @@ async function sendSMS(phoneNumber, otp) {
 const CONFIG = {
     TWO_FACTOR_API_KEY: '2df45c64-1781-11f1-bcb0-0200cd936042',
     BITRIX24_WEBHOOK_URL: 'https://sns.bitrix24.in/rest/196/zrojlhunxza4f9rx/',
-    ZOHO_CLIENT_ID: process.env.ZOHO_CLIENT_ID || '',
-    ZOHO_CLIENT_SECRET: process.env.ZOHO_CLIENT_SECRET || '',
-    ZOHO_REFRESH_TOKEN: process.env.ZOHO_REFRESH_TOKEN || '',
-    ZOHO_ORGANIZATION_ID: process.env.ZOHO_ORGANIZATION_ID || '',
+    ZOHO_CLIENT_ID: process.env.ZOHO_CLIENT_ID || '1000.ITWNFKM1D1DJ048VV5GJH682NK9NQB',
+    ZOHO_CLIENT_SECRET: process.env.ZOHO_CLIENT_SECRET || '8b8a2c718b0bcfb73fe67a1ffff368ba9027e2a323',
+    ZOHO_REFRESH_TOKEN: process.env.ZOHO_REFRESH_TOKEN || '1000.2b956a72e11e42b08366c6e3d3fee58c.efa51dcaca0400fb17a76044a5c20683',
+    ZOHO_ORGANIZATION_ID: process.env.ZOHO_ORGANIZATION_ID || '60060884990',
     ZOHO_REGION: process.env.ZOHO_REGION || 'in'
 };
 

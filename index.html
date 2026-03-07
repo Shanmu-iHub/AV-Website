@@ -2214,7 +2214,7 @@
                             <span style="color:#94A3B8; font-weight:600; font-size:15px; flex-shrink:0;">+91</span>
                         </div>
                         <input type="tel" id="heroPhoneInput" class="hero-input-field"
-                            placeholder="Enter your WhatsApp number" maxlength="10" inputmode="numeric"
+                            placeholder="Enter your phone number" maxlength="10" inputmode="numeric"
                             onkeydown="if(event.key==='Enter') heroSendOTP()">
                         <button id="heroGetOtpBtn" class="hero-submit-btn" onclick="heroSendOTP()">Get OTP</button>
                     </div>
@@ -2264,7 +2264,7 @@
                             if (!/^[6-9]\d{9}$/.test(phone)) {
                                 input.style.borderBottom = '2px solid #EF4444';
                                 input.placeholder = 'Enter valid 10-digit number';
-                                setTimeout(() => { input.style.borderBottom = ''; input.placeholder = 'Enter your WhatsApp number'; }, 2000);
+                                setTimeout(() => { input.style.borderBottom = ''; input.placeholder = 'Enter your phone number'; }, 2000);
                                 return;
                             }
 
@@ -2710,7 +2710,7 @@
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        <h4>Why do you collect my WhatsApp number?</h4>
+                        <h4>Why do you collect my phone number?</h4>
                         <div class="faq-toggle">+</div>
                     </button>
                     <div class="faq-answer">

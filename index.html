@@ -2319,24 +2319,35 @@
                                 const data = await res.json();
 
                                 if (data.success) {
-                                    // OTP verified — open registration form directly (skip modal OTP step)
+                                    // OTP verified — show success state briefly then open modal
+                                    btn.textContent = 'Verified ✓';
+                                    btn.style.background = '#22C55E';
+
                                     window.verifiedPhone = _heroPhone;
-                                    if (document.getElementById('registerModal')) {
-                                        window.selectedPlan = window.selectedPlan || 'free';
-                                        document.getElementById('registerModal').classList.add('active');
-                                        document.getElementById('modalFormState').style.display = 'none';
-                                        document.getElementById('modalOtpState').style.display = 'none';
-                                        document.getElementById('modalFormDetailsState').style.display = 'block';
-                                        if (document.getElementById('modalPaymentState')) document.getElementById('modalPaymentState').style.display = 'none';
-                                        document.body.style.overflow = 'hidden';
-                                        const phoneField = document.getElementById('regPhone');
-                                        if (phoneField) phoneField.value = '+91 ' + _heroPhone;
-                                        if (typeof updateModalPlanBadge === 'function') updateModalPlanBadge();
-                                        const sb = document.getElementById('regSubmitBtn');
-                                        if (sb) sb.disabled = false;
-                                    } else if (typeof openRegisterModal === 'function') {
-                                        openRegisterModal('free');
-                                    }
+
+                                    setTimeout(() => {
+                                        // Reset button for next time before opening modal
+                                        btn.disabled = false;
+                                        btn.textContent = 'Verify OTP';
+                                        btn.style.background = '';
+
+                                        if (document.getElementById('registerModal')) {
+                                            window.selectedPlan = window.selectedPlan || 'free';
+                                            document.getElementById('registerModal').classList.add('active');
+                                            document.getElementById('modalFormState').style.display = 'none';
+                                            document.getElementById('modalOtpState').style.display = 'none';
+                                            document.getElementById('modalFormDetailsState').style.display = 'block';
+                                            if (document.getElementById('modalPaymentState')) document.getElementById('modalPaymentState').style.display = 'none';
+                                            document.body.style.overflow = 'hidden';
+                                            const phoneField = document.getElementById('regPhone');
+                                            if (phoneField) phoneField.value = '+91 ' + _heroPhone;
+                                            if (typeof updateModalPlanBadge === 'function') updateModalPlanBadge();
+                                            const sb = document.getElementById('regSubmitBtn');
+                                            if (sb) sb.disabled = false;
+                                        } else if (typeof openRegisterModal === 'function') {
+                                            openRegisterModal('free');
+                                        }
+                                    }, 600);
                                 } else {
                                     alert(data.message || 'Invalid OTP. Try again.');
                                     btn.disabled = false;
@@ -2871,19 +2882,31 @@
                                 const data = await res.json();
 
                                 if (data.success) {
+                                    // OTP verified — show success state briefly then open modal
+                                    btn.textContent = 'Verified ✓';
+                                    btn.style.background = '#22C55E';
+
                                     window.verifiedPhone = _ctaPhone;
-                                    window.selectedPlan = window.selectedPlan || 'free';
-                                    document.getElementById('registerModal').classList.add('active');
-                                    document.getElementById('modalFormState').style.display = 'none';
-                                    document.getElementById('modalOtpState').style.display = 'none';
-                                    document.getElementById('modalFormDetailsState').style.display = 'block';
-                                    if (document.getElementById('modalPaymentState')) document.getElementById('modalPaymentState').style.display = 'none';
-                                    document.body.style.overflow = 'hidden';
-                                    const phoneField = document.getElementById('regPhone');
-                                    if (phoneField) phoneField.value = '+91 ' + _ctaPhone;
-                                    if (typeof updateModalPlanBadge === 'function') updateModalPlanBadge();
-                                    const sb = document.getElementById('regSubmitBtn');
-                                    if (sb) sb.disabled = false;
+
+                                    setTimeout(() => {
+                                        // Reset button for next time before opening modal
+                                        btn.disabled = false;
+                                        btn.textContent = 'Verify OTP';
+                                        btn.style.background = '';
+
+                                        window.selectedPlan = window.selectedPlan || 'free';
+                                        document.getElementById('registerModal').classList.add('active');
+                                        document.getElementById('modalFormState').style.display = 'none';
+                                        document.getElementById('modalOtpState').style.display = 'none';
+                                        document.getElementById('modalFormDetailsState').style.display = 'block';
+                                        if (document.getElementById('modalPaymentState')) document.getElementById('modalPaymentState').style.display = 'none';
+                                        document.body.style.overflow = 'hidden';
+                                        const phoneField = document.getElementById('regPhone');
+                                        if (phoneField) phoneField.value = '+91 ' + _ctaPhone;
+                                        if (typeof updateModalPlanBadge === 'function') updateModalPlanBadge();
+                                        const sb = document.getElementById('regSubmitBtn');
+                                        if (sb) sb.disabled = false;
+                                    }, 600);
                                 } else {
                                     alert(data.message || 'Invalid OTP. Try again.');
                                     btn.disabled = false;

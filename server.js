@@ -96,7 +96,7 @@ async function sendSMS(phoneNumber, otp) {
         console.log('🔄 Trying METHOD 1: Custom Template API...');
         try {
             const smsResp1 = await axios.get(
-                `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}/SNSSquareBoldAICamp`,
+                `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}/snsboldai1`,
                 { timeout: 10000 }
             );
             console.log('📡 Response:', JSON.stringify(smsResp1.data));
@@ -112,7 +112,7 @@ async function sendSMS(phoneNumber, otp) {
         console.log('🔄 Trying METHOD 2: Sender ID Fallback...');
         try {
             const smsResp2 = await axios.get(
-                `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}/SNSCPL`,
+                `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}/snsboldai1`,
                 { timeout: 10000 }
             );
             console.log('📡 Response:', JSON.stringify(smsResp2.data));

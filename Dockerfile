@@ -14,7 +14,7 @@ RUN npm install --production
 COPY . .
 
 # The app binds to port 3000 so use the EXPOSE instruction to have it mapped by the docker daemon
-EXPOSE 3000
+EXPOSE 3003
 
 # Define the command to run the app
 CMD [ "node", "server.js" ]

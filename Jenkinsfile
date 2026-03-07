@@ -2,78 +2,86 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "av-website"
-        DOCKER_TAG = "${env.BUILD_NUMBER}"
-        // Add your Docker Hub or Private Registry credentials ID here
-        // DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'
+        AWS_REGION = 'ap-south-1'
+        ECR_REPO = '864981730114.dkr.ecr.ap-south-1.amazonaws.com/bold-ai'
+        ECS_CLUSTER = 'snsihub-cluster-dev'
+        ECS_SERVICE = 'bold-ai-service'
+        TASK_FAMILY = 'bold-ai'  // Task Definition Name
+        CONTAINER_NAME = 'bold-ai'   // Name of the container inside ECS task definition
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
-
-        stage('Security Scan (Optional)') {
-            steps {
-                echo 'Running audit...'
-                sh 'npm audit --audit-level=high'
-            }
-        }
-
-        stage('Build Docker Image') {
+        stage('AWS ECR Login') {
             steps {
                 script {
-                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
-                    sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
+                    sh 'aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPO'
                 }
             }
         }
 
-        stage('Push to Registry') {
-            /* 
-            Uncomment and configure if pushing to a registry
+        stage('Build & Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
-                        sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
-                        sh "docker push ${DOCKER_IMAGE}:latest"
-                    }
+                    sh """
+                    docker build -t ${ECR_REPO}:latest .
+                    docker tag ${ECR_REPO}:latest ${ECR_REPO}:latest
+                    docker push ${ECR_REPO}:latest
+                    """
                 }
-            }
-            */
-            steps {
-                echo 'Skipping push - registry not configured'
             }
         }
 
-        stage('Deploy') {
+        stage('Register New Task Definition with Latest Image') {
             steps {
-                echo 'Deploying to staging/production server...'
-                // Example: Restart docker container
-                // sh "docker stop av-website-container || true"
-                // sh "docker rm av-website-container || true"
-                // sh "docker run -d --name av-website-container -p 80:3000 ${DOCKER_IMAGE}:latest"
+                script {
+                    // Fetch the existing task definition
+                    sh "aws ecs describe-task-definition --task-definition $TASK_FAMILY --query 'taskDefinition' > task-def.json"
+
+                    // Modify the task definition to update the container image
+                    sh """
+                    jq 'del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy) |
+                        .containerDefinitions[0].image = "${ECR_REPO}:latest"' task-def.json > new-task-def.json
+                    """
+
+                    // Register the updated task definition
+                    sh "aws ecs register-task-definition --cli-input-json file://new-task-def.json"
+                }
+            }
+        }
+
+        stage('Update ECS Service with New Task Definition') {
+            steps {
+                script {
+                    def TASK_REVISION = sh(script: "aws ecs describe-task-definition --task-definition $TASK_FAMILY --query 'taskDefinition.revision' --output text", returnStdout: true).trim()
+                    echo "New Task Definition Revision: ${TASK_REVISION}"
+
+                    sh """
+                    aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --task-definition ${TASK_FAMILY}:${TASK_REVISION} --force-new-deployment
+                    """
+                }
             }
         }
     }
 
     post {
-        always {
-            cleanWs()
-        }
         success {
-            echo 'Pipeline completed successfully!'
+            echo '✅ Backend Deployment Successful! 🎉'
+
+            // 🔥 Remove unused Docker images **immediately**
+            sh 'docker image prune -a -f'
+
+            // 🔥 Remove stopped containers
+            sh 'docker container prune -f'
         }
         failure {
-            echo 'Pipeline failed. Please check the logs.'
+            echo '❌ Backend Deployment Failed!'
+
+            // 🔥 Cleanup failed build images
+            sh 'docker image prune -a -f'
+        }
+        always {
+            // 🔄 Ensure unused volumes and networks are cleaned up
+            sh 'docker system prune -f --volumes'
         }
     }
 }

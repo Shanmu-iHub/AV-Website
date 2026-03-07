@@ -19,7 +19,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Request Logger Middleware
 app.use((req, res, next) => {
@@ -832,6 +832,11 @@ app.get('/api/bitrix-fields', async (req, res) => {
 });
 
 // Start server
+// Catch-all route to serve the frontend index.html
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
     console.log(`📝 API Endpoints:`);

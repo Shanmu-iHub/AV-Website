@@ -2059,6 +2059,90 @@
         #ctaOtpInput2::placeholder {
             color: #64748B !important;
         }
+
+        /* Hero Responsive Input */
+        .hero-input-wrapper {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            border-radius: 60px;
+            padding: 6px 6px 6px 20px;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .hero-input-wrapper:focus-within {
+            border-color: rgba(245, 166, 35, 0.5);
+            box-shadow: 0 0 20px rgba(245, 166, 35, 0.1);
+        }
+
+        .hero-input-field {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 15px;
+            font-family: inherit;
+            min-width: 0;
+        }
+
+        .hero-submit-btn {
+            background: linear-gradient(90deg, #E8372A, #F5831F, #F5A623);
+            color: #0A1628;
+            font-weight: 800;
+            font-size: 14px;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 24px;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .hero-submit-btn:hover {
+            transform: scale(1.04);
+            box-shadow: 0 5px 15px rgba(245, 166, 35, 0.3);
+        }
+
+        .hero-submit-btn.verify {
+            background: linear-gradient(90deg, #22C55E, #16A34A);
+            color: #fff;
+        }
+
+        @media (max-width: 500px) {
+            .hero-input-wrapper {
+                flex-direction: column;
+                border-radius: 20px;
+                padding: 15px;
+                gap: 12px;
+                background: rgba(0, 0, 0, 0.5);
+            }
+
+            .hero-input-field {
+                width: 100%;
+                text-align: center;
+                font-size: 16px;
+                padding: 5px 0;
+            }
+
+            .hero-submit-btn {
+                width: 100%;
+                padding: 14px;
+            }
+
+            .hero-input-wrapper .country-info {
+                display: flex;
+                gap: 6px;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                padding-bottom: 5px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
     </style>
 </head>
 
@@ -2124,35 +2208,30 @@
                 <div style="max-width: 580px; margin: 0 auto 20px;">
 
                     <!-- Step 1: Phone Input -->
-                    <div id="heroPhoneStep"
-                        style="display:flex; align-items:center; background:rgba(0,0,0,0.35); border:1.5px solid rgba(255,255,255,0.12); border-radius:60px; padding:6px 6px 6px 20px; gap:8px;">
-                        <span style="font-size:18px; flex-shrink:0;">🇮🇳</span>
-                        <span style="color:#94A3B8; font-weight:600; font-size:15px; flex-shrink:0;">+91</span>
-                        <input type="tel" id="heroPhoneInput" placeholder="Enter your WhatsApp number" maxlength="10"
-                            inputmode="numeric"
-                            style="flex:1; background:transparent; border:none; outline:none; color:#fff; font-size:15px; font-family:inherit; min-width:0;"
+                    <div id="heroPhoneStep" class="hero-input-wrapper">
+                        <div class="country-info">
+                            <span style="font-size:18px; flex-shrink:0;">🇮🇳</span>
+                            <span style="color:#94A3B8; font-weight:600; font-size:15px; flex-shrink:0;">+91</span>
+                        </div>
+                        <input type="tel" id="heroPhoneInput" class="hero-input-field"
+                            placeholder="Enter your WhatsApp number" maxlength="10" inputmode="numeric"
                             onkeydown="if(event.key==='Enter') heroSendOTP()">
-                        <button id="heroGetOtpBtn" onclick="heroSendOTP()"
-                            style="background:linear-gradient(90deg,#E8372A,#F5831F,#F5A623); color:#0A1628; font-weight:800; font-size:14px; border:none; border-radius:50px; padding:12px 24px; cursor:pointer; white-space:nowrap; flex-shrink:0; transition:all 0.3s;"
-                            onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform=''">Get
-                            OTP</button>
+                        <button id="heroGetOtpBtn" class="hero-submit-btn" onclick="heroSendOTP()">Get OTP</button>
                     </div>
 
                     <!-- Step 2: OTP Input (hidden initially) -->
                     <div id="heroOtpStep" style="display:none; flex-direction:column; gap:10px;">
-                        <div
-                            style="display:flex; align-items:center; background:rgba(0,0,0,0.35); border:1.5px solid rgba(245,166,35,0.4); border-radius:60px; padding:6px 6px 6px 20px; gap:8px;">
-                            <span style="font-size:18px; flex-shrink:0;">🔐</span>
-                            <span id="heroPhoneDisplay"
-                                style="color:#F5A623; font-weight:700; font-size:14px; flex-shrink:0;"></span>
-                            <input type="tel" id="heroOtpInput" placeholder="Enter 6-digit OTP" maxlength="6"
-                                inputmode="numeric"
-                                style="flex:1; background:transparent; border:none; outline:none; color:#fff; font-size:15px; font-family:inherit; min-width:0; letter-spacing:4px;"
+                        <div class="hero-input-wrapper" style="border-color: rgba(245,166,35,0.4);">
+                            <div class="country-info">
+                                <span style="font-size:18px; flex-shrink:0;">🔐</span>
+                                <span id="heroPhoneDisplay"
+                                    style="color:#F5A623; font-weight:700; font-size:14px; flex-shrink:0;"></span>
+                            </div>
+                            <input type="tel" id="heroOtpInput" class="hero-input-field" placeholder="Enter 6-digit OTP"
+                                maxlength="6" inputmode="numeric" style="letter-spacing:4px;"
                                 onkeydown="if(event.key==='Enter') heroVerifyOTP()">
-                            <button id="heroVerifyBtn" onclick="heroVerifyOTP()"
-                                style="background:linear-gradient(90deg,#22C55E,#16A34A); color:#fff; font-weight:800; font-size:14px; border:none; border-radius:50px; padding:12px 24px; cursor:pointer; white-space:nowrap; flex-shrink:0; transition:all 0.3s;"
-                                onmouseover="this.style.transform='scale(1.04)'"
-                                onmouseout="this.style.transform=''">Verify OTP</button>
+                            <button id="heroVerifyBtn" class="hero-submit-btn verify" onclick="heroVerifyOTP()">Verify
+                                OTP</button>
                         </div>
                         <div style="text-align:center;">
                             <span style="font-size:13px; color:#64748B;">Didn't receive? </span>

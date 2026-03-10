@@ -3605,11 +3605,11 @@
                     // Store session ID for verification
                     window.otpSession = result.sessionId;
                 } else {
-                    alert('Failed to send OTP: ' + (result.message || 'Unknown error'));
+                    alert(result.message || 'Please try again.');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Failed to send OTP. Please try again.');
+                alert('Network error. Please try again.');
             }
         }
 
@@ -3699,12 +3699,12 @@
                     if (btn) { btn.disabled = false; btn.textContent = 'Get OTP'; }
                 } else {
                     if (btn) { btn.disabled = false; btn.textContent = 'Get OTP'; }
-                    alert('Failed to send OTP: ' + (result.message || 'Unknown error'));
+                    alert(result.message || 'Please try again.');
                 }
             } catch (error) {
                 console.error('Error:', error);
                 if (btn) { btn.disabled = false; btn.textContent = 'Get OTP'; }
-                alert('Failed to send OTP. Please try again.');
+                alert('Network error. Please try again.');
             }
         }
 

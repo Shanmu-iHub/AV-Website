@@ -550,7 +550,7 @@ app.post('/api/submit-enquiry', async (req, res) => {
     try {
         const {
             name, email, phone, mobile,
-            age, city, presentStatus, collegeName, careerGoal, addressProofType, addressProofFile,
+            age, city, presentStatus, careerGoal, addressProofType, addressProofFile,
             plan
         } = req.body;
 
@@ -599,9 +599,7 @@ app.post('/api/submit-enquiry', async (req, res) => {
         };
         const PROOF_MAP = {
             'Aadhaar Card': '132271',
-            'PAN Card': '132273',
-            'Voter ID': '132275',
-            'Driving License': '132277'
+            'Driving Licence': '132277'
         };
 
         const bitrixStatusId = STATUS_MAP[presentStatus] || '';
@@ -654,7 +652,6 @@ app.post('/api/submit-enquiry', async (req, res) => {
                     '',
                     '💼 Status & Goals:',
                     `   Status:  ${presentStatus || 'N/A'}`,
-                    `   College: ${collegeName || 'N/A'}`,
                     `   Goal:    ${careerGoal || 'N/A'}`,
                     '',
                     `🕐 Submitted: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`,

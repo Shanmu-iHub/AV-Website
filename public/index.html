@@ -3048,11 +3048,6 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>College Name <span class="required">*</span></label>
-                    <input type="text" id="enquiryCollege" name="collegeName" placeholder="Enter your college name"
-                        required>
-                </div>
-                <div class="form-group">
                     <label>Career Goal <span class="required">*</span></label>
                     <textarea id="enquiryGoal" name="careerGoal" placeholder="Short description of future goal" required
                         style="width: 100%; border: 1.5px solid #E2E8F0; border-radius: 12px; min-height: 80px;"></textarea>
@@ -3062,7 +3057,7 @@
                     <select id="enquiryProofType" name="addressProofType" required>
                         <option value="">Select Proof Type</option>
                         <option value="Aadhaar Card">Aadhaar Card</option>
-                        <option value="Driving License">Driving License</option>
+                        <option value="Driving Licence">Driving Licence</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -3192,11 +3187,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>College Name <span class="required">*</span></label>
-                        <input type="text" id="regCollege" name="collegeName" placeholder="Enter your college name"
-                            required>
-                    </div>
-                    <div class="form-group">
                         <label>Career Goal <span class="required">*</span></label>
                         <textarea id="regGoal" name="careerGoal" placeholder="Short description of future goal" required
                             style="width: 100%; border: 1.5px solid #E2E8F0; border-radius: 12px; min-height: 80px;"></textarea>
@@ -3206,9 +3196,7 @@
                         <select id="regProofType" name="addressProofType" required>
                             <option value="">Select Proof Type</option>
                             <option value="Aadhaar Card">Aadhaar Card</option>
-                            <option value="PAN Card">PAN Card</option>
-                            <option value="Voter ID">Voter ID</option>
-                            <option value="Driving License">Driving License</option>
+                            <option value="Driving Licence">Driving Licence</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -3555,7 +3543,6 @@
             const formData = {
                 name, email, mobile,
                 age, city, presentStatus,
-                collegeName: document.getElementById('enquiryCollege').value,
                 careerGoal, addressProofType, addressProofFile
             };
 
@@ -3924,7 +3911,6 @@
             const formData = {
                 name, email, mobile,
                 age, city, presentStatus,
-                collegeName: document.getElementById('regCollege').value,
                 careerGoal, addressProofType, addressProofFile,
                 plan: window.selectedPlan || 'free'
             };

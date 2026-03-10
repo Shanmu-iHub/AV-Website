@@ -1789,7 +1789,9 @@
             margin-left: 2px;
         }
 
-        .form-group input {
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
             width: 100%;
             padding: 14px 16px;
             background: #F8FAFC;
@@ -1801,7 +1803,9 @@
             transition: all 0.3s;
         }
 
-        .form-group input:focus {
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: var(--sns-saffron);
             background: var(--sns-white);
@@ -2254,6 +2258,9 @@
                 </div>
 
                 <script>
+                    window.API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && window.location.port !== '3003'
+                        ? 'http://' + window.location.hostname + ':3003'
+                        : '';
                     (function () {
                         let _heroPhone = '';
 
@@ -2273,7 +2280,7 @@
                             btn.textContent = 'Sending…';
 
                             try {
-                                const res = await fetch('/api/send-otp', {
+                                const res = await fetch(window.API_BASE + '/api/send-otp', {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({ phone })
@@ -2312,7 +2319,7 @@
                             btn.textContent = 'Verifying…';
 
                             try {
-                                const res = await fetch('/api/verify-otp', {
+                                const res = await fetch(window.API_BASE + '/api/verify-otp', {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({ phone: _heroPhone, otp })
@@ -2365,7 +2372,7 @@
                             if (!_heroPhone) return;
                             document.getElementById('heroOtpInput').value = '';
                             try {
-                                await fetch('/api/send-otp', {
+                                await fetch(window.API_BASE + '/api/send-otp', {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({ phone: _heroPhone })
@@ -2839,7 +2846,7 @@
                             btn.textContent = 'Sending…';
 
                             try {
-                                const res = await fetch('/api/send-otp', {
+                                const res = await fetch(window.API_BASE + '/api/send-otp', {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({ phone })
@@ -2875,7 +2882,7 @@
                             btn.textContent = 'Verifying…';
 
                             try {
-                                const res = await fetch('/api/verify-otp', {
+                                const res = await fetch(window.API_BASE + '/api/verify-otp', {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({ phone: _ctaPhone, otp })
@@ -2924,7 +2931,7 @@
                             if (!_ctaPhone) return;
                             document.getElementById('ctaOtpInput2').value = '';
                             try {
-                                await fetch('/api/send-otp', {
+                                await fetch(window.API_BASE + '/api/send-otp', {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({ phone: _ctaPhone })
@@ -3021,6 +3028,44 @@
                     <label>Mobile number <span class="required">*</span></label>
                     <input type="tel" id="enquiryMobile" name="mobile" placeholder="+91-9344557376" pattern="[0-9]{10}"
                         maxlength="10" required>
+                </div>
+                <div class="form-group">
+                    <label>Age <span class="required">*</span></label>
+                    <input type="number" id="enquiryAge" name="age" placeholder="Enter your age" required>
+                </div>
+                <div class="form-group">
+                    <label>City <span class="required">*</span></label>
+                    <input type="text" id="enquiryCity" name="city" placeholder="Enter your city" required>
+                </div>
+                <div class="form-group">
+                    <label>Present Status <span class="required">*</span></label>
+                    <select id="enquiryStatus" name="presentStatus" required>
+                        <option value="">Select Status</option>
+                        <option value="Student">Student</option>
+                        <option value="Working Professional">Working Professional</option>
+                        <option value="Entrepreneur">Entrepreneur</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Career Goal <span class="required">*</span></label>
+                    <textarea id="enquiryGoal" name="careerGoal" placeholder="Short description of future goal" required
+                        style="width: 100%; border: 1.5px solid #E2E8F0; border-radius: 12px; min-height: 80px;"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Address Proof type <span class="required">*</span></label>
+                    <select id="enquiryProofType" name="addressProofType" required>
+                        <option value="">Select Proof Type</option>
+                        <option value="Aadhaar Card">Aadhaar Card</option>
+                        <option value="PAN Card">PAN Card</option>
+                        <option value="Voter ID">Voter ID</option>
+                        <option value="Driving License">Driving License</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Address Proof (Upload image/PDF) <span class="required">*</span></label>
+                    <input type="file" id="enquiryProofFile" name="addressProofFile" accept="image/*,.pdf" required
+                        style="padding: 10px;">
                 </div>
                 <div class="quick-questions">
                     <h3>Quick Questions:</h3>
@@ -3143,6 +3188,44 @@
                         <input type="text" id="regPhone" name="phone" readonly
                             style="background:rgba(34,197,94,0.07);color:#94a3b8;cursor:not-allowed;border-color:rgba(34,197,94,0.3);"
                             placeholder="Verified number will appear here">
+                    </div>
+                    <div class="form-group">
+                        <label>Age <span class="required">*</span></label>
+                        <input type="number" id="regAge" name="age" placeholder="Enter your age" required>
+                    </div>
+                    <div class="form-group">
+                        <label>City <span class="required">*</span></label>
+                        <input type="text" id="regCity" name="city" placeholder="Enter your city" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Present Status <span class="required">*</span></label>
+                        <select id="regStatus" name="presentStatus" required>
+                            <option value="">Select Status</option>
+                            <option value="Student">Student</option>
+                            <option value="Working Professional">Working Professional</option>
+                            <option value="Entrepreneur">Entrepreneur</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Career Goal <span class="required">*</span></label>
+                        <textarea id="regGoal" name="careerGoal" placeholder="Short description of future goal" required
+                            style="width: 100%; border: 1.5px solid #E2E8F0; border-radius: 12px; min-height: 80px;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Address Proof type <span class="required">*</span></label>
+                        <select id="regProofType" name="addressProofType" required>
+                            <option value="">Select Proof Type</option>
+                            <option value="Aadhaar Card">Aadhaar Card</option>
+                            <option value="PAN Card">PAN Card</option>
+                            <option value="Voter ID">Voter ID</option>
+                            <option value="Driving License">Driving License</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Address Proof (Upload image/PDF) <span class="required">*</span></label>
+                        <input type="file" id="regProofFile" name="addressProofFile" accept="image/*,.pdf" required
+                            style="padding: 10px;">
                     </div>
                     <div class="quick-questions">
                         <h3>Quick Questions:</h3>
@@ -3479,19 +3562,38 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Processing...';
 
+            const name = document.getElementById('enquiryName').value;
+            const email = document.getElementById('enquiryEmail').value;
+            const mobile = document.getElementById('enquiryMobile').value;
+            const age = document.getElementById('enquiryAge').value;
+            const city = document.getElementById('enquiryCity').value;
+            const presentStatus = document.getElementById('enquiryStatus').value;
+            const careerGoal = document.getElementById('enquiryGoal').value;
+            const addressProofType = document.getElementById('enquiryProofType').value;
+            const addressProofInput = document.getElementById('enquiryProofFile');
+
+            let addressProofFile = null;
+            if (addressProofInput.files && addressProofInput.files[0]) {
+                const file = addressProofInput.files[0];
+                const base64Content = await getBase64(file);
+                addressProofFile = {
+                    name: file.name,
+                    content: base64Content
+                };
+            }
+
             const formData = {
-                name: document.getElementById('enquiryName').value,
-                email: document.getElementById('enquiryEmail').value,
-                mobile: document.getElementById('enquiryMobile').value,
-                student: document.getElementById('q1').checked ? 'Yes' : 'No',
-                idle: document.getElementById('q2').checked ? 'Yes' : 'No',
-                future: document.getElementById('q3').checked ? 'Yes' : 'No',
-                ready: document.getElementById('q4').checked ? 'Yes' : 'No'
+                name, email, mobile,
+                age, city, presentStatus, careerGoal, addressProofType, addressProofFile,
+                student: document.getElementById('q1').checked,
+                idle: document.getElementById('q2').checked,
+                future: document.getElementById('q3').checked,
+                ready: document.getElementById('q4').checked
             };
 
             try {
                 // Send OTP and submit to Bitrix24
-                const response = await fetch('/api/submit-enquiry', {
+                const response = await fetch(window.API_BASE + '/api/submit-enquiry', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -3528,7 +3630,7 @@
             }
 
             try {
-                const response = await fetch('/api/send-otp', {
+                const response = await fetch(window.API_BASE + '/api/send-otp', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -3568,7 +3670,7 @@
             }
 
             try {
-                const response = await fetch('/api/verify-otp', {
+                const response = await fetch(window.API_BASE + '/api/verify-otp', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -3622,7 +3724,7 @@
             if (btn) { btn.disabled = true; btn.textContent = 'Sending OTP...'; }
 
             try {
-                const response = await fetch('/api/send-otp', {
+                const response = await fetch(window.API_BASE + '/api/send-otp', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -3701,7 +3803,7 @@
             if (verifyBtn) { verifyBtn.disabled = true; verifyBtn.textContent = 'Verifying...'; }
 
             try {
-                const response = await fetch('/api/verify-otp', {
+                const response = await fetch(window.API_BASE + '/api/verify-otp', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -3779,11 +3881,18 @@
             const userData = JSON.parse(sessionStorage.getItem('userData') || '{}');
             const amountDisplay = window.selectedPlan === '1' ? '1' : window.selectedPlan === '500' ? '500' : '1,000';
 
+            // 1. Open a blank window immediately to satisfy browser popup blocker
+            const paymentWindow = window.open('about:blank', '_blank');
+            if (!paymentWindow) {
+                alert('Please allow popups to proceed with payment.');
+                return;
+            }
+
             btn.disabled = true;
             btn.innerHTML = 'Creating payment link&hellip;';
 
             try {
-                const response = await fetch('/api/create-payment', {
+                const response = await fetch(window.API_BASE + '/api/create-payment', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -3797,16 +3906,18 @@
                 const result = await response.json();
 
                 if (result.success && result.paymentLink) {
-                    // Open Zoho Books payment page in new tab
-                    window.open(result.paymentLink, '_blank');
+                    // Update location of the window we already opened
+                    paymentWindow.location.href = result.paymentLink;
                     closeRegisterModal();
                     showToast();
                 } else {
-                    alert('Could not create payment link: ' + (result.message || 'Please try again or contact +91 95664 23456.'));
+                    paymentWindow.close();
+                    alert('Could not create payment link: ' + (result.message || 'Please try again.'));
                     btn.disabled = false;
                     btn.innerHTML = 'Pay &#8377;' + amountDisplay + ' &mdash; Confirm Registration';
                 }
             } catch (error) {
+                if (paymentWindow) paymentWindow.close();
                 console.error('Payment error:', error);
                 alert('Failed to create payment. Please try again.');
                 btn.disabled = false;
@@ -3822,20 +3933,39 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Processing...';
 
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const mobile = window.verifiedPhone || '';
+            const age = document.getElementById('regAge').value;
+            const city = document.getElementById('regCity').value;
+            const presentStatus = document.getElementById('regStatus').value;
+            const careerGoal = document.getElementById('regGoal').value;
+            const addressProofType = document.getElementById('regProofType').value;
+            const addressProofInput = document.getElementById('regProofFile');
+
+            let addressProofFile = null;
+            if (addressProofInput.files && addressProofInput.files[0]) {
+                const file = addressProofInput.files[0];
+                const base64Content = await getBase64(file);
+                addressProofFile = {
+                    name: file.name,
+                    content: base64Content
+                };
+            }
+
             const formData = {
-                name: document.getElementById('regName').value,
-                email: document.getElementById('regEmail').value,
-                mobile: window.verifiedPhone || '',
-                student: document.getElementById('regQ1').checked ? 'Yes' : 'No',
-                idle: document.getElementById('regQ2').checked ? 'Yes' : 'No',
-                future: document.getElementById('regQ3').checked ? 'Yes' : 'No',
-                ready: document.getElementById('regQ4').checked ? 'Yes' : 'No',
+                name, email, mobile,
+                age, city, presentStatus, careerGoal, addressProofType, addressProofFile,
+                student: document.getElementById('regQ1').checked,
+                idle: document.getElementById('regQ2').checked,
+                future: document.getElementById('regQ3').checked,
+                ready: document.getElementById('regQ4').checked,
                 plan: window.selectedPlan || 'free'
             };
 
             try {
                 // Submit to Bitrix24
-                const response = await fetch('/api/submit-enquiry', {
+                const response = await fetch(window.API_BASE + '/api/submit-enquiry', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -3851,8 +3981,14 @@
                     const current = parseInt(counter.textContent.replace(/,/g, ''));
                     counter.textContent = (current + 1).toLocaleString();
 
-                    // Store user data for payment
-                    sessionStorage.setItem('userData', JSON.stringify(formData));
+                    // Store user data for payment (only basic fields to avoid storage quota)
+                    const paymentData = {
+                        name: formData.name,
+                        email: formData.email,
+                        mobile: formData.mobile,
+                        plan: formData.plan
+                    };
+                    sessionStorage.setItem('userData', JSON.stringify(paymentData));
 
                     if (window.selectedPlan === 'free' || window.selectedPlan === 'waitlist') {
                         // Free / general waitlist — close and show toast
@@ -3874,6 +4010,15 @@
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Submit & Proceed to Payment';
             }
+        }
+
+        async function getBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = error => reject(error);
+            });
         }
     </script>
 

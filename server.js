@@ -14,11 +14,22 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3003;
 
+// Configuration — values hardcoded directly (no .env required)
+const CONFIG = {
+    TWO_FACTOR_API_KEY: '2df45c64-1781-11f1-bcb0-0200cd936042',
+    BITRIX24_WEBHOOK_URL: 'https://sns.bitrix24.in/rest/196/zo4pqwr7dqvev2nw/',
+    ZOHO_CLIENT_ID: process.env.ZOHO_CLIENT_ID || '1000.ITWNFKM1D1DJ048VV5GJH682NK9NQB',
+    ZOHO_CLIENT_SECRET: process.env.ZOHO_CLIENT_SECRET || '8b8a2c718b0bcfb73fe67a1ffff368ba9027e2a323',
+    ZOHO_REFRESH_TOKEN: process.env.ZOHO_REFRESH_TOKEN || '1000.2b956a72e11e42b08366c6e3d3fee58c.efa51dcaca0400fb17a76044a5c20683',
+    ZOHO_ORGANIZATION_ID: process.env.ZOHO_ORGANIZATION_ID || '60060884990',
+    ZOHO_REGION: process.env.ZOHO_REGION || 'in'
+};
+
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Request Logger Middleware
@@ -35,7 +46,7 @@ const MAX_OTP_ATTEMPTS = 3;
 const otpStorage = new Map();
 
 // Local Registration Tracking (for duplicate prevention)
-const REGISTRATIONS_FILE = path.join(__dirname, 'registrations.json');
+const REGISTRATIONS_FILE = path.join(__dirname, '.registrations.json');
 
 function getRegistrations() {
     try {
@@ -134,17 +145,6 @@ async function sendSMS(phoneNumber, otp) {
         return true;
     }
 }
-
-// Configuration — values hardcoded directly (no .env required)
-const CONFIG = {
-    TWO_FACTOR_API_KEY: '2df45c64-1781-11f1-bcb0-0200cd936042',
-    BITRIX24_WEBHOOK_URL: 'https://sns.bitrix24.in/rest/196/zrojlhunxza4f9rx/',
-    ZOHO_CLIENT_ID: process.env.ZOHO_CLIENT_ID || '1000.ITWNFKM1D1DJ048VV5GJH682NK9NQB',
-    ZOHO_CLIENT_SECRET: process.env.ZOHO_CLIENT_SECRET || '8b8a2c718b0bcfb73fe67a1ffff368ba9027e2a323',
-    ZOHO_REFRESH_TOKEN: process.env.ZOHO_REFRESH_TOKEN || '1000.2b956a72e11e42b08366c6e3d3fee58c.efa51dcaca0400fb17a76044a5c20683',
-    ZOHO_ORGANIZATION_ID: process.env.ZOHO_ORGANIZATION_ID || '60060884990',
-    ZOHO_REGION: process.env.ZOHO_REGION || 'in'
-};
 
 // Zoho Books base URLs (region-aware)
 const ZOHO_AUTH_URL = () => `https://accounts.zoho.${CONFIG.ZOHO_REGION}/oauth/v2/token`;
@@ -311,6 +311,7 @@ async function createZohoInvoice(token, { contactId, name, plan }) {
     }
 
     // invoice_url is the public payment page
+    console.log('Zoho Invoice Response detail - Has invoice_url:', !!invoice.invoice_url, 'Amount:', invoice.total);
     return {
         invoiceId: invoice.invoice_id,
         invoiceNo: invoice.invoice_number,
@@ -323,6 +324,7 @@ async function createZohoInvoice(token, { contactId, name, plan }) {
  * POST /api/create-payment
  */
 app.post('/api/create-payment', async (req, res) => {
+    console.log(`[${new Date().toISOString()}] POST /api/create-payment - Request for plan: ${req.body.plan}`);
     try {
         const { name, email, mobile, plan } = req.body;
 
@@ -345,6 +347,7 @@ app.post('/api/create-payment', async (req, res) => {
         // 3. Create invoice and get payment link
         const { invoiceId, invoiceNo, paymentLink } = await createZohoInvoice(token, { contactId, name, plan });
 
+        console.log(`Zoho: invoice ${invoiceId} / ${invoiceNo} generated. Link: ${paymentLink}`);
         res.json({
             success: true,
             paymentLink: paymentLink,
@@ -538,29 +541,24 @@ app.post('/api/resend-otp', async (req, res) => {
     }
 });
 
+
 /**
  * Submit Enquiry Form — Bitrix24 CRM
- * Primary: public CRM form (no auth needed, proven working)
- * Fallback: REST API webhook (requires valid BITRIX24_WEBHOOK_URL in .env)
  * POST /api/submit-enquiry
  */
 app.post('/api/submit-enquiry', async (req, res) => {
     try {
         const {
             name, email, phone, mobile,
-            plus2Student, idle100Days, aiIsFuture, readyToMaster,
             student, idle, future, ready,
+            age, city, presentStatus, careerGoal, addressProofType, addressProofFile,
             plan
         } = req.body;
 
-        // Normalise field names — accept both old and new naming
+        // Normalise field names
         const contactPhone = phone || mobile;
-        const isStudent = plus2Student ?? student;
-        const isIdle = idle100Days ?? idle;
-        const isFuture = aiIsFuture ?? future;
-        const isReady = readyToMaster ?? ready;
 
-        console.log('🔍 Raw enquiry body:', JSON.stringify(req.body, null, 2));
+        console.log('🔍 Raw enquiry body received with fields:', Object.keys(req.body));
 
         // Validate required fields
         if (!name || !email || !contactPhone) {
@@ -593,147 +591,120 @@ app.post('/api/submit-enquiry', async (req, res) => {
         const firstName = nameParts[0];
         const lastName = nameParts.slice(1).join(' ') || '-';
 
-        const enquiryData = {
-            name, email,
-            phone: contactPhone,
-            questions: {
-                plus2Student: isStudent || false,
-                idle100Days: isIdle || false,
-                aiIsFuture: isFuture || false,
-                readyToMaster: isReady || false
-            },
-            submittedAt: new Date().toISOString(),
-            ipAddress: req.ip
+        // Map Select Field Values to Bitrix Internal IDs
+        const STATUS_MAP = {
+            'Student': '132263',
+            'Working Professional': '132265',
+            'Entrepreneur': '132267',
+            'Other': '132269'
+        };
+        const PROOF_MAP = {
+            'Aadhaar Card': '132271',
+            'PAN Card': '132273',
+            'Voter ID': '132275',
+            'Driving License': '132277'
         };
 
-        console.log('📋 New Enquiry Received:', JSON.stringify(enquiryData, null, 2));
+        const bitrixStatusId = STATUS_MAP[presentStatus] || '';
+        const bitrixProofId = PROOF_MAP[addressProofType] || '';
 
         let leadId = null;
 
-        // ── METHOD 1: REST API Webhook (primary — maps ALL fields correctly) ──
+        // ── METHOD 1: REST API Webhook (primary) ──
         try {
             const BITRIX24_WEBHOOK = process.env.BITRIX24_WEBHOOK_URL || CONFIG.BITRIX24_WEBHOOK_URL;
 
-            if (!BITRIX24_WEBHOOK ||
-                BITRIX24_WEBHOOK === 'YOUR_WEBHOOK_URL_HERE' ||
-                BITRIX24_WEBHOOK.includes('your-domain.bitrix24.com')) {
+            if (!BITRIX24_WEBHOOK || BITRIX24_WEBHOOK.includes('YOUR_WEBHOOK_URL_HERE')) {
                 throw new Error('Bitrix24 webhook not configured');
             }
 
             const webhookBase = BITRIX24_WEBHOOK.replace(/crm\.lead\.add\.json\/?$/, '').replace(/\/?$/, '/');
 
-            const leadTitle = `Agentic AI-Bootcamp ${name}`; // Removed dash for literal match or kept a space
-            console.log(`📝 Setting Bitrix24 Lead Title: ${leadTitle}`);
+            const leadTitle = `Join India's Boldest AI Challenge  ${name}`;
 
-            const leadData = {
-                fields: {
-                    TITLE: leadTitle,
-                    NAME: firstName,
-                    LAST_NAME: lastName,
-                    EMAIL: [{ VALUE: email, VALUE_TYPE: 'WORK' }],
-                    PHONE: [{ VALUE: `+91${contactPhone}`, VALUE_TYPE: 'MOBILE' }],
-                    SOURCE_ID: 'WEB',
-                    SOURCE_DESCRIPTION: `Agentic AI-Bootcamp Landing Page — ${planLabel}`,
+            const fields = {
+                TITLE: leadTitle,
+                NAME: firstName,
+                LAST_NAME: lastName,
+                EMAIL: [{ VALUE: email, VALUE_TYPE: 'WORK' }],
+                PHONE: [{ VALUE: `+91${contactPhone}`, VALUE_TYPE: 'MOBILE' }],
+                SOURCE_ID: 'WEB',
+                SOURCE_DESCRIPTION: `Agentic AI-Bootcamp Landing Page — ${planLabel}`,
 
-                    // College — Agentic AI-Bootcamp
-                    'UF_CRM_1585031750': '132255',
+                // College — Agentic AI-Bootcamp
+                'UF_CRM_1585031750': '132255',
 
-                    // Custom email & mobile
-                    'UF_CRM_LEAD_1735650782896': email,
-                    'UF_CRM_67D80C3A4E2D8': contactPhone,
+                // New Fields
+                'UF_CRM_LEAD_1773071630891': age || '',
+                'UF_CRM_LEAD_1773071722200': city || '',
+                'UF_CRM_LEAD_1773071809831': bitrixStatusId,
+                'UF_CRM_LEAD_1773072146968': careerGoal || '',
+                'UF_CRM_LEAD_1773072247659': bitrixProofId,
 
-                    // Quick Questions (boolean)
-                    'UF_CRM_LEAD_1770358477232': isStudent ? true : false,
-                    'UF_CRM_LEAD_1770358505353': isIdle ? true : false,
-                    'UF_CRM_LEAD_1770358528297': isFuture ? true : false,
-                    'UF_CRM_LEAD_1770358547490': isReady ? true : false,
+                // Quick Questions (boolean)
+                'UF_CRM_LEAD_1770358477232': student ? 1 : 0,
+                'UF_CRM_LEAD_1770358505353': idle ? 1 : 0,
+                'UF_CRM_LEAD_1770358528297': future ? 1 : 0,
+                'UF_CRM_LEAD_1770358547490': ready ? 1 : 0,
 
-                    COMMENTS: [
-                        '📋 Agentic AI-Bootcamp Lead Submission',
-                        '',
-                        '👤 Contact Information:',
-                        `   Name:  ${name}`,
-                        `   Email: ${email}`,
-                        `   Phone: +91${contactPhone}`,
-                        `   Plan:  ${planLabel}`,
-                        '',
-                        '📝 Quick Questions:',
-                        `   Are you a +2 student?             ${isStudent ? '✅ Yes' : '❌ No'}`,
-                        `   Idle for 100+ days?               ${isIdle ? '✅ Yes' : '❌ No'}`,
-                        `   Is AI and Agentic AI the future?  ${isFuture ? '✅ Yes' : '❌ No'}`,
-                        `   Ready to master AI in 100 days?   ${isReady ? '✅ Yes' : '❌ No'}`,
-                        '',
-                        `🕐 Submitted: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`,
-                        '📍 Source: Landing Page Form (OTP Verified)'
-                    ].join('\n')
-                }
+                COMMENTS: [
+                    '📋 Agentic AI-Bootcamp Lead Submission',
+                    '',
+                    '👤 Contact Information:',
+                    `   Name:  ${name}`,
+                    `   Email: ${email}`,
+                    `   Phone: +91${contactPhone}`,
+                    `   Age:   ${age || 'N/A'}`,
+                    `   City:  ${city || 'N/A'}`,
+                    `   Plan:  ${planLabel}`,
+                    '',
+                    '💼 Status & Goals:',
+                    `   Status: ${presentStatus || 'N/A'}`,
+                    `   Goal:   ${careerGoal || 'N/A'}`,
+                    '',
+                    '📝 Quick Questions:',
+                    `   Are you a +2 student?             ${student ? '✅ Yes' : '❌ No'}`,
+                    `   Idle for 100+ days?               ${idle ? '✅ Yes' : '❌ No'}`,
+                    `   Is AI and Agentic AI the future?  ${future ? '✅ Yes' : '❌ No'}`,
+                    `   Ready to master AI in 100 days?   ${ready ? '✅ Yes' : '❌ No'}`,
+                    '',
+                    `🕐 Submitted: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`,
+                    '📍 Source: Landing Page Form'
+                ].join('\n')
             };
 
-            console.log('\n📤 Sending to Bitrix24 via webhook...');
-            console.log(JSON.stringify(leadData, null, 2));
+            // Handle File Upload for Address Proof
+            if (addressProofFile && addressProofFile.content) {
+                fields['UF_CRM_LEAD_1773072192923'] = {
+                    fileData: [
+                        addressProofFile.name || 'address_proof.jpg',
+                        addressProofFile.content // This should be base64
+                    ]
+                };
+            }
+
+            const leadData = { fields };
+
+            console.log('📤 Sending to Bitrix24 via webhook...');
 
             const wResp = await axios.post(`${webhookBase}crm.lead.add.json`, leadData, {
                 headers: { 'Content-Type': 'application/json' },
                 timeout: 15000
             });
 
-            console.log('✅ Bitrix24 webhook response:', JSON.stringify(wResp.data));
-
             if (wResp.data?.result) {
                 leadId = wResp.data.result;
                 console.log(`🎉 Lead created via webhook! ID: ${leadId}`);
-                console.log(`   View: https://sns.bitrix24.in/crm/lead/details/${leadId}/`);
             } else if (wResp.data?.error) {
                 throw new Error(`Bitrix24 error: ${wResp.data.error} — ${wResp.data.error_description}`);
             }
 
         } catch (webhookErr) {
-            console.error('⚠️ Webhook failed, trying public CRM form fallback:', webhookErr.message);
-
-            // ── METHOD 2: Public CRM Form fallback ───────────────────────────
-            try {
-                console.log('\n📤 Sending to Bitrix24 via public CRM form...');
-
-                const formPayload = new URLSearchParams();
-                formPayload.append('id', '345');
-                formPayload.append('sec', 'w24l0q');
-                formPayload.append('fields[LEAD_NAME]', firstName);
-                formPayload.append('fields[LEAD_LAST_NAME]', lastName);
-                formPayload.append('fields[LEAD_TITLE]', `Agentic AI-Bootcamp | ${name}`);
-                formPayload.append('fields[LEAD_EMAIL][0][VALUE]', email);
-                formPayload.append('fields[LEAD_EMAIL][0][VALUE_TYPE]', 'WORK');
-                formPayload.append('fields[LEAD_PHONE][0][VALUE]', `+91${contactPhone}`);
-                formPayload.append('fields[LEAD_PHONE][0][VALUE_TYPE]', 'MOBILE');
-                formPayload.append('fields[LEAD_UF_CRM_LEAD_1735650782896]', email);
-                formPayload.append('fields[LEAD_UF_CRM_67D80C3A4E2D8]', contactPhone);
-                formPayload.append('fields[LEAD_UF_CRM_LEAD_1770358477232]', isStudent ? '1' : '0');
-                formPayload.append('fields[LEAD_UF_CRM_LEAD_1770358505353]', isIdle ? '1' : '0');
-                formPayload.append('fields[LEAD_UF_CRM_LEAD_1770358528297]', isFuture ? '1' : '0');
-                formPayload.append('fields[LEAD_UF_CRM_LEAD_1770358547490]', isReady ? '1' : '0');
-
-                const b24Resp = await axios.post(
-                    'https://b24-31djjx.bitrix24.site/bitrix/services/main/ajax.php?action=crm.site.form.fill',
-                    formPayload.toString(),
-                    { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, timeout: 15000 }
-                );
-
-                console.log('📡 CRM form response:', JSON.stringify(b24Resp.data));
-
-                if (b24Resp.data?.result?.resultId) {
-                    leadId = b24Resp.data.result.resultId;
-                    console.log(`🎉 Lead created via CRM form! ID: ${leadId}`);
-                } else {
-                    throw new Error('CRM form did not return a resultId');
-                }
-
-            } catch (formErr) {
-                console.error('⚠️ CRM form fallback also failed:', formErr.message);
-                console.log('💾 Enquiry recorded locally only.');
-            }
+            console.error('⚠️ Webhook failed:', webhookErr.message);
+            // We removed the old public form fallback as it's for a different CRM instance anyway
         }
 
         if (leadId) {
-            // Persist the registration locally upon success
             addRegistration(email, contactPhone);
         }
 
@@ -747,13 +718,6 @@ app.post('/api/submit-enquiry', async (req, res) => {
         console.error('Error submitting enquiry:', error);
         res.status(500).json({ success: false, message: 'Failed to submit enquiry' });
     }
-});
-
-/**
- * Serve index.html
- */
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 /**

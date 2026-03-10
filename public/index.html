@@ -2980,7 +2980,7 @@
                     <h5>Contact</h5>
                     <a href="tel:+919566423456">+91 95664 23456</a>
                     <a href="https://wa.me/919566423456" target="_blank">WhatsApp Us</a>
-                    <a href="https://www.snsihub.ai" target="_blank">www.snsihub.ai</a>
+                    <a href="https://snsihub.ai/" target="_blank">www.snsihub.ai</a>
 
                 </div>
             </div>
@@ -3048,6 +3048,11 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>College Name <span class="required">*</span></label>
+                    <input type="text" id="enquiryCollege" name="collegeName" placeholder="Enter your college name"
+                        required>
+                </div>
+                <div class="form-group">
                     <label>Career Goal <span class="required">*</span></label>
                     <textarea id="enquiryGoal" name="careerGoal" placeholder="Short description of future goal" required
                         style="width: 100%; border: 1.5px solid #E2E8F0; border-radius: 12px; min-height: 80px;"></textarea>
@@ -3057,8 +3062,6 @@
                     <select id="enquiryProofType" name="addressProofType" required>
                         <option value="">Select Proof Type</option>
                         <option value="Aadhaar Card">Aadhaar Card</option>
-                        <option value="PAN Card">PAN Card</option>
-                        <option value="Voter ID">Voter ID</option>
                         <option value="Driving License">Driving License</option>
                     </select>
                 </div>
@@ -3066,25 +3069,6 @@
                     <label>Address Proof (Upload image/PDF) <span class="required">*</span></label>
                     <input type="file" id="enquiryProofFile" name="addressProofFile" accept="image/*,.pdf" required
                         style="padding: 10px;">
-                </div>
-                <div class="quick-questions">
-                    <h3>Quick Questions:</h3>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="q1" name="student" value="yes">
-                        <label for="q1">Are you a +2 student?</label>
-                    </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="q2" name="idle" value="yes">
-                        <label for="q2">Are you going to be idle for 100+ days?</label>
-                    </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="q3" name="future" value="yes">
-                        <label for="q3">Is AI and Agentic AI the future?</label>
-                    </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="q4" name="ready" value="yes">
-                        <label for="q4">Ready to master AI in 100 days?</label>
-                    </div>
                 </div>
                 <button type="submit" class="modal-submit" id="modalSubmitBtn">Submit Enquiry!!!</button>
             </form>
@@ -3208,6 +3192,11 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>College Name <span class="required">*</span></label>
+                        <input type="text" id="regCollege" name="collegeName" placeholder="Enter your college name"
+                            required>
+                    </div>
+                    <div class="form-group">
                         <label>Career Goal <span class="required">*</span></label>
                         <textarea id="regGoal" name="careerGoal" placeholder="Short description of future goal" required
                             style="width: 100%; border: 1.5px solid #E2E8F0; border-radius: 12px; min-height: 80px;"></textarea>
@@ -3226,25 +3215,6 @@
                         <label>Address Proof (Upload image/PDF) <span class="required">*</span></label>
                         <input type="file" id="regProofFile" name="addressProofFile" accept="image/*,.pdf" required
                             style="padding: 10px;">
-                    </div>
-                    <div class="quick-questions">
-                        <h3>Quick Questions:</h3>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="regQ1" name="student" value="yes">
-                            <label for="regQ1">Are you a +2 student?</label>
-                        </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="regQ2" name="idle" value="yes">
-                            <label for="regQ2">Are you going to be idle for 100+ days?</label>
-                        </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="regQ3" name="future" value="yes">
-                            <label for="regQ3">Is AI and Agentic AI the future?</label>
-                        </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="regQ4" name="ready" value="yes">
-                            <label for="regQ4">Ready to master AI in 100 days?</label>
-                        </div>
                     </div>
                     <button type="submit" class="modal-submit" id="regSubmitBtn">Submit &amp; Proceed to
                         Payment</button>
@@ -3584,11 +3554,9 @@
 
             const formData = {
                 name, email, mobile,
-                age, city, presentStatus, careerGoal, addressProofType, addressProofFile,
-                student: document.getElementById('q1').checked,
-                idle: document.getElementById('q2').checked,
-                future: document.getElementById('q3').checked,
-                ready: document.getElementById('q4').checked
+                age, city, presentStatus,
+                collegeName: document.getElementById('enquiryCollege').value,
+                careerGoal, addressProofType, addressProofFile
             };
 
             try {
@@ -3955,11 +3923,9 @@
 
             const formData = {
                 name, email, mobile,
-                age, city, presentStatus, careerGoal, addressProofType, addressProofFile,
-                student: document.getElementById('regQ1').checked,
-                idle: document.getElementById('regQ2').checked,
-                future: document.getElementById('regQ3').checked,
-                ready: document.getElementById('regQ4').checked,
+                age, city, presentStatus,
+                collegeName: document.getElementById('regCollege').value,
+                careerGoal, addressProofType, addressProofFile,
                 plan: window.selectedPlan || 'free'
             };
 

@@ -107,7 +107,7 @@ async function sendSMS(phoneNumber, otp) {
         console.log('🔄 Trying METHOD 1: Custom Template API...');
         try {
             const smsResp1 = await axios.get(
-                `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}/snsboldai1`,
+                `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}/snsihubopt1`,
                 { timeout: 10000 }
             );
             console.log('📡 Response:', JSON.stringify(smsResp1.data));
@@ -123,7 +123,7 @@ async function sendSMS(phoneNumber, otp) {
         console.log('🔄 Trying METHOD 2: Sender ID Fallback...');
         try {
             const smsResp2 = await axios.get(
-                `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}/snsboldai1`,
+                `https://2factor.in/API/V1/${apiKey}/SMS/${cleanPhone}/${otp}/snsihubopt1`,
                 { timeout: 10000 }
             );
             console.log('📡 Response:', JSON.stringify(smsResp2.data));
@@ -550,8 +550,7 @@ app.post('/api/submit-enquiry', async (req, res) => {
     try {
         const {
             name, email, phone, mobile,
-            student, idle, future, ready,
-            age, city, presentStatus, careerGoal, addressProofType, addressProofFile,
+            age, city, presentStatus, collegeName, careerGoal, addressProofType, addressProofFile,
             plan
         } = req.body;
 
@@ -629,7 +628,7 @@ app.post('/api/submit-enquiry', async (req, res) => {
                 EMAIL: [{ VALUE: email, VALUE_TYPE: 'WORK' }],
                 PHONE: [{ VALUE: `+91${contactPhone}`, VALUE_TYPE: 'MOBILE' }],
                 SOURCE_ID: 'WEB',
-                SOURCE_DESCRIPTION: `Agentic AI-Bootcamp Landing Page — ${planLabel}`,
+                SOURCE_DESCRIPTION: `Join India's Boldest AI Challenge — ${planLabel}`,
 
                 // College — Agentic AI-Bootcamp
                 'UF_CRM_1585031750': '132255',
@@ -641,11 +640,6 @@ app.post('/api/submit-enquiry', async (req, res) => {
                 'UF_CRM_LEAD_1773072146968': careerGoal || '',
                 'UF_CRM_LEAD_1773072247659': bitrixProofId,
 
-                // Quick Questions (boolean)
-                'UF_CRM_LEAD_1770358477232': student ? 1 : 0,
-                'UF_CRM_LEAD_1770358505353': idle ? 1 : 0,
-                'UF_CRM_LEAD_1770358528297': future ? 1 : 0,
-                'UF_CRM_LEAD_1770358547490': ready ? 1 : 0,
 
                 COMMENTS: [
                     '📋 Agentic AI-Bootcamp Lead Submission',
@@ -659,14 +653,9 @@ app.post('/api/submit-enquiry', async (req, res) => {
                     `   Plan:  ${planLabel}`,
                     '',
                     '💼 Status & Goals:',
-                    `   Status: ${presentStatus || 'N/A'}`,
-                    `   Goal:   ${careerGoal || 'N/A'}`,
-                    '',
-                    '📝 Quick Questions:',
-                    `   Are you a +2 student?             ${student ? '✅ Yes' : '❌ No'}`,
-                    `   Idle for 100+ days?               ${idle ? '✅ Yes' : '❌ No'}`,
-                    `   Is AI and Agentic AI the future?  ${future ? '✅ Yes' : '❌ No'}`,
-                    `   Ready to master AI in 100 days?   ${ready ? '✅ Yes' : '❌ No'}`,
+                    `   Status:  ${presentStatus || 'N/A'}`,
+                    `   College: ${collegeName || 'N/A'}`,
+                    `   Goal:    ${careerGoal || 'N/A'}`,
                     '',
                     `🕐 Submitted: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`,
                     '📍 Source: Landing Page Form'

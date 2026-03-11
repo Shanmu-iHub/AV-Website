@@ -2258,8 +2258,8 @@
                 </div>
 
                 <script>
-                    window.API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && window.location.port !== '3003'
-                        ? 'http://' + window.location.hostname + ':3003'
+                    window.API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && window.location.port !== '3000'
+                        ? 'http://' + window.location.hostname + ':3000'
                         : '';
                     (function () {
                         let _heroPhone = '';
@@ -2396,8 +2396,41 @@
 
                 <div class="waitlist-counter">
                     <span class="counter-dot"></span>
-                    <span id="liveCounter">12,847</span> people on the waitlist
+                    <span id="liveCounter">12,000</span> people on the waitlist
                 </div>
+
+                <script>
+                    (function () {
+                        async function updateWaitlistCount() {
+                            try {
+                                const response = await fetch((window.API_BASE || '') + '/api/waitlist-count');
+                                const data = await response.json();
+                                if (data.success) {
+                                    const baseCount = 12000;
+                                    const totalCount = baseCount + data.count;
+                                    const formattedCount = totalCount.toLocaleString();
+
+                                    // Update Hero Counter
+                                    const liveCounter = document.getElementById('liveCounter');
+                                    if (liveCounter) liveCounter.textContent = formattedCount;
+
+                                    // Update Final CTA Counter
+                                    const ctaCounter = document.getElementById('ctaLiveCounter');
+                                    if (ctaCounter) {
+                                        ctaCounter.textContent = formattedCount + ' people';
+                                    }
+                                }
+                            } catch (error) {
+                                console.error('Error fetching waitlist count:', error);
+                            }
+                        }
+                        // Initial fetch
+                        updateWaitlistCount();
+
+                        // Expose globally so other parts of the UI can trigger a refresh
+                        window.updateWaitlistCount = updateWaitlistCount;
+                    })();
+                </script>
 
                 <div class="hero-stats">
                     <div class="hero-stat">
@@ -2770,7 +2803,8 @@
         <div class="container">
             <div class="cta-box reveal">
                 <h2>The Waitlist Is Open till 13th April.<br><span class="text-saffron">Are You In?</span></h2>
-                <p class="cta-sub">12,847 people are already ahead of you. Every day you wait, the free slots shrink.
+                <p class="cta-sub"><span id="ctaLiveCounter">12,000 people</span> are already ahead of you. Every day
+                    you wait, the free slots shrink.
                     Join now and pay nothing — or pay later and wish you hadn't.</p>
 
                 <!-- CTA OTP Flow -->
@@ -3364,9 +3398,9 @@
             if (otp.length < 6) return;
             document.getElementById('ctaOtpState').classList.remove('active');
             document.getElementById('ctaSuccessState').classList.add('active');
-            const counter = document.getElementById('liveCounter');
-            const current = parseInt(counter.textContent.replace(/,/g, ''));
-            counter.textContent = (current + 1).toLocaleString();
+            if (typeof window.updateWaitlistCount === 'function') {
+                window.updateWaitlistCount();
+            }
             showToast();
         }
 
@@ -3380,14 +3414,7 @@
             document.getElementById('waitlist').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // === Live counter simulation ===
-        setInterval(() => {
-            const counter = document.getElementById('liveCounter');
-            const current = parseInt(counter.textContent.replace(/,/g, ''));
-            if (Math.random() > 0.6) {
-                counter.textContent = (current + Math.floor(Math.random() * 3) + 1).toLocaleString();
-            }
-        }, 8000);
+        // === Live counter simulation removed ===
 
         // === Phone input: numbers only ===
         ['phoneInput', 'ctaPhoneInput', 'modalPhoneInput'].forEach(id => {
@@ -3641,11 +3668,14 @@
                 if (result.success) {
                     document.getElementById('otpState').classList.remove('active');
                     document.getElementById('successState').classList.add('active');
-                    const counter = document.getElementById('liveCounter');
-                    const current = parseInt(counter.textContent.replace(/,/g, ''));
-                    const newCount = current + 1;
-                    counter.textContent = newCount.toLocaleString();
-                    document.getElementById('userPosition').textContent = newCount.toLocaleString();
+                    if (typeof window.updateWaitlistCount === 'function') {
+                        window.updateWaitlistCount();
+                    }
+                    // Wait a bit for the counts to update then get value for position
+                    setTimeout(() => {
+                        const counter = document.getElementById('liveCounter');
+                        if (counter) document.getElementById('userPosition').textContent = counter.textContent;
+                    }, 500);
                     showToast();
                 } else {
                     alert('Invalid OTP. Please try again.');
@@ -3929,9 +3959,9 @@
 
                 if (result.success) {
                     // Update counter
-                    const counter = document.getElementById('liveCounter');
-                    const current = parseInt(counter.textContent.replace(/,/g, ''));
-                    counter.textContent = (current + 1).toLocaleString();
+                    if (typeof window.updateWaitlistCount === 'function') {
+                        window.updateWaitlistCount();
+                    }
 
                     // Store user data for payment (only basic fields to avoid storage quota)
                     const paymentData = {

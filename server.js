@@ -46,7 +46,7 @@ const MAX_OTP_ATTEMPTS = 3;
 const otpStorage = new Map();
 
 // Local Registration Tracking (for duplicate prevention)
-const REGISTRATIONS_FILE = path.join(__dirname, '.registrations.json');
+const REGISTRATIONS_FILE = path.join(__dirname, 'registrations.json');
 
 function getRegistrations() {
     try {
@@ -781,6 +781,21 @@ app.get('/api/bitrix-fields', async (req, res) => {
     }
 });
 
+/**
+ * GET /api/waitlist-count
+ * Returns the actual count of registered users from .registrations.json
+ */
+app.get('/api/waitlist-count', (req, res) => {
+    try {
+        const registrations = getRegistrations();
+        const count = (registrations.phones ? registrations.phones.length : 0);
+        res.json({ success: true, count: count });
+    } catch (error) {
+        console.error('Error fetching waitlist count:', error);
+        res.status(500).json({ success: false, count: 0 });
+    }
+});
+
 // Start server
 // Catch-all route to serve the frontend index.html
 app.get('*', (req, res) => {
@@ -796,6 +811,7 @@ app.listen(PORT, () => {
     console.log(`   POST /api/submit-enquiry`);
     console.log(`   POST /api/create-payment`);
     console.log(`   GET  /api/bitrix-fields`);
+    console.log(`   GET  /api/waitlist-count`);
     console.log(`   GET  /api/health`);
     console.log(`2Factor API Key: ${(process.env.TWOFACTOR_API_KEY || CONFIG.TWO_FACTOR_API_KEY || '').substring(0, 10)}...`);
     console.log(`Bitrix24 Webhook: ${(process.env.BITRIX24_WEBHOOK_URL || CONFIG.BITRIX24_WEBHOOK_URL || '').substring(0, 50)}...`);

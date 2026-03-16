@@ -2202,6 +2202,125 @@
                 height: 28px;
             }
         }
+
+        /* Side Floating Sidebar */
+        .side-float-sidebar {
+            position: fixed;
+            right: 0;
+            top: 20%;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transform-origin: center top;
+            animation: hanger-swing 2s ease-in-out infinite;
+        }
+
+        .side-float-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #FFF;
+            text-decoration: none;
+            padding: 20px 10px;
+            font-weight: 800;
+            font-size: 11px;
+            letter-spacing: 1px;
+            border-radius: 12px 0 0 12px;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            box-shadow: -4px 4px 15px rgba(0, 0, 0, 0.3);
+            min-width: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-right: none;
+        }
+
+        /* Hanger swing animation */
+        @keyframes hanger-swing {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(-1.34122deg);
+            }
+        }
+
+        .side-float-item span {
+            writing-mode: vertical-rl;
+            margin: 0;
+            letter-spacing: 2px;
+            font-size: 13px;
+        }
+
+        .side-float-item:hover {
+            transform: translateX(-12px) !important;
+            animation-play-state: paused;
+            padding-right: 20px;
+            box-shadow: -10px 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .side-float-item.groups {
+            background: linear-gradient(135deg, #16A34A, #22C55E);
+        }
+
+        .side-float-item.square {
+            background: linear-gradient(135deg, #EF4444, #C2410C);
+        }
+
+        .side-float-item.ihub {
+            background: linear-gradient(135deg, #F5A623, #D97706);
+        }
+
+        @media (max-width: 1024px) {
+            .side-float-sidebar {
+                top: 25%;
+            }
+
+            .side-float-item {
+                padding: 16px 8px;
+                min-width: 40px;
+                border-radius: 10px 0 0 10px;
+            }
+
+            .side-float-item span {
+                letter-spacing: 1.5px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .side-float-sidebar {
+                top: 35%;
+            }
+
+            .side-float-item {
+                padding: 12px 6px;
+                min-width: 32px;
+                border-radius: 8px 0 0 8px;
+            }
+
+            .side-float-item span {
+                font-size: 10px;
+                letter-spacing: 1px;
+            }
+
+            /* Reduce swing animation rotation on small screens */
+            @keyframes hanger-swing {
+
+                0%,
+                100% {
+                    transform: rotate(0deg);
+                }
+
+                50% {
+                    transform: rotate(-0.5deg);
+                }
+            }
+        }
     </style>
     <meta name="keywords"
         content="BoldAI, BoldAI platform, AI platform India, AI platform Coimbatore, AI automation platform, AI agent platform, Agentic AI platform, AI tools platform, Generative AI platform, AI development platform, enterprise AI platform, SNS AI platform, SNS Innovation Hub AI, AI startup platform India, AI research platform India, AI innovation platform, AI lab platform, AI startup tools">
@@ -4112,6 +4231,19 @@
             });
         }
     </script>
+
+    <!-- Side Floating Sidebar -->
+    <div class="side-float-sidebar">
+        <a href="https://snsgroups.com/" class="side-float-item groups" target="_blank" rel="noopener noreferrer">
+            <span>SNS GROUPS</span>
+        </a>
+        <a href="https://snssquare.com/" class="side-float-item square" target="_blank" rel="noopener noreferrer">
+            <span>SNS SQUARE</span>
+        </a>
+        <a href="https://snsihub.ai/" class="side-float-item ihub" target="_blank" rel="noopener noreferrer">
+            <span>SNS iHUB</span>
+        </a>
+    </div>
 
     <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/919566423456" class="whatsapp-float" target="_blank" rel="noopener noreferrer"

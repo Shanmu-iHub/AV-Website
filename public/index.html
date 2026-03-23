@@ -3416,16 +3416,16 @@
                 </div>
                 <form class="modal-form" id="registrationForm" onsubmit="submitRegistrationForm(event)">
                     <div class="form-group">
-                        <label>Name <span class="required">*</span></label>
-                        <input type="text" id="regName" name="name" placeholder="Enter your name" required>
+                        <label>Full Name <span class="required">*</span></label>
+                        <input type="text" id="regName" name="name" placeholder="Enter your full name" required>
                     </div>
                     <div class="form-group">
                         <label>E-Mail <span class="required">*</span></label>
                         <input type="email" id="regEmail" name="email" placeholder="Enter your email" required>
                     </div>
                     <div class="form-group">
-                        <label>Mobile Number <span style="font-size:11px;color:#22C55E;font-weight:600;">✓
-                                Verified</span></label>
+                        <label>Mobile number <span class="required">*</span> <span
+                                style="font-size:11px;color:#22C55E;font-weight:600;">✓ Verified</span></label>
                         <input type="text" id="regPhone" name="phone" readonly
                             style="background:rgba(34,197,94,0.07);color:#94a3b8;cursor:not-allowed;border-color:rgba(34,197,94,0.3);"
                             placeholder="Verified number will appear here">
@@ -3439,6 +3439,16 @@
                         <input type="text" id="regCity" name="city" placeholder="Enter your city" required>
                     </div>
                     <div class="form-group">
+                        <label>Preferred Track <span class="required">*</span></label>
+                        <select id="regTrack" name="preferredTrack" required>
+                            <option value="">Select Preferred Track</option>
+                            <option value="Tech Track">Tech Track</option>
+                            <option value="JEE / NEET Track">JEE / NEET Track</option>
+                            <option value="Govt Exams Track">Govt Exams Track</option>
+                            <option value="Banking Track">Banking Track</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label>Present Status <span class="required">*</span></label>
                         <select id="regStatus" name="presentStatus" required>
                             <option value="">Select Status</option>
@@ -3449,7 +3459,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Career Goal <span class="required">*</span></label>
+                        <label>Career Goal (Short description of future goal) <span class="required">*</span></label>
                         <textarea id="regGoal" name="careerGoal" placeholder="Short description of future goal" required
                             style="width: 100%; border: 1.5px solid #E2E8F0; border-radius: 12px; min-height: 80px;"></textarea>
                     </div>
@@ -3462,9 +3472,19 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Address Proof (Upload image/PDF) <span class="required">*</span></label>
-                        <input type="file" id="regProofFile" name="addressProofFile" accept="image/*,.pdf" required
-                            style="padding: 10px;">
+                        <label>Address Proof (Upload document image/PDF) <span class="required">*</span></label>
+                        <div class="file-upload-container" onclick="document.getElementById('regProofFile').click()"
+                            style="border: 1.5px solid #E2E8F0; border-radius: 12px; background: #f9fafb; padding: 16px; display: flex; align-items: center; justify-content: flex-start; cursor: pointer; transition: all 0.3s; position: relative;">
+                            <div
+                                style="padding: 10px 16px; background: #fff; border: 1.5px solid #CBD5E1; border-radius: 8px; font-weight: 500; font-size: 14px; color: #475569; display: flex; align-items: center; gap: 8px;">
+                                <span style="font-size: 18px;">+</span> Select a file
+                            </div>
+                            <span id="fileNameDisplay"
+                                style="margin-left: 12px; font-size: 13px; color: #64748B;"></span>
+                            <input type="file" id="regProofFile" name="addressProofFile" accept="image/*,.pdf" required
+                                style="position: absolute; width: 0; height: 0; opacity: 0;"
+                                onchange="updateFileName(this)">
+                        </div>
                     </div>
                     <button type="submit" class="modal-submit" id="regSubmitBtn">Submit &amp; Proceed to
                         Payment</button>
@@ -4151,6 +4171,7 @@
             const mobile = window.verifiedPhone || '';
             const age = document.getElementById('regAge').value;
             const city = document.getElementById('regCity').value;
+            const preferredTrack = document.getElementById('regTrack').value;
             const presentStatus = document.getElementById('regStatus').value;
             const careerGoal = document.getElementById('regGoal').value;
             const addressProofType = document.getElementById('regProofType').value;
@@ -4168,7 +4189,7 @@
 
             const formData = {
                 name, email, mobile,
-                age, city, presentStatus,
+                age, city, preferredTrack, presentStatus,
                 careerGoal, addressProofType, addressProofFile,
                 plan: window.selectedPlan || 'free'
             };
@@ -4229,6 +4250,15 @@
                 reader.onload = () => resolve(reader.result.split(',')[1]);
                 reader.onerror = error => reject(error);
             });
+        }
+
+        function updateFileName(input) {
+            const fileNameDisplay = document.getElementById('fileNameDisplay');
+            if (input.files && input.files[0]) {
+                fileNameDisplay.textContent = input.files[0].name;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
         }
     </script>
 

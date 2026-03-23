@@ -550,7 +550,7 @@ app.post('/api/submit-enquiry', async (req, res) => {
     try {
         const {
             name, email, phone, mobile,
-            age, city, presentStatus, careerGoal, addressProofType, addressProofFile,
+            age, city, preferredTrack, presentStatus, careerGoal, addressProofType, addressProofFile,
             plan
         } = req.body;
 
@@ -643,11 +643,12 @@ app.post('/api/submit-enquiry', async (req, res) => {
                     '📋 Agentic AI-Bootcamp Lead Submission',
                     '',
                     '👤 Contact Information:',
-                    `   Name:  ${name}`,
+                    `   Full Name:  ${name}`,
                     `   Email: ${email}`,
                     `   Phone: +91${contactPhone}`,
                     `   Age:   ${age || 'N/A'}`,
                     `   City:  ${city || 'N/A'}`,
+                    `   Track: ${preferredTrack || 'N/A'}`,
                     `   Plan:  ${planLabel}`,
                     '',
                     '💼 Status & Goals:',

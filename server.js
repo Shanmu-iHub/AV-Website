@@ -12,12 +12,12 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3000;
 
 // Configuration — values hardcoded directly (no .env required)
 const CONFIG = {
     TWO_FACTOR_API_KEY: '2df45c64-1781-11f1-bcb0-0200cd936042',
-    BITRIX24_WEBHOOK_URL: 'https://sns.bitrix24.in/rest/196/zo4pqwr7dqvev2nw/',
+    BITRIX24_WEBHOOK_URL: 'https://sns.bitrix24.in/rest/196/y57zpsuo3cx8yppu/',
     ZOHO_CLIENT_ID: process.env.ZOHO_CLIENT_ID || '1000.ITWNFKM1D1DJ048VV5GJH682NK9NQB',
     ZOHO_CLIENT_SECRET: process.env.ZOHO_CLIENT_SECRET || '8b8a2c718b0bcfb73fe67a1ffff368ba9027e2a323',
     ZOHO_REFRESH_TOKEN: process.env.ZOHO_REFRESH_TOKEN || '1000.2b956a72e11e42b08366c6e3d3fee58c.efa51dcaca0400fb17a76044a5c20683',
@@ -602,8 +602,16 @@ app.post('/api/submit-enquiry', async (req, res) => {
             'Driving Licence': '132277'
         };
 
+        const TRACK_MAP = {
+            'Tech Track': '132275',
+            'JEE / NEET Track': '132277',
+            'Govt Exams Track': '132279',
+            'Banking Track': '132281'
+        };
+
         const bitrixStatusId = STATUS_MAP[presentStatus] || '';
         const bitrixProofId = PROOF_MAP[addressProofType] || '';
+        const bitrixTrackId = TRACK_MAP[preferredTrack] || '';
 
         let leadId = null;
 
@@ -633,7 +641,7 @@ app.post('/api/submit-enquiry', async (req, res) => {
 
                 // New Fields
                 'UF_CRM_LEAD_1773071630891': age || '',
-                'UF_CRM_LEAD_1773071689960': preferredTrack || '',
+                'UF_CRM_LEAD_1774247287627': bitrixTrackId,
                 'UF_CRM_LEAD_1773071722200': city || '',
                 'UF_CRM_LEAD_1773071809831': bitrixStatusId,
                 'UF_CRM_LEAD_1773072146968': careerGoal || '',

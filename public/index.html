@@ -3279,7 +3279,7 @@
             </div>
             <form class="modal-form" id="enquiryForm" onsubmit="submitEnquiryForm(event)">
                 <div class="form-group">
-                    <label>Name <span class="required">*</span></label>
+                    <label> Full Name <span class="required">*</span></label>
                     <input type="text" id="enquiryName" name="name" placeholder="Enter your name" required>
                 </div>
                 <div class="form-group">
@@ -3300,9 +3300,19 @@
                     <input type="text" id="enquiryCity" name="city" placeholder="Enter your city" required>
                 </div>
                 <div class="form-group">
+                    <label>Preferred Track <span class="required">*</span></label>
+                    <select id="enquiryTrack" name="preferredTrack" required>
+                        <option value="">Select Preferred Track</option>
+                        <option value="Tech Track">Tech Track</option>
+                        <option value="JEE / NEET Track">JEE / NEET Track</option>
+                        <option value="Govt Exams Track">Govt Exams Track</option>
+                        <option value="Banking Track">Banking Track</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>Present Status <span class="required">*</span></label>
                     <select id="enquiryStatus" name="presentStatus" required>
-                        <option value="">Select Status</option>
+                        <option value="">What are you currently doing?</option>
                         <option value="Student">Student</option>
                         <option value="Working Professional">Working Professional</option>
                         <option value="Entrepreneur">Entrepreneur</option>
@@ -3800,6 +3810,7 @@
             const mobile = document.getElementById('enquiryMobile').value;
             const age = document.getElementById('enquiryAge').value;
             const city = document.getElementById('enquiryCity').value;
+            const preferredTrack = document.getElementById('enquiryTrack').value;
             const presentStatus = document.getElementById('enquiryStatus').value;
             const careerGoal = document.getElementById('enquiryGoal').value;
             const addressProofType = document.getElementById('enquiryProofType').value;
@@ -3817,7 +3828,7 @@
 
             const formData = {
                 name, email, mobile,
-                age, city, presentStatus,
+                age, city, preferredTrack, presentStatus,
                 careerGoal, addressProofType, addressProofFile
             };
 

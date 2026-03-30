@@ -1145,6 +1145,13 @@
             border: none;
         }
 
+        .pricing-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
         .pricing-btn.primary {
             background: var(--gradient-saffron);
             color: var(--sns-dark);
@@ -2904,7 +2911,7 @@
                         <li><span class="check">&#10003;</span> Prep resource kit</li>
                         <li><span class="check">&#10003;</span> Participation certificate</li>
                     </ul>
-                    <button class="pricing-btn secondary" onclick="openRegisterModal('500')">Register — ₹500 +
+                    <button class="pricing-btn secondary" onclick="openRegisterModal('500')" disabled>Register — ₹500 +
                         GST</button>
                 </div>
                 <div class="pricing-card">
@@ -2919,7 +2926,8 @@
                         <li><span class="check">&#10003;</span> Basic resource kit</li>
                         <li><span class="check">&#10003;</span> Participation certificate</li>
                     </ul>
-                    <button class="pricing-btn secondary" onclick="openRegisterModal('1000')">Register — ₹1,000 +
+                    <button class="pricing-btn secondary" onclick="openRegisterModal('1000')" disabled>Register — ₹1,000
+                        +
                         GST</button>
                 </div>
             </div>
@@ -2931,7 +2939,7 @@
                         on track and scholarship tier.</p>
                 </div>
                 <button class="pricing-btn secondary" style="white-space:nowrap;width:40%;min-width:140px;"
-                    onclick="openRegisterModal('1')">Pay ₹1 + GST</button>
+                    onclick="openRegisterModal('1')" disabled>Pay ₹1 + GST</button>
             </div>
         </div>
     </section>

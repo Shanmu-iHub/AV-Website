@@ -17,6 +17,10 @@ const PORT = process.env.PORT || 3000;
 // Configuration — values hardcoded directly (no .env required)
 const CONFIG = {
     TWO_FACTOR_API_KEY: '2df45c64-1781-11f1-bcb0-0200cd936042',
+    TWO_FACTOR_SENDER_ID: 'SNSCPL',
+    TWO_FACTOR_ENTITY_ID: '1001574959862480730',
+    TWO_FACTOR_CONFIRM_TEMPLATE: 'snsihubconfirm01',
+    TWO_FACTOR_DLT_TEMPLATE_ID: '1007793909282020049',
     BITRIX24_WEBHOOK_URL: 'https://sns.bitrix24.in/rest/196/y57zpsuo3cx8yppu/',
     ZOHO_CLIENT_ID: process.env.ZOHO_CLIENT_ID || '1000.ITWNFKM1D1DJ048VV5GJH682NK9NQB',
     ZOHO_CLIENT_SECRET: process.env.ZOHO_CLIENT_SECRET || '8b8a2c718b0bcfb73fe67a1ffff368ba9027e2a323',
@@ -90,7 +94,7 @@ function generateOTP() {
 async function sendSMS(phoneNumber, otp) {
     console.log(`📱 Sending SMS OTP ${otp} to ${phoneNumber}`);
 
-    const apiKey = process.env.TWOFACTOR_API_KEY || CONFIG.TWO_FACTOR_API_KEY;
+    const apiKey = process.env.TWO_FACTOR_API_KEY || CONFIG.TWO_FACTOR_API_KEY;
     if (!apiKey || apiKey === 'your_2factor_api_key_here' || apiKey === 'your_2factor_api_key') {
         console.log('⚠️ 2Factor API key not configured. OTP logging only.');
         console.log(`🔐 OTP for ${phoneNumber}: ${otp}`);
@@ -101,7 +105,7 @@ async function sendSMS(phoneNumber, otp) {
         // Clean phone number: keep all digits (91XXXXXXXXXX)
         const cleanPhone = phoneNumber.replace(/\D/g, '');
 
-        console.log(`� Sending SMS OTP ${otp} via 2Factor... Targeting: ${cleanPhone}`);
+        console.log(` Sending SMS OTP ${otp} via 2Factor... Targeting: ${cleanPhone}`);
 
         // METHOD 1: SMS OTP with Template (Optimized GET - Most likely to work for custom DLT)
         console.log('🔄 Trying METHOD 1: Custom Template API...');
@@ -137,12 +141,50 @@ async function sendSMS(phoneNumber, otp) {
 
         console.error('❌ All SMS methods failed');
         console.log(`🔐 Fallback - OTP for ${phoneNumber}: ${otp}`);
-        return true; // Allow user to proceed even if SMS delivery fails
+        return true;
 
     } catch (error) {
         console.error('❌ sendSMS error:', error.message);
         console.log(`🔐 Fallback - OTP for ${phoneNumber}: ${otp}`);
         return true;
+    }
+}
+
+/**
+ * Send confirmation SMS via 2Factor after registration
+ */
+async function sendConfirmationSMS(phoneNumber) {
+    const apiKey = process.env.TWO_FACTOR_API_KEY || CONFIG.TWO_FACTOR_API_KEY;
+    const senderId = process.env.TWO_FACTOR_SENDER_ID || CONFIG.TWO_FACTOR_SENDER_ID;
+    const templateName = process.env.TWO_FACTOR_CONFIRM_TEMPLATE || CONFIG.TWO_FACTOR_CONFIRM_TEMPLATE;
+
+    if (!apiKey || apiKey.includes('your_2factor')) {
+        console.log('⚠️ 2Factor confirmation SMS skipped: API key not configured');
+        return false;
+    }
+
+    try {
+        let cleanPhone = phoneNumber.replace(/\D/g, '');
+        if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
+
+        console.log(`📱 Sending confirmation SMS to ${cleanPhone} using template ${templateName}...`);
+
+        const response = await axios.post(`https://2factor.in/API/V1/${apiKey}/ADDON_SERVICES/SEND/TSMS`, {
+            To: cleanPhone,
+            From: senderId,
+            TemplateName: templateName,
+            TemplateID: CONFIG.TWO_FACTOR_DLT_TEMPLATE_ID,
+            EntityID: CONFIG.TWO_FACTOR_ENTITY_ID
+        }, {
+            headers: { 'Content-Type': 'application/json' },
+            timeout: 10000
+        });
+
+        console.log('📡 2Factor Confirmation Response:', JSON.stringify(response.data));
+        return response.data?.Status === 'Success';
+    } catch (error) {
+        console.error('❌ sendConfirmationSMS error:', error.response?.data || error.message);
+        return false;
     }
 }
 
@@ -702,6 +744,8 @@ app.post('/api/submit-enquiry', async (req, res) => {
 
         if (leadId) {
             addRegistration(email, contactPhone);
+            // Send confirmation SMS asynchronously
+            sendConfirmationSMS(contactPhone).catch(err => console.error('Confirmation SMS error:', err));
         }
 
         res.status(200).json({
@@ -823,7 +867,7 @@ app.listen(PORT, () => {
     console.log(`   GET  /api/bitrix-fields`);
     console.log(`   GET  /api/waitlist-count`);
     console.log(`   GET  /api/health`);
-    console.log(`2Factor API Key: ${(process.env.TWOFACTOR_API_KEY || CONFIG.TWO_FACTOR_API_KEY || '').substring(0, 10)}...`);
+    console.log(`2Factor API Key: ${(process.env.TWO_FACTOR_API_KEY || CONFIG.TWO_FACTOR_API_KEY || '').substring(0, 10)}...`);
     console.log(`Bitrix24 Webhook: ${(process.env.BITRIX24_WEBHOOK_URL || CONFIG.BITRIX24_WEBHOOK_URL || '').substring(0, 50)}...`);
     const zohoReady = CONFIG.ZOHO_CLIENT_ID && CONFIG.ZOHO_CLIENT_ID !== 'your_zoho_client_id_here';
     console.log(`Zoho Books: ${zohoReady ? `READY (org: ${CONFIG.ZOHO_ORGANIZATION_ID}, region: .${CONFIG.ZOHO_REGION})` : 'NOT configured — add ZOHO_* vars to .env'}`);

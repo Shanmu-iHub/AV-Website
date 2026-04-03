@@ -27,3 +27,4 @@ logs/
 # Temporary files
 tmp/
 temp/
+registrations.json

@@ -641,7 +641,7 @@ app.post('/api/submit-enquiry', async (req, res) => {
         };
         const PROOF_MAP = {
             'Aadhaar Card': '132271',
-            'Driving Licence': '132277'
+            'Driving Licence': '132273'
         };
 
         const TRACK_MAP = {
@@ -839,14 +839,40 @@ app.get('/api/bitrix-fields', async (req, res) => {
  * GET /api/waitlist-count
  * Returns the actual count of registered users from .registrations.json
  */
-app.get('/api/waitlist-count', (req, res) => {
+app.get('/api/waitlist-count', async (req, res) => {
     try {
-        const registrations = getRegistrations();
-        const count = (registrations.phones ? registrations.phones.length : 0);
-        res.json({ success: true, count: count });
+        const webhook = process.env.BITRIX24_WEBHOOK_URL || CONFIG.BITRIX24_WEBHOOK_URL;
+
+        if (!webhook || webhook.includes('your-domain') || webhook.includes('YOUR_WEBHOOK')) {
+            const registrations = getRegistrations();
+            return res.json({ success: true, count: registrations.phones?.length || 0 });
+        }
+
+        const webhookBase = webhook.replace(/crm\.lead\.add\.json\/?$/, '').replace(/\/?$/, '/');
+
+        // Use the exact filter from submit-enquiry to count relevant leads
+        const filter = { 'UF_CRM_1585031750': '132255' };
+
+        const response = await axios.get(`${webhookBase}crm.lead.list.json`, {
+            params: { filter: filter, select: ['ID'] },
+            timeout: 8000
+        });
+
+        // The "total" property represents all matching leads
+        const totalCountFromBitrix = response.data?.total || 0;
+
+        console.log(`📊 Dynamic Registration Count (Bitrix24): ${totalCountFromBitrix}`);
+        res.json({ success: true, count: totalCountFromBitrix });
+
     } catch (error) {
-        console.error('Error fetching waitlist count:', error);
-        res.status(500).json({ success: false, count: 0 });
+        console.error('❌ Bitrix counter error:', error.message);
+        // Robust fallback to local count
+        try {
+            const registrations = getRegistrations();
+            res.json({ success: true, count: registrations.phones?.length || 0, source: 'local_fallback' });
+        } catch (e) {
+            res.status(500).json({ success: false, count: 0 });
+        }
     }
 });
 
